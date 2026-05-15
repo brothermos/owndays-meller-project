@@ -1,36 +1,48 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# OWNDAYS x MELLER - Product Listing Page
+
+Frontend assignment implementation for the OWNDAYS x MELLER sunglasses collaboration page.
+
+## Stack
+
+- Next.js 16 (App Router)
+- React 19 + TypeScript
+- Tailwind CSS v4
+
+## Features Implemented
+
+- Responsive layout:
+  - Desktop: sticky top nav + 3-column product grid + right-side modal panel
+  - Mobile: hamburger menu overlay + single-column product list + full-screen modal
+- Product listing rendered from API (`8` products)
+- Product card color swatches:
+  - supports `hex_code` fill
+  - supports pattern image swatches when `path` is provided
+  - product image switches based on selected SKU
+- Product detail modal:
+  - model name, SKU image carousel, variant chips, frame type, localized description
+  - price format (`¥7,800+tax` in grid, `¥7,800 税込` in modal)
+  - ONLINE STORE CTA with out-of-stock disabled state
+- "HOW TO STYLE THEM" horizontal carousel with `+` quick-open modal trigger
+- Keyboard support: `ESC` closes mobile menu and modal
+- Basic SEO metadata + Open Graph tags
+
+## Data Source
+
+- Products API: `https://api-one-alpha-60.vercel.app/meller/products.json`
+- Image base URL: `https://static.lenskart.com/media/owndays/img/`
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Validation
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+npm run lint
+npm run build
+```

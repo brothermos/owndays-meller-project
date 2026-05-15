@@ -1,26 +1,76 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #ff6723;
+  --foreground: #111111;
+  --color-primary: #ff6723;
+  --color-primary-hover: #923b14;
+  --color-dark: #000000;
+  --color-dark-hover: #525252;
+  --color-disabled: #d9d9d9;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-primary: var(--color-primary);
+  --color-primary-hover: var(--color-primary-hover);
+  --color-dark: var(--color-dark);
+  --color-dark-hover: var(--color-dark-hover);
+  --color-disabled: var(--color-disabled);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Inter, "Avenir Next", "Helvetica Neue", Arial, sans-serif;
+  margin: 0;
+  min-height: 100vh;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+}
+
+img {
+  display: block;
+}
+
+.theme-primary {
+  background-color: var(--color-primary);
+  color: #ffffff;
+  transition: background-color 0.2s ease;
+}
+
+.theme-primary:hover {
+  background-color: var(--color-primary-hover);
+}
+
+.theme-dark {
+  background-color: var(--color-dark);
+  color: #ffffff;
+  transition: background-color 0.2s ease;
+}
+
+.theme-dark:hover {
+  background-color: var(--color-dark-hover);
+}
+
+.theme-disabled {
+  background-color: var(--color-disabled);
+  color: #7a7a7a;
+  cursor: not-allowed;
 }
