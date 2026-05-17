@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import QueryProvider from "./core/query-provider";
+import QueryProvider from "./lib/query-provider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -19,8 +19,7 @@ export const metadata: Metadata = {
     "Explore the OWNDAYS x MELLER sunglasses collaboration with product details, color variants, and styling inspiration.",
   openGraph: {
     title: "OWNDAYS x MELLER | Product Listing",
-    description:
-      "Shop the OWNDAYS x MELLER collaboration collection with responsive browsing and variant details.",
+    description: "Shop the OWNDAYS x MELLER collaboration collection with responsive browsing and variant details.",
     images: [
       {
         url: "https://static.lenskart.com/media/owndays/img/products/36ebdac7-36d3-40a8-9e83-f3cb90b4c9d4.webp",
@@ -38,10 +37,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-    >
+    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col">
         <QueryProvider>{children}</QueryProvider>
       </body>

@@ -31,7 +31,7 @@ const HeroSection = () => {
   }, [isMobileMenuOpen]);
 
   return (
-    <section id="products" className="relative text-white">
+    <section className="relative text-white">
       <div className="relative mx-auto h-[677px] w-full overflow-hidden lg:h-[633px]">
         <div className="absolute inset-0 hidden lg:block">
           <Image
