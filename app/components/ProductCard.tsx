@@ -35,14 +35,14 @@ const ProductCard = ({ product }: ProductCardProps) => {
       <div className="flex flex-1 flex-col gap-3 px-4 pb-4 pt-3 sm:px-5 sm:pb-5">
         <div className="flex items-start justify-between gap-3">
           <div className="min-w-0">
-            <h3 className="text-xl font-bold uppercase leading-tight tracking-tight sm:text-2xl">
+            <div className="text-xl font-bold uppercase leading-tight tracking-tight sm:text-4xl">
               {product.product.model_name}
-            </h3>
+            </div>
             <p className="mt-1 text-xs text-black/80 sm:text-sm">{getSkuLabel(product.product.code, selectedSku)}</p>
           </div>
 
-          <div className="flex shrink-0 flex-wrap justify-end gap-1.5">
-            {product.skus.map((sku, index) => {
+          <div className="flex max-w-[161px] shrink-0 flex-wrap justify-end gap-[3px]">
+            {product.skus.slice(0, 4).map((sku, index) => {
               const color = sku.colors[0];
               if (!color) return null;
 
@@ -54,11 +54,15 @@ const ProductCard = ({ product }: ProductCardProps) => {
                   type="button"
                   aria-label={`Select ${color.name}`}
                   onClick={() => setSelectedSkuIndex(index)}
-                  className={`h-5 w-5 rounded-full border border-black/10 sm:h-6 sm:w-6 ${
-                    isSelected ? "ring-2 ring-[#ff6723] ring-offset-1" : ""
-                  }`}
-                  style={getSwatchStyle(color)}
-                />
+                  className="flex size-[38px] shrink-0 items-center justify-center"
+                >
+                  <span
+                    className={`size-[28px] shrink-0 rounded-full border border-black/10 ${
+                      isSelected ? "ring-[1px] ring-[#ff6723] ring-offset-4 ring-offset-white" : ""
+                    }`}
+                    style={getSwatchStyle(color)}
+                  />
+                </button>
               );
             })}
           </div>

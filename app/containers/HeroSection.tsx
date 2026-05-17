@@ -102,11 +102,7 @@ const HeroSection = () => {
 
               <div className="mt-16 flex flex-col gap-7 text-3xl font-semibold">
                 {NAV_ITEMS.map((item) => (
-                  <a
-                    key={item.label}
-                    href={item.href}
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
+                  <a key={item.label} href={item.href} onClick={() => setIsMobileMenuOpen(false)}>
                     {item.label}
                   </a>
                 ))}
@@ -116,12 +112,7 @@ const HeroSection = () => {
         )}
 
         <div className="absolute inset-0 flex items-center justify-center px-5">
-          <h1
-            className="bg-black text-[56px] font-bold text-[#ff6723] font-stretch-extra-condensed tracking-tight leading-[56px] lg:text-[110px] lg:leading-[75px]"
-            style={{
-              fontFamily: "Helvetica Neue",
-            }}
-          >
+          <h1 className="font-display m-0 inline-block bg-black text-[56px] font-bold leading-none tracking-tight text-[#ff6723] [text-box-edge:cap_alphabetic] [text-box-trim:trim-both] lg:text-[110px]">
             PRODUCTS
           </h1>
         </div>

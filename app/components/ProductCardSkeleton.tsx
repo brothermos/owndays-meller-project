@@ -14,10 +14,12 @@ const ProductCardSkeleton = () => {
             <div className={`h-3.5 w-36 sm:h-4 sm:w-40 ${SKELETON_BLOCK}`} />
           </div>
 
-          <div className="flex shrink-0 gap-1.5">
-            <div className={`h-5 w-5 rounded-full sm:h-6 sm:w-6 ${SKELETON_BLOCK}`} />
-            <div className={`h-5 w-5 rounded-full sm:h-6 sm:w-6 ${SKELETON_BLOCK}`} />
-            <div className={`h-5 w-5 rounded-full sm:h-6 sm:w-6 ${SKELETON_BLOCK}`} />
+          <div className="flex shrink-0 gap-[3px]">
+            {[0, 1, 2].map((i) => (
+              <div key={i} className="flex size-[38px] items-center justify-center">
+                <div className={`size-[28px] rounded-full ${SKELETON_BLOCK}`} />
+              </div>
+            ))}
           </div>
         </div>
 
