@@ -61,9 +61,9 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} ${barlowCondensed.variable} ${plusJakartaSans.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
+        <QueryProvider>{children}</QueryProvider>
         <Analytics />
         <SpeedInsights />
-        <QueryProvider>{children}</QueryProvider>
       </body>
     </html>
   );
