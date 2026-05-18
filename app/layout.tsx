@@ -1,10 +1,5 @@
 import type { Metadata } from "next";
-import {
-  Barlow_Condensed,
-  Geist,
-  Geist_Mono,
-  Plus_Jakarta_Sans,
-} from "next/font/google";
+import { Barlow_Condensed, Geist } from "next/font/google";
 import "./globals.css";
 import QueryProvider from "./lib/query-provider";
 import { Analytics } from "@vercel/analytics/next";
@@ -15,20 +10,10 @@ const geistSans = Geist({
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
 const barlowCondensed = Barlow_Condensed({
   subsets: ["latin"],
   weight: ["700"],
   variable: "--font-barlow-condensed",
-});
-
-const plusJakartaSans = Plus_Jakarta_Sans({
-  subsets: ["latin"],
-  variable: "--font-plus-jakarta-sans",
 });
 
 export const metadata: Metadata = {
@@ -58,7 +43,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${barlowCondensed.variable} ${plusJakartaSans.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${barlowCondensed.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
         <QueryProvider>{children}</QueryProvider>
