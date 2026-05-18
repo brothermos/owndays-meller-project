@@ -1,8 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ff6723;
-  --foreground: #111111;
+  --background: #111111;
   --color-primary: #ff6723;
   --color-primary-hover: #923b14;
   --color-dark: #000000;
@@ -11,8 +10,6 @@
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
   --color-primary: var(--color-primary);
   --color-primary-hover: var(--color-primary-hover);
   --color-dark: var(--color-dark);
@@ -31,8 +28,9 @@
 
 body {
   background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-sans), "Avenir Next", "Helvetica Neue", Arial, sans-serif;
+  color: var(--background);
+  font-family:
+    var(--font-sans), "Avenir Next", "Helvetica Neue", Arial, sans-serif;
   margin: 0;
   min-height: 100vh;
 }

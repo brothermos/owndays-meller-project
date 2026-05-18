@@ -1,34 +1,11 @@
 "use client";
 
+import { NAV_ITEMS } from "@/app/constants/navbar";
+import useHeroSection from "@/app/hooks/useHeroSection";
 import Image from "next/image";
-import { useEffect, useState } from "react";
-
-const NAV_ITEMS = [
-  { label: "ABOUT", href: "#about" },
-  { label: "PRODUCTS", href: "#products" },
-  { label: "STORES", href: "#stores" },
-];
 
 const HeroSection = () => {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-  useEffect(() => {
-    const onEsc = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        setIsMobileMenuOpen(false);
-      }
-    };
-
-    window.addEventListener("keydown", onEsc);
-    return () => window.removeEventListener("keydown", onEsc);
-  }, []);
-
-  useEffect(() => {
-    document.body.style.overflow = isMobileMenuOpen ? "hidden" : "";
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [isMobileMenuOpen]);
+  const { isMobileMenuOpen, setIsMobileMenuOpen } = useHeroSection();
 
   return (
     <section className="relative text-white">

@@ -1,16 +1,19 @@
 "use client";
 
 import ProductCard from "@/app/components/ProductCard";
-import ProductCardSkeleton, {
-  PRODUCT_SKELETON_COUNT,
-} from "@/app/components/ProductCardSkeleton";
+import ProductCardSkeleton from "@/app/components/ProductCardSkeleton";
 import { useProductsQuery } from "@/app/services/product.service";
+
+const PRODUCT_SKELETON_COUNT = 8;
 
 const ProductSection = () => {
   const { data: products, isLoading, isError } = useProductsQuery();
 
   return (
-    <section id="products" className="bg-primary px-4 py-10 sm:px-8 lg:px-16 lg:py-14">
+    <section
+      id="products"
+      className="bg-primary px-4 py-[80px] sm:px-8 lg:px-[70px] lg:py-[110px] mt-0 lg:mt-1"
+    >
       <div className="mx-auto w-full max-w-[1440px]">
         {isLoading && (
           <ul

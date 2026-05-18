@@ -1,7 +1,5 @@
 const SKELETON_BLOCK = "animate-pulse rounded bg-[#e8e8e8]";
 
-const PRODUCT_SKELETON_COUNT = 8;
-
 const ProductCardSkeleton = () => {
   return (
     <article className="flex flex-col bg-white" aria-hidden>
@@ -16,18 +14,22 @@ const ProductCardSkeleton = () => {
 
           <div className="flex shrink-0 gap-[3px]">
             {[0, 1, 2].map((i) => (
-              <div key={i} className="flex size-[38px] items-center justify-center">
+              <div
+                key={i}
+                className="flex size-[38px] items-center justify-center"
+              >
                 <div className={`size-[28px] rounded-full ${SKELETON_BLOCK}`} />
               </div>
             ))}
           </div>
         </div>
 
-        <div className={`ml-auto mt-auto h-6 w-28 sm:h-7 sm:w-32 ${SKELETON_BLOCK}`} />
+        <div
+          className={`ml-auto mt-auto h-6 w-28 sm:h-7 sm:w-32 ${SKELETON_BLOCK}`}
+        />
       </div>
     </article>
   );
 };
 
-export { PRODUCT_SKELETON_COUNT };
 export default ProductCardSkeleton;
