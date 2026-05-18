@@ -9,8 +9,8 @@ const NavbarSection = () => {
 
   return (
     <>
-      <header className="fixed left-0 right-0 top-0 z-100 w-full px-5 py-6 lg:px-16 lg:py-10">
-        <div className="flex items-center justify-between text-white">
+      <header className="fixed left-0 right-0 top-0 z-100 mx-auto px-4 sm:px-8 lg:px-[70px] py-6 lg:py-10">
+        <div className="flex items-center justify-between text-white max-w-[1440px] w-full mx-auto">
           <div>
             <div className="lg:hidden">
               <Image
@@ -21,6 +21,7 @@ const NavbarSection = () => {
                 className="h-auto w-[180px]"
               />
             </div>
+
             <div className="hidden lg:block">
               <Image
                 src="/images/collab_logo_desktop.png"
@@ -32,7 +33,7 @@ const NavbarSection = () => {
             </div>
           </div>
 
-          <nav className="hidden items-center gap-10 text-xl font-semibold lg:flex">
+          <nav className="hidden items-center gap-10 text-xl font-bold lg:flex">
             {NAV_ITEMS.map((item) => (
               <a key={item.label} href={item.href}>
                 {item.label}
