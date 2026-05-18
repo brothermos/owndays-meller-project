@@ -2,7 +2,12 @@
 
 import Image from "next/image";
 import { useMemo, useState } from "react";
-import { getProductImageUrl, getSkuLabel, getSkuPrimaryImage, getSwatchStyle } from "@/app/lib/product";
+import {
+  getProductImageUrl,
+  getSkuLabel,
+  getSkuPrimaryImage,
+  getSwatchStyle,
+} from "@/app/lib/product";
 import type { ProductItem } from "@/app/types/product.type";
 import { formatGridPrice } from "../utils/format";
 
@@ -14,7 +19,10 @@ const ProductCard = ({ product }: ProductCardProps) => {
   const [selectedSkuIndex, setSelectedSkuIndex] = useState(0);
 
   const selectedSku = product.skus[selectedSkuIndex] ?? product.skus[0];
-  const primaryImagePath = useMemo(() => (selectedSku ? getSkuPrimaryImage(selectedSku) : null), [selectedSku]);
+  const primaryImagePath = useMemo(
+    () => (selectedSku ? getSkuPrimaryImage(selectedSku) : null),
+    [selectedSku],
+  );
 
   if (!selectedSku || !primaryImagePath) {
     return null;
@@ -22,13 +30,13 @@ const ProductCard = ({ product }: ProductCardProps) => {
 
   return (
     <article className="group flex flex-col bg-white text-black transition-shadow hover:shadow-[inset_0_0_0_2px_#000]">
-      <div className="relative aspect-4/3 w-full bg-[#f2f2f2]">
+      <div className="relative isolate aspect-4/3 w-full bg-[#F7F7F7]">
         <Image
           src={getProductImageUrl(primaryImagePath)}
           alt={product.product.model_name}
           fill
           sizes="(max-width: 1024px) 100vw, 33vw"
-          className="object-contain p-6"
+          className="object-contain p-6 mix-blend-multiply"
         />
       </div>
 
@@ -38,7 +46,9 @@ const ProductCard = ({ product }: ProductCardProps) => {
             <div className="text-xl font-bold uppercase leading-tight tracking-tight sm:text-4xl">
               {product.product.model_name}
             </div>
-            <p className="mt-1 text-xs text-black/80 sm:text-sm">{getSkuLabel(product.product.code, selectedSku)}</p>
+            <p className="mt-1 text-xs text-black/80 sm:text-sm">
+              {getSkuLabel(product.product.code, selectedSku)}
+            </p>
           </div>
 
           <div className="flex max-w-[161px] shrink-0 flex-wrap justify-end gap-[3px]">
@@ -58,7 +68,9 @@ const ProductCard = ({ product }: ProductCardProps) => {
                 >
                   <span
                     className={`size-[28px] shrink-0 rounded-full border border-black/10 ${
-                      isSelected ? "ring-[1px] ring-[#ff6723] ring-offset-4 ring-offset-white" : ""
+                      isSelected
+                        ? "ring-[1px] ring-[#ff6723] ring-offset-4 ring-offset-white"
+                        : ""
                     }`}
                     style={getSwatchStyle(color)}
                   />

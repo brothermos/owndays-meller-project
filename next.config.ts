@@ -8,6 +8,11 @@ const nextConfig: NextConfig = {
         hostname: "static.lenskart.com",
         pathname: "/media/owndays/img/**",
       },
+      {
+        protocol: "https",
+        hostname: "www.owndays.com",
+        pathname: "/storage/**",
+      },
     ],
   },
 };
