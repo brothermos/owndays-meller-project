@@ -24,20 +24,28 @@ const ProductCard = ({ product }: ProductCardProps) => {
     [selectedSku],
   );
 
-  if (!selectedSku || !primaryImagePath) {
+  if (!selectedSku) {
     return null;
   }
 
   return (
-    <article className="group flex flex-col bg-white text-black transition-shadow hover:shadow-[inset_0_0_0_2px_#000]">
-      <div className="relative isolate aspect-4/3 w-full bg-[#F7F7F7]">
-        <Image
-          src={getProductImageUrl(primaryImagePath)}
-          alt={product.product.model_name}
-          fill
-          sizes="(max-width: 1024px) 100vw, 33vw"
-          className="object-contain p-6 mix-blend-multiply"
-        />
+    <article className="group flex flex-col bg-white text-black outline-2 outline-transparent transition-all duration-500 ease-in-out motion-safe:hover:scale-[1.03] hover:outline-black">
+      <div className="aspect-4/3 w-full bg-[#F7F7F7] p-4">
+        <div className="relative isolate size-full overflow-hidden bg-white">
+          {primaryImagePath ? (
+            <Image
+              src={getProductImageUrl(primaryImagePath)}
+              alt={product.product.model_name}
+              fill
+              sizes="(max-width: 1024px) 100vw, 33vw"
+              className="object-contain p-6 mix-blend-multiply"
+            />
+          ) : (
+            <div className="flex size-full items-center justify-center p-6 text-sm font-medium text-black/50">
+              Image unavailable
+            </div>
+          )}
+        </div>
       </div>
 
       <div className="flex flex-1 flex-col gap-3 px-4 pb-4 pt-3 sm:px-5 sm:pb-5">
