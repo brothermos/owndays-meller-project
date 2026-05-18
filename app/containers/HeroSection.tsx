@@ -56,10 +56,27 @@ const HeroSection = () => {
 
         <div className="absolute w-full px-5 py-6 lg:px-16 lg:py-10">
           <div className="flex items-center justify-between">
-            <div className="text-2xl text-white lg:text-4xl">
-              <span className="font-bold tracking-widest">OWNDAYS</span>
-              <span className="font-normal"> X </span>
-              <span className="font-bold">MELLER</span>
+            <div>
+              <div className="lg:hidden">
+                <Image
+                  src="/images/collab_logo_mobile.png"
+                  alt="OWNDAYS x MELLER collaboration logo"
+                  width={240}
+                  height={16}
+                  priority
+                  className="h-auto w-[180px]"
+                />
+              </div>
+              <div className="hidden lg:block">
+                <Image
+                  src="/images/collab_logo_desktop.png"
+                  alt="OWNDAYS x MELLER collaboration logo"
+                  width={351}
+                  height={52}
+                  priority
+                  className="h-auto w-[351px]"
+                />
+              </div>
             </div>
 
             <div className="hidden items-center gap-10 text-xl font-semibold lg:flex">
@@ -87,11 +104,13 @@ const HeroSection = () => {
           <div className="fixed inset-0 z-60 bg-[#1e1e1e] lg:hidden">
             <div className="flex h-full flex-col p-6">
               <div className="flex items-center justify-between">
-                <div className="text-base text-white">
-                  <span className="font-bold tracking-widest">OWNDAYS</span>
-                  <span className="font-normal"> X </span>
-                  <span className="font-bold">MELLER</span>
-                </div>
+                <Image
+                  src="/images/collab_logo_mobile.png"
+                  alt="OWNDAYS x MELLER collaboration logo"
+                  width={240}
+                  height={16}
+                  className="h-auto w-[180px]"
+                />
                 <button
                   type="button"
                   className="text-4xl leading-none"
@@ -104,7 +123,11 @@ const HeroSection = () => {
 
               <div className="mt-16 flex flex-col gap-7 text-3xl font-semibold">
                 {NAV_ITEMS.map((item) => (
-                  <a key={item.label} href={item.href} onClick={() => setIsMobileMenuOpen(false)}>
+                  <a
+                    key={item.label}
+                    href={item.href}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
                     {item.label}
                   </a>
                 ))}
@@ -114,9 +137,9 @@ const HeroSection = () => {
         )}
 
         <div className="absolute inset-0 flex items-center justify-center px-5">
-          <h1 className="font-display m-0 inline-block bg-black text-[56px] font-bold leading-none tracking-tight text-[#ff6723] [text-box-edge:cap_alphabetic] [text-box-trim:trim-both] lg:text-[110px]">
+          <div className="font-display m-0 inline-block bg-black text-[56px] font-bold leading-none tracking-tight text-[#ff6723] [text-box-edge:cap_alphabetic] [text-box-trim:trim-both] lg:text-[110px]">
             PRODUCTS
-          </h1>
+          </div>
         </div>
       </div>
     </section>

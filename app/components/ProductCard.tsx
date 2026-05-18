@@ -50,15 +50,12 @@ const ProductCard = ({ product, eagerImage = false }: ProductCardProps) => {
         </div>
       </div>
 
-      <div className="flex flex-1 flex-col gap-3 px-4 pb-4 pt-3 sm:px-5 sm:pb-5">
+      <div className="flex flex-1 flex-col px-4 pb-4 pt-3 sm:px-5 sm:pb-5">
         <div className="flex items-start justify-between gap-3">
           <div className="min-w-0">
-            <div className="text-xl font-bold uppercase leading-tight tracking-tight sm:text-4xl">
+            <div className="font-display text-xl font-bold uppercase leading-tight tracking-tight sm:text-5xl">
               {product.product.model_name}
             </div>
-            <p className="mt-1 text-xs text-black/80 sm:text-sm">
-              {getSkuLabel(product.product.code, selectedSku)}
-            </p>
           </div>
 
           <div className="flex max-w-[161px] shrink-0 flex-wrap justify-end gap-[3px]">
@@ -90,9 +87,14 @@ const ProductCard = ({ product, eagerImage = false }: ProductCardProps) => {
           </div>
         </div>
 
-        <p className="mt-auto text-right text-lg font-bold sm:text-xl">
-          {formatGridPrice(product.selling_setting.price)}
-        </p>
+        <div className="flex items-end justify-between gap-3">
+          <p className="text-xs text-black/80 sm:text-base">
+            {getSkuLabel(product.product.code, selectedSku)}
+          </p>
+          <p className="text-right text-lg font-bold sm:text-xl">
+            {formatGridPrice(product.selling_setting.price)}
+          </p>
+        </div>
       </div>
     </article>
   );

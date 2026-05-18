@@ -5,12 +5,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "static.lenskart.com",
-        pathname: "/media/owndays/img/**",
-      },
-      {
-        protocol: "https",
-        hostname: "www.owndays.com",
+        hostname: "storage.owndays.com",
         pathname: "/storage/**",
       },
     ],

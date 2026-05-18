@@ -1,5 +1,5 @@
 const DEFAULT_API_BASE_URL = "https://api-one-alpha-60.vercel.app";
-const DEFAULT_PRODUCT_IMAGE_BASE_URL = "https://www.owndays.com/storage/";
+const DEFAULT_PRODUCT_IMAGE_BASE_URL = "https://storage.owndays.com/storage/";
 
 function getEnv(key: string, fallback: string) {
   return process.env[key] ?? fallback;
