@@ -4,12 +4,15 @@ import Image from "next/image";
 import { NAV_ITEMS } from "@/app/constants/navbar";
 import useHeroSection from "@/app/hooks/useHeroSection";
 
+const NAVBAR_CTA_CLASS =
+  "w-fit border border-transparent px-2 py-1 transition-colors hover:border-black hover:bg-white hover:text-black!";
+
 const NavbarSection = () => {
   const { isMobileMenuOpen, setIsMobileMenuOpen } = useHeroSection();
 
   return (
     <>
-      <header className="fixed left-0 right-0 top-0 z-100 mx-auto px-4 sm:px-8 lg:px-[70px] py-6 lg:py-10">
+      <header className="fixed left-0 right-0 top-0 z-100 mx-auto px-4 sm:px-8 lg:px-[70px] py-6">
         <div className="flex items-center justify-between text-white max-w-[1440px] w-full mx-auto">
           <div>
             <div className="lg:hidden">
@@ -35,7 +38,7 @@ const NavbarSection = () => {
 
           <nav className="hidden items-center gap-10 text-xl font-bold lg:flex">
             {NAV_ITEMS.map((item) => (
-              <a key={item.label} href={item.href}>
+              <a key={item.label} href={item.href} className={NAVBAR_CTA_CLASS}>
                 {item.label}
               </a>
             ))}
@@ -80,6 +83,7 @@ const NavbarSection = () => {
                 <a
                   key={item.label}
                   href={item.href}
+                  className={NAVBAR_CTA_CLASS}
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {item.label}
