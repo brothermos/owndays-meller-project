@@ -22,7 +22,7 @@ const StyleCarouselSection = () => {
     <>
       <section className="bg-primary pt-10 lg:pt-16">
         <div className="px-4 sm:px-8 lg:px-[70px]">
-          <div className="relative z-10 mb-[-28px] inline-flex flex-col lg:mb-[-46px]">
+          <div className="relative z-10 mb-[-28px] inline-flex items-start flex-col lg:mb-[-46px]">
             <span className="font-display inline-block bg-black text-[72px] font-bold leading-none tracking-tight text-[#ff6723] [text-box-edge:cap_alphabetic] [text-box-trim:trim-both] lg:text-[120px]">
               HOW TO
             </span>
@@ -37,7 +37,7 @@ const StyleCarouselSection = () => {
             {CAROUSEL_IMAGES.map((imageSrc, index) => (
               <li
                 key={imageSrc}
-                className="relative h-[492px] w-[326px] shrink-0 overflow-hidden border border-black/15 bg-black/5 lg:h-[611px] lg:w-[405px]"
+                className="relative h-[492px] w-[326px] shrink-0 overflow-hidden lg:h-[611px] lg:w-[405px]"
               >
                 <Image
                   src={imageSrc}
@@ -49,9 +49,15 @@ const StyleCarouselSection = () => {
                 <button
                   type="button"
                   aria-label={`Open product detail for look ${index + 1}`}
-                  className="absolute bottom-0 right-0 flex size-[70px] items-center justify-center bg-primary text-[52px] leading-none text-black"
+                  className="absolute bottom-0 right-0 flex size-[70px] items-center justify-center bg-primary"
                 >
-                  +
+                  <Image
+                    src="/svg/plus_icon.svg"
+                    alt=""
+                    width={28}
+                    height={28}
+                    aria-hidden="true"
+                  />
                 </button>
               </li>
             ))}
