@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { getSkuLabel, getSwatchStyle } from "@/app/lib/product";
+import { getSkuLabel, getSkuSwatchStyle } from "@/app/lib/product";
 import type { ProductItem } from "@/app/types/product.type";
 import { formatGridPrice } from "../utils/format";
 import useProductCard from "@/app/hooks/useProductCard";
@@ -58,16 +58,20 @@ const ProductCard = (props: ProductCardProps) => {
 
           <div className="flex max-w-[161px] shrink-0 flex-wrap justify-end gap-[3px]">
             {product.skus.slice(0, 4).map((sku, index) => {
-              const color = sku.colors[0];
-              if (!color) return null;
+              const firstColor = sku.colors[0];
+              if (!firstColor) return null;
 
               const isSelected = index === selectedSkuIndex;
+              const swatchStyle = getSkuSwatchStyle(sku.colors);
+              const colorLabel = sku.colors
+                .map((color) => color.name)
+                .join(" / ");
 
               return (
                 <button
                   key={sku.id}
                   type="button"
-                  aria-label={`Select ${color.name}`}
+                  aria-label={`Select ${colorLabel}`}
                   onClick={() => setSelectedSkuIndex(index)}
                   className="flex size-[38px] shrink-0 items-center justify-center"
                 >
@@ -77,7 +81,7 @@ const ProductCard = (props: ProductCardProps) => {
                         ? "ring-[1px] ring-[#ff6723] ring-offset-4 ring-offset-white"
                         : ""
                     }`}
-                    style={getSwatchStyle(color)}
+                    style={swatchStyle}
                   />
                 </button>
               );

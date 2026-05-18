@@ -29,3 +29,22 @@ export function getSwatchStyle(color: ProductColor): CSSProperties {
 
   return { backgroundColor: "#d9d9d9" };
 }
+
+export function getSkuSwatchStyle(colors: ProductColor[]): CSSProperties {
+  const validHexColors = colors
+    .map((color) => color.hex_code)
+    .filter((hex): hex is string => Boolean(hex));
+
+  if (validHexColors.length >= 2) {
+    return {
+      backgroundImage: `linear-gradient(135deg, ${validHexColors[0]} 0 50%, ${validHexColors[1]} 50% 100%)`,
+      backgroundClip: "padding-box",
+    };
+  }
+
+  if (colors[0]) {
+    return getSwatchStyle(colors[0]);
+  }
+
+  return { backgroundColor: "#d9d9d9" };
+}
