@@ -43,6 +43,7 @@ const ProductDetailModal = () => {
       return;
     }
     emblaApi.reInit();
+    emblaApi.scrollTo(0);
   }, [emblaApi, selectedSkuIndex, selectedProduct]);
 
   const sortedSkus = useMemo(() => (selectedProduct ? sortSkus(selectedProduct.skus) : []), [selectedProduct]);
@@ -109,15 +110,15 @@ const ProductDetailModal = () => {
 
         <div className="relative h-[335px] w-full shrink-0 overflow-hidden bg-white sm:h-[499px]">
           <div className="h-full" ref={emblaRef}>
-            <ul className="flex h-full">
+            <ul className="flex h-full items-center">
               {skuImageUrls.map((url, idx) => (
-                <li key={`${url}-${idx}`} className="relative h-full shrink-0 grow-0 basis-[78%] sm:basis-[72%]">
+                <li key={`${url}-${idx}`} className="relative h-[298px] shrink-0 grow-0 basis-[70%]">
                   <Image
                     src={url}
-                    alt={selectedProduct.product.model_name}
+                    alt={`${selectedProduct.product.model_name} — image ${idx + 1}`}
                     fill
                     sizes="(max-width: 640px) 78vw, 444px"
-                    className="object-contain p-10 mix-blend-multiply sm:p-16"
+                    className="object-contain px-3 mix-blend-multiply sm:px-10"
                     priority={idx === 0}
                   />
                 </li>
@@ -125,9 +126,9 @@ const ProductDetailModal = () => {
             </ul>
           </div>
 
-          <div className="pointer-events-none absolute inset-x-0 bottom-3 flex justify-center px-3 sm:bottom-4 sm:px-0">
+          <div className="absolute inset-x-0 bottom-6 z-20 flex justify-center px-3 sm:bottom-12 sm:px-6">
             <div
-              className="pointer-events-auto flex max-w-full flex-wrap justify-center gap-x-1 gap-y-1 sm:flex-nowrap sm:gap-x-2 sm:overflow-x-auto sm:px-6 sm:scrollbar-none sm:[&::-webkit-scrollbar]:hidden"
+              className="flex max-w-full flex-wrap justify-center gap-x-1 gap-y-1 sm:flex-nowrap sm:gap-x-2 sm:overflow-x-auto sm:scrollbar-none sm:[&::-webkit-scrollbar]:hidden"
               role="group"
               aria-label="Select color variant"
             >
@@ -135,17 +136,15 @@ const ProductDetailModal = () => {
                 const colorLabel = getSkuColorLabel(sku.colors);
                 const isActive = idx === selectedSkuIndex;
                 return (
-                  <button
+                  <div
                     key={sku.id}
-                    type="button"
                     onClick={() => setSelectedSkuIndex(idx)}
-                    aria-pressed={isActive}
-                    className={`shrink-0 cursor-pointer rounded-full border border-black px-2 py-0.5 text-[10px] leading-tight font-medium uppercase tracking-wide transition-colors sm:px-3 sm:py-1 sm:text-[11px] sm:tracking-[0.5px] ${
+                    className={`shrink-0 cursor-pointer rounded-full border border-black px-2 py-0.5 text-[10px] leading-tight font-medium uppercase tracking-wide transition-colors sm:px-3 sm:py-1 sm:text-base sm:tracking-[0.5px] ${
                       isActive ? "bg-black text-white" : "bg-transparent text-black hover:bg-black hover:text-white"
                     }`}
                   >
                     {colorLabel}
-                  </button>
+                  </div>
                 );
               })}
             </div>
