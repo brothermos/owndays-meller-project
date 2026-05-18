@@ -39,6 +39,7 @@ const HeroSection = () => {
             alt="OWNDAYS x MELLER hero banner"
             fill
             priority
+            sizes="(max-width: 1023px) 0px, 100vw"
             className="object-cover"
           />
         </div>
@@ -48,6 +49,7 @@ const HeroSection = () => {
             alt="OWNDAYS x MELLER hero banner"
             fill
             priority
+            sizes="(max-width: 1023px) 100vw, 0px"
             className="object-cover"
           />
         </div>

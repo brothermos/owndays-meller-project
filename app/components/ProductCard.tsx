@@ -13,9 +13,10 @@ import { formatGridPrice } from "../utils/format";
 
 type ProductCardProps = {
   product: ProductItem;
+  eagerImage?: boolean;
 };
 
-const ProductCard = ({ product }: ProductCardProps) => {
+const ProductCard = ({ product, eagerImage = false }: ProductCardProps) => {
   const [selectedSkuIndex, setSelectedSkuIndex] = useState(0);
 
   const selectedSku = product.skus[selectedSkuIndex] ?? product.skus[0];
@@ -38,6 +39,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
               alt={product.product.model_name}
               fill
               sizes="(max-width: 1024px) 100vw, 33vw"
+              loading={eagerImage ? "eager" : "lazy"}
               className="object-contain p-6 mix-blend-multiply"
             />
           ) : (

@@ -34,9 +34,9 @@ const ProductSection = () => {
 
         {products && products.length > 0 && (
           <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 lg:gap-6">
-            {products.map((product) => (
+            {products.map((product, index) => (
               <li key={product.product.id}>
-                <ProductCard product={product} />
+                <ProductCard product={product} eagerImage={index < 3} />
               </li>
             ))}
           </ul>
