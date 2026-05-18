@@ -44,7 +44,7 @@ const StyleCarouselSection = () => {
             {CAROUSEL_IMAGES.map((imageSrc, index) => (
               <li
                 key={imageSrc}
-                className="relative h-[492px] w-[326px] shrink-0 cursor-pointer overflow-hidden active:cursor-grabbing lg:h-[611px] lg:w-[405px]"
+                className="group relative h-[492px] w-[326px] shrink-0 cursor-pointer overflow-hidden outline-2 outline-black transition-all duration-500 ease-in-out motion-safe:hover:scale-[1.03] active:cursor-grabbing lg:h-[611px] lg:w-[405px] lg:outline-transparent lg:hover:z-10 lg:hover:outline-black"
               >
                 <Image
                   src={imageSrc}

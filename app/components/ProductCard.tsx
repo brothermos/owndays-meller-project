@@ -24,7 +24,7 @@ const ProductCard = (props: ProductCardProps) => {
   } = useProductCard(product);
 
   return (
-    <article className="group flex flex-col bg-white text-black outline-2 outline-black transition-all duration-500 ease-in-out motion-safe:hover:scale-[1.03] lg:outline-transparent lg:hover:outline-black">
+    <article className="group cursor-pointer flex flex-col bg-white text-black outline-2 outline-black transition-all duration-500 ease-in-out motion-safe:hover:scale-[1.03] lg:outline-transparent lg:hover:outline-black">
       <div className="aspect-4/3 w-full bg-white p-4">
         <div className="relative isolate size-full overflow-hidden bg-[#F7F7F7]">
           {currentImageUrl ? (
