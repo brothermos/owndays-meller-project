@@ -4,18 +4,18 @@ import Image from "next/image";
 import useEmblaCarousel from "embla-carousel-react";
 
 const CAROUSEL_IMAGES = [
-  "/images/carousel_1.png",
-  "/images/carousel_2.png",
-  "/images/carousel_3.png",
-  "/images/carousel_4.png",
-  "/images/carousel_5.png",
-  "/images/carousel_6.png",
-  "/images/carousel_7.png",
-  "/images/carousel_8.png",
-  "/images/carousel_9.png",
-  "/images/carousel_10.png",
-  "/images/carousel_11.png",
-  "/images/carousel_12.png",
+  "/images/carousel_1.avif",
+  "/images/carousel_2.avif",
+  "/images/carousel_3.avif",
+  "/images/carousel_4.avif",
+  "/images/carousel_5.avif",
+  "/images/carousel_6.avif",
+  "/images/carousel_7.avif",
+  "/images/carousel_8.avif",
+  "/images/carousel_9.avif",
+  "/images/carousel_10.avif",
+  "/images/carousel_11.avif",
+  "/images/carousel_12.avif",
 ];
 
 const StyleCarouselSection = () => {
@@ -50,6 +50,7 @@ const StyleCarouselSection = () => {
                   src={imageSrc}
                   alt={`How to style look ${index + 1}`}
                   fill
+                  quality={60}
                   sizes="(max-width: 1024px) 326px, 405px"
                   className="object-cover"
                 />

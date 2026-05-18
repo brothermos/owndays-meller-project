@@ -12,7 +12,7 @@ const HeroSection = () => {
       <div className="relative mx-auto h-[677px] w-full overflow-hidden lg:h-[633px]">
         <div className="absolute inset-0 hidden lg:block">
           <Image
-            src="/images/hero_banner_desktop.png"
+            src="/images/hero_banner_desktop.avif"
             alt="OWNDAYS x MELLER hero banner"
             fill
             priority
@@ -22,7 +22,7 @@ const HeroSection = () => {
         </div>
         <div className="absolute inset-0 lg:hidden">
           <Image
-            src="/images/hero_banner_mobile.png"
+            src="/images/hero_banner_mobile.avif"
             alt="OWNDAYS x MELLER hero banner"
             fill
             priority
@@ -40,7 +40,6 @@ const HeroSection = () => {
                   alt="OWNDAYS x MELLER collaboration logo"
                   width={240}
                   height={16}
-                  priority
                   className="h-auto w-[180px]"
                 />
               </div>
@@ -50,7 +49,6 @@ const HeroSection = () => {
                   alt="OWNDAYS x MELLER collaboration logo"
                   width={351}
                   height={52}
-                  priority
                   className="h-auto w-[351px]"
                 />
               </div>
