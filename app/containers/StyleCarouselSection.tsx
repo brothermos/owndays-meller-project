@@ -40,7 +40,7 @@ const StyleCarouselSection = () => {
         </div>
 
         <div
-          className="-mt-5 overflow-hidden pt-5 lg:-mt-6 lg:pt-6"
+          className="-mb-5 -mt-5 overflow-hidden pb-5 pt-5 lg:-mb-6 lg:-mt-6 lg:pb-6 lg:pt-6"
           ref={emblaRef}
         >
           <ul className="flex">

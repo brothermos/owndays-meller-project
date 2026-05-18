@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { useEffect, useState } from "react";
 import { NAV_ITEMS } from "@/app/constants/navbar";
 import useHeroSection from "@/app/hooks/useHeroSection";
 
@@ -9,10 +10,25 @@ const NAVBAR_CTA_CLASS =
 
 const NavbarSection = () => {
   const { isMobileMenuOpen, setIsMobileMenuOpen } = useHeroSection();
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => {
+      setIsScrolled(window.scrollY > 0);
+    };
+
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
     <>
-      <header className="fixed left-0 right-0 top-0 z-100 mx-auto px-4 sm:px-8 lg:px-[70px] py-6">
+      <header
+        className={`fixed left-0 right-0 top-0 z-100 mx-auto px-4 py-4 transition-all duration-300 sm:px-8 lg:px-[70px] ${
+          isScrolled ? "bg-black/20 backdrop-blur-sm" : "bg-transparent"
+        }`}
+      >
         <div className="flex items-center justify-between text-white max-w-[1440px] w-full mx-auto">
           <div>
             <div className="lg:hidden">
