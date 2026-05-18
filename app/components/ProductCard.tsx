@@ -14,16 +14,17 @@ type ProductCardProps = {
 const ProductCard = (props: ProductCardProps) => {
   const { product, eagerImage = false } = props;
 
-  const {
-    skuImageUrls,
-    hasAnyImage,
-    selectedSkuIndex,
-    setSelectedSkuIndex,
-    selectedSku,
-  } = useProductCard(product);
+  const { skuImageUrls, hasAnyImage, selectedSkuIndex, setSelectedSkuIndex, selectedSku } = useProductCard(product);
+
+  const isOutOfStock = product.selling_setting.in_stock === 0;
 
   return (
-    <article className="group cursor-pointer flex flex-col bg-white text-black outline-2 outline-black transition-all duration-500 ease-in-out motion-safe:hover:scale-[1.03] lg:outline-transparent lg:hover:outline-black">
+    <article
+      aria-disabled={isOutOfStock || undefined}
+      className={`group flex flex-col bg-white text-black outline-2 outline-black transition-all duration-500 ease-in-out lg:outline-transparent ${
+        isOutOfStock ? "cursor-default" : "cursor-pointer motion-safe:hover:scale-[1.03] lg:hover:outline-black"
+      }`}
+    >
       <div className="aspect-4/3 w-full bg-white p-4">
         <div className="relative isolate size-full overflow-hidden bg-[#F7F7F7]">
           {hasAnyImage ? (
@@ -41,13 +42,21 @@ const ProductCard = (props: ProductCardProps) => {
                   loading={index === 0 && eagerImage ? "eager" : "lazy"}
                   className={`object-contain p-6 mix-blend-multiply transition-opacity duration-150 ${
                     isActive ? "opacity-100" : "opacity-0"
-                  }`}
+                  } ${isOutOfStock ? "grayscale" : ""}`}
                 />
               );
             })
           ) : (
             <div className="flex size-full items-center justify-center p-6 text-sm font-medium text-black/50">
               Image unavailable
+            </div>
+          )}
+
+          {isOutOfStock && (
+            <div className="absolute inset-0 z-10 flex items-center justify-center bg-black/40">
+              <span className="font-display bg-black px-4 py-2 text-2xl font-bold uppercase tracking-wider text-white">
+                Sold Out
+              </span>
             </div>
           )}
         </div>
@@ -68,9 +77,7 @@ const ProductCard = (props: ProductCardProps) => {
 
               const isSelected = index === selectedSkuIndex;
               const swatchStyle = getSkuSwatchStyle(sku.colors);
-              const colorLabel = sku.colors
-                .map((color) => color.name)
-                .join(" / ");
+              const colorLabel = sku.colors.map((color) => color.name).join(" / ");
 
               return (
                 <button
@@ -82,9 +89,7 @@ const ProductCard = (props: ProductCardProps) => {
                 >
                   <span
                     className={`size-[28px] shrink-0 rounded-full border border-black/10 ${
-                      isSelected
-                        ? "ring-[1px] ring-primary ring-offset-4 ring-offset-white"
-                        : ""
+                      isSelected ? "ring-2 ring-primary ring-offset-4 ring-offset-white" : ""
                     }`}
                     style={swatchStyle}
                   />
@@ -95,12 +100,8 @@ const ProductCard = (props: ProductCardProps) => {
         </div>
 
         <div className="flex items-end justify-between gap-3">
-          <p className="text-black/80 text-base">
-            {getSkuLabel(product.product.code, selectedSku)}
-          </p>
-          <p className="text-right font-bold text-xl">
-            {formatGridPrice(product.selling_setting.price)}
-          </p>
+          <p className="text-black/80 text-base">{getSkuLabel(product.product.code, selectedSku)}</p>
+          <p className="text-right font-bold text-xl">{formatGridPrice(product.selling_setting.price)}</p>
         </div>
       </div>
     </article>

@@ -12,12 +12,12 @@ const ProductSection = () => {
   return (
     <section
       id="products"
-      className="bg-primary px-4 pt-[80px] sm:px-8 lg:px-[70px] lg:pt-[110px] lg:pb-[177px] pb-[121px] mt-0 lg:mt-1"
+      className="bg-primary px-4 pt-[80px] sm:px-8 lg:px-[70px] lg:pt-[110px] lg:pb-[177px] pb-[121px]"
     >
       <div className="mx-auto w-full max-w-[1440px]">
         {isLoading && (
           <ul
-            className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 lg:gap-6"
+            className="grid grid-cols-1 gap-[17px] lg:grid-cols-3"
             aria-busy="true"
             aria-label="Loading products"
           >
@@ -36,7 +36,7 @@ const ProductSection = () => {
         )}
 
         {products && products.length > 0 && (
-          <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 lg:gap-6">
+          <ul className="grid grid-cols-1 gap-[17px] lg:grid-cols-3">
             {products.map((product, index) => (
               <AnimatedProductItem
                 key={product.product.id}

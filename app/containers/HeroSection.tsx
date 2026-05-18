@@ -4,8 +4,8 @@ import Image from "next/image";
 
 const HeroSection = () => {
   return (
-    <section className="relative text-white">
-      <div className="relative mx-auto h-[677px] w-full overflow-hidden lg:h-[633px]">
+    <section id="about" className="relative text-white">
+      <div className="relative mx-auto h-[630px] w-full overflow-hidden">
         <div className="absolute inset-0 hidden lg:block">
           <Image
             src="/images/hero_banner_desktop.avif"

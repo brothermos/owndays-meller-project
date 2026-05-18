@@ -19,7 +19,10 @@ const OWNDAYS_LINK_CTA_CLASS =
 
 const FooterSection = () => {
   return (
-    <footer className="bg-black text-primary">
+    <footer
+      id="stores"
+      className="scroll-mt-20 bg-black text-primary lg:scroll-mt-24"
+    >
       <div className="hidden lg:block">
         <div className="border-y border-primary">
           <div className="mx-auto grid max-w-[1440px] grid-cols-[64.7222%_35.2778%]">
