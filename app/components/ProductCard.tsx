@@ -15,9 +15,8 @@ const ProductCard = (props: ProductCardProps) => {
   const { product, eagerImage = false } = props;
 
   const {
-    currentImageUrl,
-    loadedImageUrl,
-    setLoadedImageUrl,
+    skuImageUrls,
+    hasAnyImage,
     selectedSkuIndex,
     setSelectedSkuIndex,
     selectedSku,
@@ -27,19 +26,25 @@ const ProductCard = (props: ProductCardProps) => {
     <article className="group cursor-pointer flex flex-col bg-white text-black outline-2 outline-black transition-all duration-500 ease-in-out motion-safe:hover:scale-[1.03] lg:outline-transparent lg:hover:outline-black">
       <div className="aspect-4/3 w-full bg-white p-4">
         <div className="relative isolate size-full overflow-hidden bg-[#F7F7F7]">
-          {currentImageUrl ? (
-            <Image
-              key={currentImageUrl}
-              src={currentImageUrl}
-              alt={product.product.model_name}
-              fill
-              sizes="(max-width: 1024px) 100vw, 33vw"
-              loading={eagerImage ? "eager" : "lazy"}
-              onLoad={() => setLoadedImageUrl(currentImageUrl)}
-              className={`object-contain p-6 mix-blend-multiply transition-opacity duration-200 ${
-                loadedImageUrl === currentImageUrl ? "opacity-100" : "opacity-0"
-              }`}
-            />
+          {hasAnyImage ? (
+            skuImageUrls.map((url, index) => {
+              if (!url) return null;
+              const isActive = index === selectedSkuIndex;
+              return (
+                <Image
+                  key={url}
+                  src={url}
+                  alt={product.product.model_name}
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 33vw"
+                  quality={60}
+                  loading={index === 0 && eagerImage ? "eager" : "lazy"}
+                  className={`object-contain p-6 mix-blend-multiply transition-opacity duration-150 ${
+                    isActive ? "opacity-100" : "opacity-0"
+                  }`}
+                />
+              );
+            })
           ) : (
             <div className="flex size-full items-center justify-center p-6 text-sm font-medium text-black/50">
               Image unavailable
