@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import useEmblaCarousel from "embla-carousel-react";
 
 const CAROUSEL_IMAGES = [
   "/images/carousel_1.png",
@@ -18,6 +19,12 @@ const CAROUSEL_IMAGES = [
 ];
 
 const StyleCarouselSection = () => {
+  const [emblaRef] = useEmblaCarousel({
+    align: "start",
+    dragFree: true,
+    containScroll: "trimSnaps",
+  });
+
   return (
     <>
       <section className="bg-primary pt-10 lg:pt-16">
@@ -32,12 +39,12 @@ const StyleCarouselSection = () => {
           </div>
         </div>
 
-        <div className="overflow-x-auto">
-          <ul className="flex min-w-max">
+        <div className="overflow-hidden" ref={emblaRef}>
+          <ul className="flex">
             {CAROUSEL_IMAGES.map((imageSrc, index) => (
               <li
                 key={imageSrc}
-                className="relative h-[492px] w-[326px] shrink-0 overflow-hidden lg:h-[611px] lg:w-[405px]"
+                className="relative h-[492px] w-[326px] shrink-0 cursor-pointer overflow-hidden active:cursor-grabbing lg:h-[611px] lg:w-[405px]"
               >
                 <Image
                   src={imageSrc}
