@@ -26,6 +26,8 @@ export type ProductItem = {
 export type ProductSku = {
   id: number;
   code: string;
+  order: number;
+  is_default_display: number;
   colors: ProductColor[];
   images: ProductImage[];
 };
@@ -34,6 +36,12 @@ export type ProductColor = {
   name: string;
   path: string | null;
   hex_code: string | null;
+  localizations?: ProductColorLocalization[];
+};
+
+export type ProductColorLocalization = {
+  language_code: string;
+  name: string;
 };
 
 export type ProductImage = {

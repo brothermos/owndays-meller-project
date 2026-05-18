@@ -1,10 +1,15 @@
 "use client";
 
 import Image from "next/image";
-import { getSkuLabel, getSkuSwatchStyle } from "@/app/lib/product";
+import {
+  getSkuColorLabel,
+  getSkuLabel,
+  getSkuSwatchStyle,
+} from "@/app/lib/product";
 import type { ProductItem } from "@/app/types/product.type";
 import { formatGridPrice } from "../utils/format";
 import useProductCard from "@/app/hooks/useProductCard";
+import { useProductDetail } from "@/app/contexts/product-detail-context";
 
 type ProductCardProps = {
   product: ProductItem;
@@ -14,13 +19,39 @@ type ProductCardProps = {
 const ProductCard = (props: ProductCardProps) => {
   const { product, eagerImage = false } = props;
 
-  const { skuImageUrls, hasAnyImage, selectedSkuIndex, setSelectedSkuIndex, selectedSku } = useProductCard(product);
+  const {
+    sortedSkus,
+    skuImageUrls,
+    hasAnyImage,
+    selectedSkuIndex,
+    setSelectedSkuIndex,
+    selectedSku,
+  } = useProductCard(product);
 
   const isOutOfStock = product.selling_setting.in_stock === 0;
+  const { openModal } = useProductDetail();
+
+  const handleCardClick = () => {
+    if (isOutOfStock) return;
+    openModal(product, selectedSkuIndex);
+  };
+
+  const handleCardKeyDown = (event: React.KeyboardEvent<HTMLElement>) => {
+    if (isOutOfStock) return;
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      openModal(product, selectedSkuIndex);
+    }
+  };
 
   return (
     <article
+      role={isOutOfStock ? undefined : "button"}
+      tabIndex={isOutOfStock ? undefined : 0}
       aria-disabled={isOutOfStock || undefined}
+      aria-label={`View ${product.product.model_name} details`}
+      onClick={handleCardClick}
+      onKeyDown={handleCardKeyDown}
       className={`group flex flex-col bg-white text-black outline-2 outline-black transition-all duration-500 ease-in-out lg:outline-transparent ${
         isOutOfStock ? "cursor-default" : "cursor-pointer motion-safe:hover:scale-[1.03] lg:hover:outline-black"
       }`}
@@ -71,20 +102,23 @@ const ProductCard = (props: ProductCardProps) => {
           </div>
 
           <div className="flex max-w-[161px] shrink-0 flex-wrap justify-end gap-[3px]">
-            {product.skus.slice(0, 4).map((sku, index) => {
+            {sortedSkus.slice(0, 4).map((sku, index) => {
               const firstColor = sku.colors[0];
               if (!firstColor) return null;
 
               const isSelected = index === selectedSkuIndex;
               const swatchStyle = getSkuSwatchStyle(sku.colors);
-              const colorLabel = sku.colors.map((color) => color.name).join(" / ");
+              const colorLabel = getSkuColorLabel(sku.colors);
 
               return (
                 <button
                   key={sku.id}
                   type="button"
                   aria-label={`Select ${colorLabel}`}
-                  onClick={() => setSelectedSkuIndex(index)}
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    setSelectedSkuIndex(index);
+                  }}
                   className="flex size-[38px] shrink-0 items-center justify-center"
                 >
                   <span

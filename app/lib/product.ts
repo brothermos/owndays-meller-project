@@ -2,9 +2,33 @@ import { PRODUCT_IMAGE_BASE_URL } from "@/app/config/env";
 import type { ProductColor, ProductSku } from "@/app/types/product.type";
 import type { CSSProperties } from "react";
 
+export function getColorEnglishName(color: ProductColor): string {
+  const enName = color.localizations?.find(
+    (loc) => loc.language_code === "en",
+  )?.name;
+  return (enName ?? color.name).toUpperCase();
+}
+
+export function getSkuColorLabel(
+  colors: ProductColor[],
+  separator = " / ",
+): string {
+  return colors.map(getColorEnglishName).join(separator);
+}
+
 export function getProductImageUrl(path: string) {
   return `${PRODUCT_IMAGE_BASE_URL}${path}`;
 }
+
+export function sortSkus(skus: ProductSku[]): ProductSku[] {
+  return [...skus].sort((a, b) => a.order - b.order);
+}
+
+export function getDefaultSkuIndex(sortedSkus: ProductSku[]): number {
+  const idx = sortedSkus.findIndex((sku) => sku.is_default_display === 1);
+  return idx >= 0 ? idx : 0;
+}
+
 export function getSkuPrimaryImage(sku: ProductSku): string | null {
   const sorted = [...sku.images].sort((a, b) => a.order - b.order);
   return sorted[0]?.path ?? null;

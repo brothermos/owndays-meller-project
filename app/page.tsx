@@ -5,6 +5,8 @@ import ProductSection from "@/app/containers/ProductSection";
 import StyleCarouselSection from "@/app/containers/StyleCarouselSection";
 import FooterSection from "@/app/containers/FooterSection";
 import NavbarSection from "@/app/containers/NavbarSection";
+import ProductDetailModal from "@/app/components/ProductDetailModal";
+import { ProductDetailProvider } from "@/app/contexts/product-detail-context";
 import { getQueryClient } from "@/app/lib/get-query-client";
 import { productsQueryOptions } from "@/app/services/product.service";
 
@@ -14,13 +16,16 @@ export default async function HomePage() {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <main className="min-h-screen w-full">
-        <NavbarSection />
-        <HeroSection />
-        <ProductSection />
-        <StyleCarouselSection />
-        <FooterSection />
-      </main>
+      <ProductDetailProvider>
+        <main className="min-h-screen w-full">
+          <NavbarSection />
+          <HeroSection />
+          <ProductSection />
+          <StyleCarouselSection />
+          <FooterSection />
+        </main>
+        <ProductDetailModal />
+      </ProductDetailProvider>
     </HydrationBoundary>
   );
 }
