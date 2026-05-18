@@ -68,10 +68,10 @@ const StyleCarouselSection = () => {
       <section className=" bg-primary">
         <div className="px-4 sm:px-8 lg:px-[70px]">
           <div className="relative z-10 mb-[-28px] inline-flex items-start flex-col lg:mb-[-46px]">
-            <span className="font-display inline-block bg-black text-[72px] font-bold leading-none tracking-tight text-[#ff6723] [text-box-edge:cap_alphabetic] [text-box-trim:trim-both] lg:text-[120px]">
+            <span className="font-display inline-block bg-black text-[72px] font-bold leading-none tracking-tight text-primary [text-box-edge:cap_alphabetic] [text-box-trim:trim-both] lg:text-[120px]">
               HOW TO
             </span>
-            <span className="font-display mt-6 inline-block bg-black text-[72px] font-bold leading-none tracking-tight text-[#ff6723] [text-box-edge:cap_alphabetic] [text-box-trim:trim-both] lg:text-[120px]">
+            <span className="font-display mt-6 inline-block bg-black text-[72px] font-bold leading-none tracking-tight text-primary [text-box-edge:cap_alphabetic] [text-box-trim:trim-both] lg:text-[120px]">
               STYLE THEM
             </span>
           </div>

@@ -12,18 +12,18 @@ const LEGAL_LINKS = [
 ];
 
 const FOOTER_INLINE_CTA_CLASS =
-  "w-fit border border-transparent px-1 py-0.5 text-[#ff6723] transition-colors hover:border-black hover:bg-white hover:text-black!";
+  "w-fit border border-transparent px-1 py-0.5 text-primary transition-colors hover:border-black hover:bg-white hover:text-black!";
 
 const OWNDAYS_LINK_CTA_CLASS =
-  "group ml-8 mt-2 flex items-center gap-2 border border-transparent px-2 py-1 text-[21px] font-semibold tracking-wide text-[#ff6723] transition-colors hover:border-black hover:bg-white hover:text-black!";
+  "group ml-8 mt-2 flex items-center gap-2 border border-transparent px-2 py-1 text-[21px] font-semibold tracking-wide text-primary transition-colors hover:border-black hover:bg-white hover:text-black!";
 
 const FooterSection = () => {
   return (
-    <footer className="bg-black text-[#ff6723]">
+    <footer className="bg-black text-primary">
       <div className="hidden lg:block">
-        <div className="border-y border-[#ff6723]">
+        <div className="border-y border-primary">
           <div className="mx-auto grid max-w-[1440px] grid-cols-[64.7222%_35.2778%]">
-            <div className="border-r border-[#ff6723] px-12 py-14">
+            <div className="border-r border-primary px-12 py-14">
               <nav className="flex flex-col gap-4 text-[18px] font-semibold tracking-wide">
                 {NAV_ITEMS.map((item) => (
                   <a
@@ -51,7 +51,7 @@ const FooterSection = () => {
             </div>
 
             <div className="flex flex-col items-center justify-center px-12 py-14">
-              <div className="flex items-center gap-2 px-2 py-1 text-[#ff6723]">
+              <div className="flex items-center gap-2 px-2 py-1 text-primary">
                 <Image
                   src="/svg/cart_icon.svg"
                   alt=""
@@ -81,7 +81,7 @@ const FooterSection = () => {
           </div>
         </div>
 
-        <div className="border-b border-[#ff6723]">
+        <div className="border-b border-primary">
           <div className="mx-auto flex max-w-[1440px] items-center justify-between px-12 py-6 text-sm font-semibold tracking-wide">
             <div className="flex items-center gap-8">
               {LEGAL_LINKS.map((item) => (
@@ -101,12 +101,12 @@ const FooterSection = () => {
 
       <div className="mx-auto max-w-[720px] pb-8 lg:hidden">
         <div>
-          <nav className="border-b-2 border-t-4 border-[#ff6723]">
+          <nav className="border-b-2 border-t-4 border-primary">
             {NAV_ITEMS.map((item) => (
               <a
                 key={item.label}
                 href={item.href}
-                className="flex items-center justify-between border-b-2 border-[#ff6723] px-[30px] py-7 font-semibold tracking-wide text-[#ff6723] transition-colors hover:bg-white hover:text-black! last:border-b-0"
+                className="flex items-center justify-between border-b-2 border-primary px-[30px] py-7 font-semibold tracking-wide text-primary transition-colors hover:bg-white hover:text-black! last:border-b-0"
               >
                 <span>{item.label}</span>
                 <span className="leading-none">
@@ -122,7 +122,7 @@ const FooterSection = () => {
             ))}
           </nav>
 
-          <div className="flex items-center justify-between border-b border-[#ff6723] px-[30px] py-9 text-[#ff6723]">
+          <div className="flex items-center justify-between border-b border-primary px-[30px] py-9 text-primary">
             <div className="flex items-center gap-3">
               <Image
                 src="/svg/cart_icon.svg"
@@ -135,7 +135,7 @@ const FooterSection = () => {
             </div>
             <Link
               href="https://www.owndays.com"
-              className="group flex items-center gap-2 border border-transparent px-2 py-1 text-xs font-semibold tracking-wide text-[#ff6723] transition-colors hover:border-black hover:bg-white hover:text-black!"
+              className="group flex items-center gap-2 border border-transparent px-2 py-1 text-xs font-semibold tracking-wide text-primary transition-colors hover:border-black hover:bg-white hover:text-black!"
             >
               <span>OWNDAYS.COM</span>
               <Image
@@ -149,7 +149,7 @@ const FooterSection = () => {
             </Link>
           </div>
 
-          <div className="border-b border-[#ff6723] px-[30px] py-8">
+          <div className="border-b border-primary px-[30px] py-8">
             <div className="flex flex-col gap-3 font-semibold tracking-wide">
               {LEGAL_LINKS.map((item) => (
                 <Link

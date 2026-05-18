@@ -28,7 +28,7 @@ const HeroSection = () => {
         </div>
 
         <div className="absolute inset-0 flex items-center justify-center px-5">
-          <div className="font-display m-0 inline-block bg-black text-[56px] font-bold leading-none tracking-tight text-[#ff6723] [text-box-edge:cap_alphabetic] [text-box-trim:trim-both] lg:text-[110px]">
+          <div className="font-display m-0 inline-block bg-black text-[56px] font-bold leading-none tracking-tight text-primary [text-box-edge:cap_alphabetic] [text-box-trim:trim-both] lg:text-[110px]">
             PRODUCTS
           </div>
         </div>

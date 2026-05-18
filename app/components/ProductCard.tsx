@@ -83,7 +83,7 @@ const ProductCard = (props: ProductCardProps) => {
                   <span
                     className={`size-[28px] shrink-0 rounded-full border border-black/10 ${
                       isSelected
-                        ? "ring-[1px] ring-[#ff6723] ring-offset-4 ring-offset-white"
+                        ? "ring-[1px] ring-primary ring-offset-4 ring-offset-white"
                         : ""
                     }`}
                     style={swatchStyle}
