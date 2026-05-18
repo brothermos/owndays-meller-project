@@ -12,7 +12,7 @@ const ProductSection = () => {
   return (
     <section
       id="products"
-      className="bg-primary px-4 pt-[80px] sm:px-8 lg:px-[70px] lg:pt-[110px] lg:pb-[373px] pb-[200px] mt-0 lg:mt-1"
+      className="bg-primary px-4 pt-[80px] sm:px-8 lg:px-[70px] lg:pt-[110px] lg:pb-[177px] pb-[121px] mt-0 lg:mt-1"
     >
       <div className="mx-auto w-full max-w-[1440px]">
         {isLoading && (

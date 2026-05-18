@@ -27,7 +27,7 @@ const StyleCarouselSection = () => {
 
   return (
     <>
-      <section className="bg-primary pt-10 lg:pt-16">
+      <section className=" bg-primary">
         <div className="px-4 sm:px-8 lg:px-[70px]">
           <div className="relative z-10 mb-[-28px] inline-flex items-start flex-col lg:mb-[-46px]">
             <span className="font-display inline-block bg-black text-[72px] font-bold leading-none tracking-tight text-[#ff6723] [text-box-edge:cap_alphabetic] [text-box-trim:trim-both] lg:text-[120px]">
@@ -51,6 +51,8 @@ const StyleCarouselSection = () => {
                   alt={`How to style look ${index + 1}`}
                   fill
                   quality={60}
+                  loading={index === 0 ? "eager" : "lazy"}
+                  fetchPriority={index === 0 ? "high" : "auto"}
                   sizes="(max-width: 1024px) 326px, 405px"
                   className="object-cover"
                 />
