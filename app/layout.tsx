@@ -8,6 +8,7 @@ import {
 import "./globals.css";
 import QueryProvider from "./lib/query-provider";
 import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -61,6 +62,7 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col">
         <Analytics />
+        <SpeedInsights />
         <QueryProvider>{children}</QueryProvider>
       </body>
     </html>
