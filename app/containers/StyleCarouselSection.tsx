@@ -39,7 +39,10 @@ const StyleCarouselSection = () => {
           </div>
         </div>
 
-        <div className="overflow-hidden" ref={emblaRef}>
+        <div
+          className="-mt-5 overflow-hidden pt-5 lg:-mt-6 lg:pt-6"
+          ref={emblaRef}
+        >
           <ul className="flex">
             {CAROUSEL_IMAGES.map((imageSrc, index) => (
               <li
