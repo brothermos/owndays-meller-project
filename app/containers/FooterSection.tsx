@@ -48,7 +48,8 @@ const FooterSection = () => {
                       src="/svg/right_icon.svg"
                       alt=""
                       width={28}
-                      height={38}
+                      height={28}
+                      className="h-auto w-7"
                       aria-hidden="true"
                     />
                   </span>
