@@ -16,17 +16,24 @@ const barlowCondensed = Barlow_Condensed({
   variable: "--font-barlow-condensed",
 });
 
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  (process.env.VERCEL_URL
+    ? `https://${process.env.VERCEL_URL}`
+    : "http://localhost:3000");
+
 export const metadata: Metadata = {
-  title: "OWNDAYS x MELLER | Product Listing",
+  metadataBase: new URL(siteUrl),
+  title: "OWNDAYS x MELLER",
   description:
     "Explore the OWNDAYS x MELLER sunglasses collaboration with product details, color variants, and styling inspiration.",
   openGraph: {
-    title: "OWNDAYS x MELLER | Product Listing",
+    title: "OWNDAYS x MELLER",
     description:
       "Shop the OWNDAYS x MELLER collaboration collection with responsive browsing and variant details.",
     images: [
       {
-        url: "https://static.lenskart.com/media/owndays/img/products/36ebdac7-36d3-40a8-9e83-f3cb90b4c9d4.webp",
+        url: "/images/meta_ogp.jpg",
         width: 1200,
         height: 630,
         alt: "OWNDAYS x MELLER collection",
