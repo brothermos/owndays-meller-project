@@ -1,38 +1,20 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import { MOBILE_MENU_EXIT_MS } from "@/app/constants/mobile-menu";
+import { useAnimatedPresence } from "@/app/hooks/useAnimatedPresence";
 import { useBodyScrollLock } from "@/app/hooks/useBodyScrollLock";
 
 export function useMobileMenu() {
-  const [isOpen, setIsOpenState] = useState<boolean>(false);
-  const [isMounted, setIsMounted] = useState<boolean>(false);
-  const exitTimerRef = useRef<number | null>(null);
+  const [isOpen, setIsOpenState] = useState(false);
 
-  const clearExitTimer = useCallback(() => {
-    if (exitTimerRef.current !== null) {
-      window.clearTimeout(exitTimerRef.current);
-      exitTimerRef.current = null;
-    }
+  const isMounted = useAnimatedPresence({
+    isVisible: isOpen,
+    exitDurationMs: MOBILE_MENU_EXIT_MS,
+  });
+
+  const setIsOpen = useCallback((open: boolean) => {
+    setIsOpenState(open);
   }, []);
-
-  const setIsOpen = useCallback(
-    (open: boolean) => {
-      clearExitTimer();
-
-      if (open) {
-        setIsMounted(true);
-        setIsOpenState(true);
-        return;
-      }
-
-      setIsOpenState(false);
-      exitTimerRef.current = window.setTimeout(() => {
-        setIsMounted(false);
-        exitTimerRef.current = null;
-      }, MOBILE_MENU_EXIT_MS);
-    },
-    [clearExitTimer],
-  );
 
   useEffect(() => {
     if (!isMounted) return;
@@ -48,8 +30,6 @@ export function useMobileMenu() {
   }, [isMounted, setIsOpen]);
 
   useBodyScrollLock(isMounted);
-
-  useEffect(() => clearExitTimer, [clearExitTimer]);
 
   return { isOpen, isMounted, setIsOpen };
 }
