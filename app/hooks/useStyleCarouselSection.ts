@@ -4,14 +4,11 @@ import { STYLE_CAROUSEL_SLIDES } from "@/app/constants/style-carousel";
 import { useProductDetail } from "@/app/contexts/product-detail-context";
 import { findProductSkuByColor } from "@/app/lib/product";
 import { useProductsQuery } from "@/app/services/product.service";
-
-const DRAG_THRESHOLD_PX = 8;
+import { DRAG_THRESHOLD_PX } from "../constants/style-carousel-section.type";
 
 export function getStyleCarouselSlideLabel(index: number) {
   const slide = STYLE_CAROUSEL_SLIDES[index];
-  return slide
-    ? `${slide.modelName} ${slide.colorLabel}`
-    : `look ${index + 1}`;
+  return slide ? `${slide.modelName} ${slide.colorLabel}` : `look ${index + 1}`;
 }
 
 export function useStyleCarouselSection() {
@@ -26,11 +23,7 @@ export function useStyleCarouselSection() {
       const target = STYLE_CAROUSEL_SLIDES[slideIndex];
       if (!target) return;
 
-      const match = findProductSkuByColor(
-        products,
-        target.modelName,
-        target.colorLabel,
-      );
+      const match = findProductSkuByColor(products, target.modelName, target.colorLabel);
       if (!match) return;
 
       openModal(match.product, match.skuIndex);
@@ -38,15 +31,12 @@ export function useStyleCarouselSection() {
     [products, openModal],
   );
 
-  const onSlidePointerDown = useCallback(
-    (event: React.PointerEvent<HTMLLIElement>) => {
-      slidePointerStart.current = {
-        x: event.clientX,
-        y: event.clientY,
-      };
-    },
-    [],
-  );
+  const onSlidePointerDown = useCallback((event: React.PointerEvent<HTMLLIElement>) => {
+    slidePointerStart.current = {
+      x: event.clientX,
+      y: event.clientY,
+    };
+  }, []);
 
   const onSlideClick = useCallback(
     (event: React.MouseEvent<HTMLLIElement>, slideIndex: number) => {

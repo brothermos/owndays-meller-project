@@ -1,14 +1,12 @@
 import ProductCard from "@/app/components/ProductCard";
 import { useInView } from "@/app/hooks/useInView";
 import { ProductItem } from "@/app/types/product.type";
+import { COLUMNS_LG, STAGGER_STEP_MS } from "../constants/animated-product-item";
 
 type AnimatedProductItemProps = {
   product: ProductItem;
   index: number;
 };
-
-const STAGGER_STEP_MS = 120;
-const COLUMNS_LG = 3;
 
 const AnimatedProductItem = (props: AnimatedProductItemProps) => {
   const { product, index } = props;
