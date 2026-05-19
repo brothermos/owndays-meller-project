@@ -3,7 +3,7 @@
 import Image from "next/image";
 
 import { useStyleCarouselSection } from "@/app/hooks/useStyleCarouselSection";
-import { getStyleCarouselSlideLabel } from "@/app/lib/style-carousel";
+import { getStyleCarouselSlideLabel } from "@/app/utils/carousel";
 
 const StyleCarouselSection = () => {
   const { slides, onSlidePointerDown, onSlideClick, onSlideKeyDown } = useStyleCarouselSection();
@@ -55,13 +55,7 @@ const StyleCarouselSection = () => {
                   aria-hidden="true"
                   className="pointer-events-none absolute bottom-0 right-0 z-20 flex size-[70px] items-center justify-center bg-primary"
                 >
-                  <Image
-                    src="/svg/plus_icon.svg"
-                    alt=""
-                    width={28}
-                    height={28}
-                    aria-hidden="true"
-                  />
+                  <Image src="/svg/plus_icon.svg" alt="" width={28} height={28} aria-hidden="true" />
                 </span>
               </li>
             );

@@ -1,10 +1,9 @@
 import useEmblaCarousel from "embla-carousel-react";
 import { useEffect, useMemo, useRef, useState } from "react";
 
-import { getProductImageUrl, getSkuColorLabel, sortSkus } from "@/app/lib/product";
 import type { ProductItem } from "@/app/types/product.type";
 import { formatModalPrice } from "@/app/utils/format";
-import { ONLINE_STORE_BASE } from "@/app/config/env";
+import { buildOnlineStoreUrl, getProductImageUrl, getSkuColorLabel, sortSkus } from "@/app/utils/product";
 
 type UseProductDetailModalOptions = {
   selectedProduct: ProductItem;
@@ -21,9 +20,6 @@ export function useProductDetailModal(props: UseProductDetailModalOptions) {
     containScroll: "trimSnaps",
   });
   const isFirstEmblaSync = useRef(true);
-
-  const buildOnlineStoreUrl = (productCode: string, skuId: number) =>
-    `${ONLINE_STORE_BASE}/${productCode}?sku=${skuId}`;
 
   useEffect(() => {
     if (!emblaApi) return;

@@ -1,4 +1,4 @@
-import { PRODUCT_IMAGE_BASE_URL } from "@/app/config/env";
+import { ONLINE_STORE_BASE, PRODUCT_IMAGE_BASE_URL } from "@/app/config/env";
 import type {
   ProductColor,
   ProductItem,
@@ -24,6 +24,10 @@ export function getSkuColorLabel(
 
 export function getProductImageUrl(path: string) {
   return `${PRODUCT_IMAGE_BASE_URL}${path}`;
+}
+
+export function buildOnlineStoreUrl(productCode: string, skuId: number) {
+  return `${ONLINE_STORE_BASE}${productCode}?sku=${skuId}`;
 }
 
 export function sortSkus(skus: ProductSku[]): ProductSku[] {

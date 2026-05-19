@@ -1,8 +1,8 @@
 import { useCallback, useMemo, type MouseEvent } from "react";
 
 import { SWATCH_RING_CLASS, type ColorSwatchVariant } from "@/app/constants/color-swatch-button";
-import { getProductImageUrl, getSwatchStyle, SWATCH_FALLBACK_STYLE } from "@/app/lib/product";
 import type { ProductSku } from "@/app/types/product.type";
+import { getProductImageUrl, getSwatchStyle, SWATCH_FALLBACK_STYLE } from "@/app/utils/product";
 
 export function useColorSwatchButton(sku: ProductSku, isSelected: boolean, onSelect: () => void) {
   const ringClass = isSelected ? SWATCH_RING_CLASS.selected : SWATCH_RING_CLASS.default;
