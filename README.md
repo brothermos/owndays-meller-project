@@ -4,7 +4,7 @@ Frontend implementation for the **OWNDAYS x MELLER** sunglasses collaboration la
 
 ## Live Demo
 
-`https://owndays-meller-project.vercel.app/`
+[https://owndays-meller-project.vercel.app/](https://owndays-meller-project.vercel.app/)
 
 ## Tech Stack
 
