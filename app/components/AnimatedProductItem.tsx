@@ -20,7 +20,7 @@ const AnimatedProductItem = (props: AnimatedProductItemProps) => {
     <li
       ref={ref}
       style={{ transitionDelay: `${delayMs}ms` }}
-      className={`transform-gpu transition-all duration-700 ease-out will-change-transform motion-reduce:translate-y-0 motion-reduce:opacity-100 motion-reduce:transition-none ${
+      className={`transform-gpu transition-[transform,opacity] duration-700 ease-out motion-reduce:translate-y-0 motion-reduce:opacity-100 motion-reduce:transition-none ${
         isInView ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
       }`}
     >

@@ -2,14 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { NAV_ITEMS } from "@/app/constants/navbar";
-
-const LEGAL_LINKS = [
-  { label: "CONTACT US", href: "#" },
-  { label: "PRIVACY POLICY", href: "#" },
-  { label: "TERMS OF USE", href: "#" },
-  { label: "特定商取引法表示", href: "#" },
-];
+import { FOOTER_LEGAL_LINKS, NAV_ITEMS } from "@/app/constants/navbar";
 
 const FOOTER_INLINE_CTA_CLASS =
   "w-fit border-2 border-transparent px-1 py-0.5 text-primary transition-colors hover:border-black hover:bg-white hover:text-black!";
@@ -105,7 +98,7 @@ const FooterSection = () => {
         <div className="border-b-2 border-primary">
           <div className="mx-auto flex max-w-[1440px] items-center justify-between px-12 py-6 text-sm font-semibold tracking-wide">
             <div className="flex items-center gap-8">
-              {LEGAL_LINKS.map((item) => (
+              {FOOTER_LEGAL_LINKS.map((item) => (
                 <Link
                   key={item.label}
                   href={item.href}
@@ -173,7 +166,7 @@ const FooterSection = () => {
 
           <div className="border-b-2 border-primary px-[30px] py-8">
             <div className="flex flex-col gap-3 font-semibold tracking-wide">
-              {LEGAL_LINKS.map((item) => (
+              {FOOTER_LEGAL_LINKS.map((item) => (
                 <Link
                   key={item.label}
                   href={item.href}

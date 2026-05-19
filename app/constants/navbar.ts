@@ -4,7 +4,7 @@ export const NAV_ITEMS = [
   { label: "STORES", href: "#stores" },
 ] as const;
 
-export const MOBILE_MENU_LEGAL_LINKS = [
+export const FOOTER_LEGAL_LINKS = [
   {
     label: "CONTACT US",
     href: "https://www.owndays.com/jp/ja/contact",
@@ -16,7 +16,7 @@ export const MOBILE_MENU_LEGAL_LINKS = [
     emphasis: false,
   },
   {
-    label: "TERMS OF SERVICE",
+    label: "TERMS OF USE",
     href: "https://www.owndays.com/jp/ja/terms",
     emphasis: false,
   },
@@ -25,4 +25,10 @@ export const MOBILE_MENU_LEGAL_LINKS = [
     href: "https://www.owndays.com/jp/ja/agreement",
     emphasis: true,
   },
+] as const;
+
+export const MOBILE_MENU_LEGAL_LINKS = [
+  ...FOOTER_LEGAL_LINKS.slice(0, 2),
+  { label: "TERMS OF SERVICE", href: FOOTER_LEGAL_LINKS[2].href, emphasis: false },
+  FOOTER_LEGAL_LINKS[3],
 ] as const;

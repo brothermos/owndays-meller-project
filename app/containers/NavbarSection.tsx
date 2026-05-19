@@ -30,11 +30,11 @@ const NavbarSection = () => {
   return (
     <>
       <header
-        className={`fixed left-0 right-0 top-0 z-100 mx-auto px-4 py-4 transition-all duration-300 sm:px-8 lg:px-[70px] ${
+        className={`fixed left-0 right-0 top-0 z-100 py-[23px] transition-all duration-300 lg:py-[25px] ${
           isScrolled ? "bg-black/20 backdrop-blur-sm" : "bg-transparent"
         }`}
       >
-        <div className="mx-auto flex w-full max-w-[1440px] items-center justify-between text-white">
+        <div className="mx-auto flex w-full max-w-[1440px] items-center justify-between px-4 text-white sm:px-8 lg:px-[70px]">
           <div>
             <div className="lg:hidden">
               <Image
@@ -57,7 +57,7 @@ const NavbarSection = () => {
             </div>
           </div>
 
-          <nav className="hidden items-center gap-10 text-xl font-bold lg:flex">
+          <nav className="hidden items-center gap-[50px] text-[15px] font-bold uppercase tracking-[0.7px] lg:flex">
             {NAV_ITEMS.map((item) => (
               <a key={item.label} href={item.href} className={NAVBAR_CTA_CLASS}>
                 {item.label}
@@ -67,7 +67,7 @@ const NavbarSection = () => {
 
           <button
             type="button"
-            className="flex h-6 w-5 flex-col justify-between lg:hidden"
+            className="flex h-[24px] w-[20px] flex-col justify-between lg:hidden"
             aria-label="Open mobile menu"
             onClick={() => setIsMobileMenuOpen(true)}
           >

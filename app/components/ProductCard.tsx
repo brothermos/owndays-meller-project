@@ -52,7 +52,7 @@ const ProductCard = (props: ProductCardProps) => {
       aria-label={`View ${product.product.model_name} details`}
       onClick={handleCardClick}
       onKeyDown={handleCardKeyDown}
-      className={`group flex flex-col bg-white text-black outline-2 outline-black transition-all duration-500 ease-in-out lg:outline-transparent ${
+      className={`group flex flex-col bg-white text-black outline-2 outline-black transition-transform duration-300 ease-out lg:outline-transparent ${
         isOutOfStock
           ? "cursor-default"
           : "cursor-pointer motion-safe:hover:scale-[1.03] lg:hover:outline-black"
@@ -95,10 +95,10 @@ const ProductCard = (props: ProductCardProps) => {
         </div>
       </div>
 
-      <div className="flex flex-1 flex-col px-4 sm:px-4 pb-8">
+      <div className="flex flex-1 flex-col px-4 pb-8">
         <div className="flex items-start justify-between gap-3">
           <div className="min-w-0">
-            <div className="font-display font-bold uppercase leading-tight tracking-tight text-5xl">
+            <div className="font-display text-5xl font-bold uppercase leading-tight tracking-tight">
               {product.product.model_name}
             </div>
           </div>
@@ -121,13 +121,13 @@ const ProductCard = (props: ProductCardProps) => {
                     event.stopPropagation();
                     setSelectedSkuIndex(index);
                   }}
-                  className="group/swatch flex size-[38px] shrink-0 items-center justify-center rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+                  className="flex size-[38px] shrink-0 items-center justify-center focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
                 >
                   <span
-                    className={`size-[28px] shrink-0 rounded-full border border-black/10 transition-[box-shadow,transform] duration-150 motion-safe:group-hover/swatch:scale-110 ${
+                    className={`size-[28px] shrink-0 rounded-full border border-black/10 ${
                       isSelected
                         ? "ring-2 ring-primary ring-offset-4 ring-offset-white"
-                        : "group-hover/swatch:ring-2 group-hover/swatch:ring-black/50 group-hover/swatch:ring-offset-2 group-hover/swatch:ring-offset-white"
+                        : ""
                     }`}
                     style={swatchStyle}
                   />
@@ -138,10 +138,10 @@ const ProductCard = (props: ProductCardProps) => {
         </div>
 
         <div className="flex items-end justify-between gap-3">
-          <p className="text-black/80 text-base">
+          <p className="text-base text-black/80">
             {getSkuLabel(product.product.code, selectedSku)}
           </p>
-          <p className="text-right font-bold text-xl">
+          <p className="text-right text-xl font-bold">
             {formatGridPrice(product.selling_setting.price)}
           </p>
         </div>
