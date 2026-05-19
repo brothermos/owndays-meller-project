@@ -9,12 +9,8 @@ const NAVBAR_CTA_CLASS =
   "w-fit border border-transparent px-2 py-1 transition-colors hover:border-black hover:bg-white hover:text-black!";
 
 const NavbarSection = () => {
-  const {
-    isMobileMenuOpen,
-    setIsMobileMenuOpen,
-    isMobileMenuMounted,
-    isMobileMenuAnimating,
-  } = useHeroSection();
+  const { isMobileMenuOpen, setIsMobileMenuOpen, isMobileMenuMounted } =
+    useHeroSection();
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
@@ -67,23 +63,27 @@ const NavbarSection = () => {
 
           <button
             type="button"
-            className="flex h-[24px] w-[20px] flex-col justify-between lg:hidden"
+            className="lg:hidden"
             aria-label="Open mobile menu"
             onClick={() => setIsMobileMenuOpen(true)}
           >
-            <span className="h-[2px] w-full bg-white" />
-            <span className="h-[2px] w-full bg-white" />
-            <span className="h-[2px] w-full bg-white" />
+            <Image
+              src="/svg/hamburger_icon.svg"
+              alt=""
+              width={20}
+              height={15}
+              aria-hidden="true"
+            />
           </button>
         </div>
       </header>
 
       {isMobileMenuMounted && (
         <div
-          className={`fixed inset-0 z-110 flex flex-col p-4 backdrop-blur-md lg:hidden motion-reduce:backdrop-blur-none ${
-            isMobileMenuAnimating
-              ? "animate-overlay-in bg-black/40"
-              : "pointer-events-none animate-overlay-out bg-black/40"
+          className={`fixed inset-0 z-110 flex flex-col bg-black/40 p-4 lg:hidden ${
+            isMobileMenuOpen
+              ? "animate-overlay-in"
+              : "pointer-events-none animate-overlay-out"
           }`}
           role="dialog"
           aria-modal="true"
@@ -93,7 +93,7 @@ const NavbarSection = () => {
         >
           <div
             className={`flex h-full w-full flex-col rounded-[10px] bg-black motion-reduce:animate-none ${
-              isMobileMenuAnimating
+              isMobileMenuOpen
                 ? "animate-mobile-menu-panel-in"
                 : "pointer-events-none animate-mobile-menu-panel-out"
             }`}
@@ -108,8 +108,8 @@ const NavbarSection = () => {
               <Image
                 src="/svg/close_icon.svg"
                 alt=""
-                width={42}
-                height={42}
+                width={28}
+                height={28}
                 aria-hidden="true"
               />
             </button>

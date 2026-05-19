@@ -1,19 +1,13 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
-const MOBILE_MENU_EXIT_MS = 300;
+const MOBILE_MENU_EXIT_MS = 320;
 
 const useHeroSection = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpenState] = useState(false);
   const [isMobileMenuMounted, setIsMobileMenuMounted] = useState(false);
-  const [isMobileMenuAnimating, setIsMobileMenuAnimating] = useState(false);
-  const rafRef = useRef<number | null>(null);
   const exitTimerRef = useRef<number | null>(null);
 
   const clearPendingMenuTransitions = useCallback(() => {
-    if (rafRef.current !== null) {
-      cancelAnimationFrame(rafRef.current);
-      rafRef.current = null;
-    }
     if (exitTimerRef.current !== null) {
       window.clearTimeout(exitTimerRef.current);
       exitTimerRef.current = null;
@@ -25,20 +19,12 @@ const useHeroSection = () => {
       clearPendingMenuTransitions();
 
       if (open) {
-        setIsMobileMenuOpenState(true);
         setIsMobileMenuMounted(true);
-        setIsMobileMenuAnimating(false);
-        rafRef.current = requestAnimationFrame(() => {
-          rafRef.current = requestAnimationFrame(() => {
-            setIsMobileMenuAnimating(true);
-            rafRef.current = null;
-          });
-        });
+        setIsMobileMenuOpenState(true);
         return;
       }
 
       setIsMobileMenuOpenState(false);
-      setIsMobileMenuAnimating(false);
       exitTimerRef.current = window.setTimeout(() => {
         setIsMobileMenuMounted(false);
         exitTimerRef.current = null;
@@ -71,7 +57,6 @@ const useHeroSection = () => {
     isMobileMenuOpen,
     setIsMobileMenuOpen,
     isMobileMenuMounted,
-    isMobileMenuAnimating,
   };
 };
 
