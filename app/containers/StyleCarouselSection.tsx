@@ -1,8 +1,26 @@
 "use client";
 
-import { useEffect } from "react";
+import { useCallback, useRef } from "react";
 import Image from "next/image";
 import useEmblaCarousel from "embla-carousel-react";
+import { useProductDetail } from "@/app/contexts/product-detail-context";
+import { findProductSkuByColor } from "@/app/lib/product";
+import { useProductsQuery } from "@/app/services/product.service";
+
+const CAROUSEL_SLIDE_TARGETS = [
+  { modelName: "ADISA", colorLabel: "clear gray" },
+  { modelName: "TANA", colorLabel: "brown demi" },
+  { modelName: "NAYAH", colorLabel: "black" },
+  { modelName: "CUMBI", colorLabel: "brown demi" },
+  { modelName: "NAYAH", colorLabel: "black / orange" },
+  { modelName: "KESSIE", colorLabel: "black" },
+  { modelName: "NAYAH", colorLabel: "brown demi" },
+  { modelName: "CUMBI", colorLabel: "brown demi" },
+  { modelName: "ADISA", colorLabel: "black" },
+  { modelName: "CHAUEN", colorLabel: "brown demi" },
+  { modelName: "ADISA", colorLabel: "clear green" },
+  { modelName: "TANA", colorLabel: "brown demi" },
+] as const;
 
 const CAROUSEL_IMAGES = [
   "/images/carousel_1.avif",
@@ -20,48 +38,49 @@ const CAROUSEL_IMAGES = [
 ];
 
 const StyleCarouselSection = () => {
-  const [emblaRef, emblaApi] = useEmblaCarousel({
+  const { data: products } = useProductsQuery();
+  const { openModal } = useProductDetail();
+  const slidePointerStart = useRef<{ x: number; y: number } | null>(null);
+
+  const handleSlideClick = useCallback(
+    (slideIndex: number) => {
+      if (!products) return;
+
+      const target = CAROUSEL_SLIDE_TARGETS[slideIndex];
+      if (!target) return;
+
+      const match = findProductSkuByColor(
+        products,
+        target.modelName,
+        target.colorLabel,
+      );
+      if (!match) return;
+
+      openModal(match.product, match.skuIndex);
+    },
+    [products, openModal],
+  );
+
+  const handleSlideActivate = useCallback(
+    (event: React.MouseEvent<HTMLLIElement>, slideIndex: number) => {
+      const start = slidePointerStart.current;
+      slidePointerStart.current = null;
+      if (!start) return;
+
+      const dx = event.clientX - start.x;
+      const dy = event.clientY - start.y;
+      if (Math.hypot(dx, dy) > 8) return;
+
+      handleSlideClick(slideIndex);
+    },
+    [handleSlideClick],
+  );
+
+  const [emblaRef] = useEmblaCarousel({
     align: "start",
     dragFree: true,
     containScroll: "trimSnaps",
   });
-
-  useEffect(() => {
-    if (!emblaApi) return;
-
-    const disableRubberBand = () => {
-      const {
-        limit,
-        target,
-        location,
-        offsetLocation,
-        scrollTo,
-        translate,
-        scrollBody,
-      } = emblaApi.internalEngine();
-
-      let edge: number | null = null;
-      if (limit.reachedMax(target.get())) edge = limit.max;
-      if (limit.reachedMin(target.get())) edge = limit.min;
-
-      if (edge !== null) {
-        offsetLocation.set(edge);
-        location.set(edge);
-        target.set(edge);
-        translate.to(edge);
-        translate.toggleActive(false);
-        scrollBody.useDuration(0).useFriction(0);
-        scrollTo.distance(0, false);
-      } else {
-        translate.toggleActive(true);
-      }
-    };
-
-    emblaApi.on("scroll", disableRubberBand);
-    return () => {
-      emblaApi.off("scroll", disableRubberBand);
-    };
-  }, [emblaApi]);
 
   return (
     <>
@@ -82,36 +101,58 @@ const StyleCarouselSection = () => {
           ref={emblaRef}
         >
           <ul className="flex">
-            {CAROUSEL_IMAGES.map((imageSrc, index) => (
-              <li
-                key={imageSrc}
-                className="group relative h-[492px] w-[326px] shrink-0 cursor-pointer overflow-hidden outline-2 outline-black transition-all duration-500 ease-in-out motion-safe:hover:scale-[1.03] active:cursor-grabbing lg:h-[611px] lg:w-[405px] lg:outline-transparent lg:hover:z-10 lg:hover:outline-black"
-              >
-                <Image
-                  src={imageSrc}
-                  alt={`How to style look ${index + 1}`}
-                  fill
-                  quality={60}
-                  loading={index === 0 ? "eager" : "lazy"}
-                  fetchPriority={index === 0 ? "high" : "auto"}
-                  sizes="(max-width: 1024px) 326px, 405px"
-                  className="object-cover"
-                />
-                <button
-                  type="button"
-                  aria-label={`Open product detail for look ${index + 1}`}
-                  className="absolute bottom-0 right-0 flex size-[70px] items-center justify-center bg-primary"
+            {CAROUSEL_IMAGES.map((imageSrc, index) => {
+              const target = CAROUSEL_SLIDE_TARGETS[index];
+              const slideLabel = target
+                ? `${target.modelName} ${target.colorLabel}`
+                : `look ${index + 1}`;
+
+              return (
+                <li
+                  key={imageSrc}
+                  role="button"
+                  tabIndex={0}
+                  aria-label={`Open ${slideLabel} product details`}
+                  onPointerDown={(event) => {
+                    slidePointerStart.current = {
+                      x: event.clientX,
+                      y: event.clientY,
+                    };
+                  }}
+                  onClick={(event) => handleSlideActivate(event, index)}
+                  onKeyDown={(event) => {
+                    if (event.key === "Enter" || event.key === " ") {
+                      event.preventDefault();
+                      handleSlideClick(index);
+                    }
+                  }}
+                  className="group relative h-[492px] w-[326px] shrink-0 cursor-pointer overflow-hidden outline-2 outline-black transition-all duration-500 ease-in-out motion-safe:hover:scale-[1.03] active:cursor-grabbing lg:h-[611px] lg:w-[405px] lg:outline-transparent lg:hover:z-10 lg:hover:outline-black"
                 >
                   <Image
-                    src="/svg/plus_icon.svg"
-                    alt=""
-                    width={28}
-                    height={28}
-                    aria-hidden="true"
+                    src={imageSrc}
+                    alt={`How to style look ${index + 1}`}
+                    fill
+                    quality={60}
+                    loading={index === 0 ? "eager" : "lazy"}
+                    fetchPriority={index === 0 ? "high" : "auto"}
+                    sizes="(max-width: 1024px) 326px, 405px"
+                    className="object-cover"
                   />
-                </button>
-              </li>
-            ))}
+                  <span
+                    aria-hidden="true"
+                    className="pointer-events-none absolute bottom-0 right-0 z-20 flex size-[70px] items-center justify-center bg-primary"
+                  >
+                    <Image
+                      src="/svg/plus_icon.svg"
+                      alt=""
+                      width={28}
+                      height={28}
+                      aria-hidden="true"
+                    />
+                  </span>
+                </li>
+              );
+            })}
           </ul>
         </div>
       </section>

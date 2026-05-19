@@ -53,7 +53,9 @@ const ProductCard = (props: ProductCardProps) => {
       onClick={handleCardClick}
       onKeyDown={handleCardKeyDown}
       className={`group flex flex-col bg-white text-black outline-2 outline-black transition-all duration-500 ease-in-out lg:outline-transparent ${
-        isOutOfStock ? "cursor-default" : "cursor-pointer motion-safe:hover:scale-[1.03] lg:hover:outline-black"
+        isOutOfStock
+          ? "cursor-default"
+          : "cursor-pointer motion-safe:hover:scale-[1.03] lg:hover:outline-black"
       }`}
     >
       <div className="aspect-4/3 w-full bg-white p-4">
@@ -119,11 +121,13 @@ const ProductCard = (props: ProductCardProps) => {
                     event.stopPropagation();
                     setSelectedSkuIndex(index);
                   }}
-                  className="flex size-[38px] shrink-0 items-center justify-center"
+                  className="group/swatch flex size-[38px] shrink-0 items-center justify-center rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
                 >
                   <span
-                    className={`size-[28px] shrink-0 rounded-full border border-black/10 ${
-                      isSelected ? "ring-2 ring-primary ring-offset-4 ring-offset-white" : ""
+                    className={`size-[28px] shrink-0 rounded-full border border-black/10 transition-[box-shadow,transform] duration-150 motion-safe:group-hover/swatch:scale-110 ${
+                      isSelected
+                        ? "ring-2 ring-primary ring-offset-4 ring-offset-white"
+                        : "group-hover/swatch:ring-2 group-hover/swatch:ring-black/50 group-hover/swatch:ring-offset-2 group-hover/swatch:ring-offset-white"
                     }`}
                     style={swatchStyle}
                   />
@@ -134,8 +138,12 @@ const ProductCard = (props: ProductCardProps) => {
         </div>
 
         <div className="flex items-end justify-between gap-3">
-          <p className="text-black/80 text-base">{getSkuLabel(product.product.code, selectedSku)}</p>
-          <p className="text-right font-bold text-xl">{formatGridPrice(product.selling_setting.price)}</p>
+          <p className="text-black/80 text-base">
+            {getSkuLabel(product.product.code, selectedSku)}
+          </p>
+          <p className="text-right font-bold text-xl">
+            {formatGridPrice(product.selling_setting.price)}
+          </p>
         </div>
       </div>
     </article>

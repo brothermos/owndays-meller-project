@@ -1,5 +1,9 @@
 import { PRODUCT_IMAGE_BASE_URL } from "@/app/config/env";
-import type { ProductColor, ProductSku } from "@/app/types/product.type";
+import type {
+  ProductColor,
+  ProductItem,
+  ProductSku,
+} from "@/app/types/product.type";
 import type { CSSProperties } from "react";
 
 export function getColorEnglishName(color: ProductColor): string {
@@ -52,6 +56,27 @@ export function getSwatchStyle(color: ProductColor): CSSProperties {
   }
 
   return { backgroundColor: "#d9d9d9" };
+}
+
+export function findProductSkuByColor(
+  products: ProductItem[],
+  modelName: string,
+  colorLabel: string,
+): { product: ProductItem; skuIndex: number } | null {
+  const product = products.find(
+    (item) =>
+      item.product.model_name.toUpperCase() === modelName.toUpperCase(),
+  );
+  if (!product) return null;
+
+  const sortedSkus = sortSkus(product.skus);
+  const target = colorLabel.trim().toLowerCase();
+  const skuIndex = sortedSkus.findIndex(
+    (sku) => getSkuColorLabel(sku.colors).toLowerCase() === target,
+  );
+
+  if (skuIndex < 0) return null;
+  return { product, skuIndex };
 }
 
 export function getSkuSwatchStyle(colors: ProductColor[]): CSSProperties {
