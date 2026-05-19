@@ -24,7 +24,7 @@ const StyleCarouselSection = () => {
       <div
         role="region"
         aria-label="How to style them gallery"
-        className="-mb-5 -mt-5 overflow-x-auto overscroll-x-contain scroll-smooth pb-5 pt-5 [-ms-overflow-style:none] scrollbar-none touch-pan-x [&::-webkit-scrollbar]:hidden lg:-mb-6 lg:-mt-6 lg:pb-6 lg:pt-6"
+        className="-mb-5 -mt-5 overflow-x-auto overscroll-x-contain scroll-smooth pb-5 pt-5 [-ms-overflow-style:none] scrollbar-none [&::-webkit-scrollbar]:hidden lg:-mb-6 lg:-mt-6 lg:pb-6 lg:pt-6"
       >
         <ul className="flex">
           {slides.map((slide, index) => {
