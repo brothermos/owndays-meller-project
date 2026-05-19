@@ -4,10 +4,8 @@ import { useProductDetail } from "@/app/contexts/product-detail-context";
 import {
   getDefaultSkuIndex,
   getProductImageUrl,
-  getSkuColorLabel,
   getSkuLabel,
   getSkuPrimaryImage,
-  getSkuSwatchStyle,
   sortSkus,
 } from "@/app/lib/product";
 import type { ProductItem } from "@/app/types/product.type";
@@ -31,18 +29,16 @@ export function useProductCard(product: ProductItem) {
     [sortedSkus],
   );
 
-  const swatches = useMemo(
+  const displaySkus = useMemo(
     () =>
       sortedSkus.slice(0, 4).flatMap((sku, index) => {
         if (!sku.colors[0]) return [];
 
         return [
           {
-            skuId: sku.id,
+            sku,
             index,
             isSelected: index === selectedSkuIndex,
-            swatchStyle: getSkuSwatchStyle(sku.colors),
-            colorLabel: getSkuColorLabel(sku.colors),
           },
         ];
       }),
@@ -75,17 +71,9 @@ export function useProductCard(product: ProductItem) {
     setSelectedSkuIndex(index);
   }, []);
 
-  const handleSwatchClick = useCallback(
-    (event: React.MouseEvent<HTMLButtonElement>, index: number) => {
-      event.stopPropagation();
-      selectSku(index);
-    },
-    [selectSku],
-  );
-
   return {
     skuImageUrls,
-    swatches,
+    displaySkus,
     hasAnyImage,
     selectedSkuIndex,
     isOutOfStock,
@@ -94,6 +82,6 @@ export function useProductCard(product: ProductItem) {
     modelName,
     handleCardClick: openProductDetail,
     handleCardKeyDown,
-    handleSwatchClick,
+    selectSku,
   };
 }

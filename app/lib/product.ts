@@ -6,6 +6,8 @@ import type {
 } from "@/app/types/product.type";
 import type { CSSProperties } from "react";
 
+export const SWATCH_FALLBACK_STYLE: CSSProperties = { backgroundColor: "#d9d9d9" };
+
 export function getColorEnglishName(color: ProductColor): string {
   const enName = color.localizations?.find(
     (loc) => loc.language_code === "en",
@@ -55,7 +57,7 @@ export function getSwatchStyle(color: ProductColor): CSSProperties {
     };
   }
 
-  return { backgroundColor: "#d9d9d9" };
+  return SWATCH_FALLBACK_STYLE;
 }
 
 export function findProductSkuByColor(
@@ -77,23 +79,4 @@ export function findProductSkuByColor(
 
   if (skuIndex < 0) return null;
   return { product, skuIndex };
-}
-
-export function getSkuSwatchStyle(colors: ProductColor[]): CSSProperties {
-  const validHexColors = colors
-    .map((color) => color.hex_code)
-    .filter((hex): hex is string => Boolean(hex));
-
-  if (validHexColors.length >= 2) {
-    return {
-      backgroundImage: `linear-gradient(135deg, ${validHexColors[0]} 0 50%, ${validHexColors[1]} 50% 100%)`,
-      backgroundClip: "padding-box",
-    };
-  }
-
-  if (colors[0]) {
-    return getSwatchStyle(colors[0]);
-  }
-
-  return { backgroundColor: "#d9d9d9" };
 }

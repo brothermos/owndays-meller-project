@@ -2,8 +2,9 @@
 
 import Image from "next/image";
 
-import type { ProductItem } from "@/app/types/product.type";
+import ColorSwatchButton from "@/app/components/ColorSwatchButton";
 import { useProductCard } from "@/app/hooks/useProductCard";
+import type { ProductItem } from "@/app/types/product.type";
 
 type ProductCardProps = {
   product: ProductItem;
@@ -15,7 +16,7 @@ const ProductCard = (props: ProductCardProps) => {
 
   const {
     skuImageUrls,
-    swatches,
+    displaySkus,
     hasAnyImage,
     selectedSkuIndex,
     isOutOfStock,
@@ -24,7 +25,7 @@ const ProductCard = (props: ProductCardProps) => {
     modelName,
     handleCardClick,
     handleCardKeyDown,
-    handleSwatchClick,
+    selectSku,
   } = useProductCard(product);
 
   return (
@@ -83,21 +84,10 @@ const ProductCard = (props: ProductCardProps) => {
           </div>
 
           <div className="flex max-w-[161px] shrink-0 flex-wrap justify-end gap-[3px]">
-            {swatches.map((swatch) => (
-              <button
-                key={swatch.skuId}
-                type="button"
-                aria-label={`Select ${swatch.colorLabel}`}
-                onClick={(event) => handleSwatchClick(event, swatch.index)}
-                className="flex size-[38px] shrink-0 items-center justify-center focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-              >
-                <span
-                  className={`size-[28px] shrink-0 rounded-full border border-black/10 ${
-                    swatch.isSelected ? "ring-2 ring-primary ring-offset-4 ring-offset-white" : ""
-                  }`}
-                  style={swatch.swatchStyle}
-                />
-              </button>
+            {displaySkus.map(({ sku, index, isSelected }) => (
+              <div key={sku.id} className="flex size-[38px] shrink-0 items-center justify-center">
+                <ColorSwatchButton sku={sku} isSelected={isSelected} onSelect={() => selectSku(index)} />
+              </div>
             ))}
           </div>
         </div>

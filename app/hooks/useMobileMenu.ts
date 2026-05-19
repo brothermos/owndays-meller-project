@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
-import { MOBILE_MENU_EXIT_MS } from "../constants/mobile-menu.type";
+import { MOBILE_MENU_EXIT_MS } from "../constants/mobile-menu";
 
 export function useMobileMenu() {
   const [isOpen, setIsOpenState] = useState<boolean>(false);

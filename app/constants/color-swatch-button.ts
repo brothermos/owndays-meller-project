@@ -1,3 +1,5 @@
+export type ColorSwatchVariant = "dual" | "pattern" | "solid";
+
 export const SWATCH_BASE_CLASS =
   "size-7 rounded-full transition-[box-shadow,transform] duration-150 hover:cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black";
 

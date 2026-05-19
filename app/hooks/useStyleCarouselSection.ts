@@ -1,15 +1,10 @@
 import { useCallback, useRef } from "react";
 
 import { STYLE_CAROUSEL_SLIDES } from "@/app/constants/style-carousel";
+import { DRAG_THRESHOLD_PX } from "@/app/constants/style-carousel-section";
 import { useProductDetail } from "@/app/contexts/product-detail-context";
 import { findProductSkuByColor } from "@/app/lib/product";
 import { useProductsQuery } from "@/app/services/product.service";
-import { DRAG_THRESHOLD_PX } from "../constants/style-carousel-section.type";
-
-export function getStyleCarouselSlideLabel(index: number) {
-  const slide = STYLE_CAROUSEL_SLIDES[index];
-  return slide ? `${slide.modelName} ${slide.colorLabel}` : `look ${index + 1}`;
-}
 
 export function useStyleCarouselSection() {
   const { data: products } = useProductsQuery();
@@ -65,7 +60,6 @@ export function useStyleCarouselSection() {
 
   return {
     slides: STYLE_CAROUSEL_SLIDES,
-    getSlideLabel: getStyleCarouselSlideLabel,
     onSlidePointerDown,
     onSlideClick,
     onSlideKeyDown,

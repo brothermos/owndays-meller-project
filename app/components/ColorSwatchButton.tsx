@@ -2,7 +2,8 @@
 
 import type { ProductSku } from "@/app/types/product.type";
 
-import { SWATCH_BASE_CLASS, useColorSwatchButton } from "../hooks/useColorSwatchButton";
+import { SWATCH_BASE_CLASS } from "@/app/constants/color-swatch-button";
+import { useColorSwatchButton } from "@/app/hooks/useColorSwatchButton";
 
 type ColorSwatchButtonProps = {
   sku: ProductSku;

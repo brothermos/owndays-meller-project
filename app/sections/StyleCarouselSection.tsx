@@ -3,15 +3,10 @@
 import Image from "next/image";
 
 import { useStyleCarouselSection } from "@/app/hooks/useStyleCarouselSection";
+import { getStyleCarouselSlideLabel } from "@/app/lib/style-carousel";
 
 const StyleCarouselSection = () => {
-  const {
-    slides,
-    getSlideLabel,
-    onSlidePointerDown,
-    onSlideClick,
-    onSlideKeyDown,
-  } = useStyleCarouselSection();
+  const { slides, onSlidePointerDown, onSlideClick, onSlideKeyDown } = useStyleCarouselSection();
 
   return (
     <section className=" bg-primary">
@@ -33,7 +28,7 @@ const StyleCarouselSection = () => {
       >
         <ul className="flex">
           {slides.map((slide, index) => {
-            const slideLabel = getSlideLabel(index);
+            const slideLabel = getStyleCarouselSlideLabel(index);
 
             return (
               <li

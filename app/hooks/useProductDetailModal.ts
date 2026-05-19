@@ -5,6 +5,7 @@ import { useFocusTrap } from "@/app/hooks/useFocusTrap";
 import { getProductImageUrl, getSkuColorLabel, sortSkus } from "@/app/lib/product";
 import type { ProductItem } from "@/app/types/product.type";
 import { formatModalPrice } from "@/app/utils/format";
+import { ONLINE_STORE_BASE } from "../config/env";
 
 type UseProductDetailModalOptions = {
   selectedProduct: ProductItem;
@@ -23,8 +24,6 @@ export function useProductDetailModal(props: UseProductDetailModalOptions) {
   });
   const isFirstEmblaSync = useRef(true);
   const dialogRef = useRef<HTMLElement>(null);
-
-  const ONLINE_STORE_BASE = "https://www.owndays.com/jp/ja/products";
 
   const buildOnlineStoreUrl = (productCode: string, skuId: number) =>
     `${ONLINE_STORE_BASE}/${productCode}?sku=${skuId}`;
@@ -82,6 +81,6 @@ export function useProductDetailModal(props: UseProductDetailModalOptions) {
     modelName,
     description,
     selectedSku,
-    selectSku: setSelectedSkuIndex,
+    setSelectedSkuIndex,
   };
 }
