@@ -18,21 +18,6 @@ const ONLINE_STORE_BASE = "https://www.owndays.com/jp/ja/products";
 const buildOnlineStoreUrl = (productCode: string, skuId: number) =>
   `${ONLINE_STORE_BASE}/${productCode}?sku=${skuId}`;
 
-const CloseIcon = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 28 28"
-    fill="none"
-    className="h-7 w-7"
-    aria-hidden="true"
-  >
-    <path
-      d="M24.745 27.23L13.615 16.0825L2.485 27.23L0 24.745L11.1475 13.615L0 2.485L2.485 0L13.615 11.1475L24.745 0.0175004L27.2125 2.485L16.0825 13.615L27.2125 24.745L24.745 27.23Z"
-      fill="currentColor"
-    />
-  </svg>
-);
-
 type ProductDetailModalContentProps = {
   selectedProduct: ProductItem;
   initialSkuIndex: number;
@@ -130,7 +115,13 @@ const ProductDetailModalContent = ({
           aria-label="Close product detail"
           className="absolute top-4 right-4 z-30 rounded-full p-2 text-primary"
         >
-          <CloseIcon />
+          <Image
+            src="/svg/close_icon.svg"
+            alt=""
+            width={28}
+            height={28}
+            aria-hidden="true"
+          />
         </button>
 
         <div className="relative h-[335px] w-full shrink-0 overflow-hidden bg-white sm:h-[499px]">
@@ -139,7 +130,7 @@ const ProductDetailModalContent = ({
               {skuImageUrls.map((url, idx) => (
                 <li
                   key={`${url}-${idx}`}
-                  className="relative h-[298px] shrink-0 grow-0 basis-[70%]"
+                  className="relative cursor-pointer h-[298px] shrink-0 grow-0 basis-[70%]"
                 >
                   <Image
                     src={url}

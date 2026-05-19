@@ -2,14 +2,19 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { NAV_ITEMS } from "@/app/constants/navbar";
+import { MOBILE_MENU_LEGAL_LINKS, NAV_ITEMS } from "@/app/constants/navbar";
 import useHeroSection from "@/app/hooks/useHeroSection";
 
 const NAVBAR_CTA_CLASS =
   "w-fit border border-transparent px-2 py-1 transition-colors hover:border-black hover:bg-white hover:text-black!";
 
 const NavbarSection = () => {
-  const { isMobileMenuOpen, setIsMobileMenuOpen } = useHeroSection();
+  const {
+    isMobileMenuOpen,
+    setIsMobileMenuOpen,
+    isMobileMenuMounted,
+    isMobileMenuAnimating,
+  } = useHeroSection();
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
@@ -29,7 +34,7 @@ const NavbarSection = () => {
           isScrolled ? "bg-black/20 backdrop-blur-sm" : "bg-transparent"
         }`}
       >
-        <div className="flex items-center justify-between text-white max-w-[1440px] w-full mx-auto">
+        <div className="mx-auto flex w-full max-w-[1440px] items-center justify-between text-white">
           <div>
             <div className="lg:hidden">
               <Image
@@ -73,38 +78,76 @@ const NavbarSection = () => {
         </div>
       </header>
 
-      {isMobileMenuOpen && (
-        <div className="fixed inset-0 z-60 bg-[#1e1e1e] lg:hidden">
-          <div className="flex h-full flex-col p-6">
-            <div className="flex items-center justify-between">
+      {isMobileMenuMounted && (
+        <div
+          className={`fixed inset-0 z-110 flex flex-col p-4 backdrop-blur-md lg:hidden motion-reduce:backdrop-blur-none ${
+            isMobileMenuAnimating
+              ? "animate-overlay-in bg-black/40"
+              : "pointer-events-none animate-overlay-out bg-black/40"
+          }`}
+          role="dialog"
+          aria-modal="true"
+          aria-hidden={!isMobileMenuOpen}
+          aria-label="Mobile navigation menu"
+          onClick={() => setIsMobileMenuOpen(false)}
+        >
+          <div
+            className={`flex h-full w-full flex-col rounded-[10px] bg-black motion-reduce:animate-none ${
+              isMobileMenuAnimating
+                ? "animate-mobile-menu-panel-in"
+                : "pointer-events-none animate-mobile-menu-panel-out"
+            }`}
+            onClick={(event) => event.stopPropagation()}
+          >
+            <button
+              type="button"
+              className="ml-auto flex cursor-pointer pt-[15px] pr-[15px]"
+              aria-label="Close menu"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
               <Image
-                src="/images/collab_logo_mobile.png"
-                alt="OWNDAYS x MELLER collaboration logo"
-                width={240}
-                height={16}
-                className="h-auto w-[180px]"
+                src="/svg/close_icon.svg"
+                alt=""
+                width={42}
+                height={42}
+                aria-hidden="true"
               />
-              <button
-                type="button"
-                className="text-4xl leading-none text-white"
-                aria-label="Close mobile menu"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                ×
-              </button>
-            </div>
+            </button>
 
-            <div className="mt-16 flex flex-col gap-7 text-3xl font-semibold text-white">
-              {NAV_ITEMS.map((item) => (
-                <a
-                  key={item.label}
-                  href={item.href}
-                  className={NAVBAR_CTA_CLASS}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  {item.label}
-                </a>
-              ))}
+            <div className="px-[40px] py-[23px]">
+              <nav className="text-primary">
+                <ul>
+                  {NAV_ITEMS.map((item) => (
+                    <li key={item.label} className="mb-[25px]">
+                      <a
+                        href={item.href}
+                        className="text-[18px] font-semibold leading-[20.09px] tracking-[0.7px]"
+                        onClick={() => setIsMobileMenuOpen(false)}
+                      >
+                        {item.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+
+              <nav className="mt-[60px] text-primary">
+                <ul>
+                  {MOBILE_MENU_LEGAL_LINKS.map((item) => (
+                    <li key={item.label} className="mb-[15px]">
+                      <a
+                        href={item.href}
+                        className={`text-[11px] leading-[20px] tracking-[0.7px] ${
+                          item.emphasis ? "font-semibold" : "font-medium"
+                        }`}
+                        onClick={() => setIsMobileMenuOpen(false)}
+                      >
+                        {item.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
             </div>
           </div>
         </div>
