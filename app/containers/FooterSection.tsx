@@ -8,19 +8,15 @@ const FOOTER_INLINE_CTA_CLASS =
   "w-fit border-2 border-transparent px-1 py-0.5 text-primary transition-colors hover:border-black hover:bg-white hover:text-black!";
 
 const FOOTER_GROUP_CTA_CLASS =
-  "group flex items-center gap-2 border-2 border-transparent px-2 py-1 text-primary transition-colors hover:border-black hover:bg-white hover:text-black!";
+  "group flex max-w-fit items-center border-2 border-transparent px-2 py-1 text-primary transition-colors hover:border-black hover:bg-white hover:text-black!";
 
 const FOOTER_MOBILE_NAV_CLASS =
-  "flex items-center justify-between border-b-2 border-primary px-[30px] py-7 font-semibold tracking-wide text-primary transition-colors hover:bg-white hover:text-black! last:border-b-0";
+  "flex h-full w-full items-center justify-between text-primary transition-colors hover:border-black hover:bg-white hover:text-black!";
 
 const INSTAGRAM_LINK_CLASS = "group inline-flex cursor-pointer";
 
 const INSTAGRAM_ICON_CLASS =
   "transition-transform duration-300 ease-out motion-safe:group-hover:scale-110 motion-safe:group-active:scale-95";
-
-const ONLINE_STORE_CTA_CLASS = `${FOOTER_GROUP_CTA_CLASS} text-[21px] font-semibold tracking-wide`;
-
-const OWNDAYS_LINK_CTA_CLASS = `${FOOTER_GROUP_CTA_CLASS} ml-8 mt-2 text-[21px] font-semibold tracking-wide`;
 
 const ONLINE_STORE_HREF = "https://www.owndays.com/jp/ja";
 
@@ -30,173 +26,117 @@ const FooterSection = () => {
   return (
     <footer
       id="stores"
-      className="scroll-mt-20 bg-black text-primary lg:scroll-mt-24"
+      className="scroll-mt-20 overflow-hidden bg-black text-primary md:scroll-mt-24"
     >
-      <div className="hidden lg:block">
-        <div className="border-y-2 border-primary">
-          <div className="mx-auto grid max-w-[1440px] grid-cols-[64.7222%_35.2778%]">
-            <div className="border-r-2 border-primary px-12 py-14">
-              <nav className="flex flex-col gap-4 text-[18px] font-semibold tracking-wide">
-                {NAV_ITEMS.map((item) => (
-                  <a
-                    key={item.label}
-                    href={item.href}
-                    className={FOOTER_INLINE_CTA_CLASS}
-                  >
+      <div className="md:border-t-2 md:border-primary md:grid md:grid-cols-[auto_318px] lg:grid-cols-[1fr_445px] xl:grid-cols-[1fr_508px]">
+        <div className="md:col-span-2 md:border-r-2 md:border-primary md:p-[30px] md:[grid-area:1/1/3/2] lg:pt-[69px] lg:pl-[70px] lg:pb-[55px]">
+          <ul className="border-t-4 border-primary md:border-t-0 md:grid md:gap-[11px] lg:gap-5">
+            {NAV_ITEMS.map((item) => (
+              <li
+                key={item.label}
+                className="flex h-[60px] w-full items-center border-b-2 border-primary pl-[30px] pr-[19px] md:h-auto md:border-none md:px-0"
+              >
+                <a
+                  href={item.href}
+                  className={`${FOOTER_MOBILE_NAV_CLASS} border-2 border-transparent md:max-w-fit md:pt-[5px] md:pb-[2px] lg:pt-0 ${FOOTER_INLINE_CTA_CLASS}`}
+                >
+                  <span className="text-[14px] font-semibold leading-none tracking-[0.7px] lg:text-[18px]">
                     {item.label}
-                  </a>
-                ))}
-              </nav>
+                  </span>
+                  <span className="shrink-0 md:hidden">
+                    <Image
+                      src="/svg/right_icon.svg"
+                      alt=""
+                      width={28}
+                      height={38}
+                      aria-hidden="true"
+                    />
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="flex w-full flex-row items-center justify-between px-[30px] md:col-span-1 md:mx-auto md:min-h-0 md:flex-col md:justify-center md:gap-[17px] md:self-center md:px-0 md:[grid-area:1/2/4/3]">
+          <Link
+            href={ONLINE_STORE_HREF}
+            className={`${FOOTER_GROUP_CTA_CLASS} items-center gap-1 py-10 md:gap-[9px] md:py-0 lg:gap-[9px] lg:text-[21px] lg:font-semibold lg:tracking-wide`}
+          >
+            <Image
+              src="/svg/cart_icon.svg"
+              alt=""
+              width={24}
+              height={24}
+              className="transition group-hover:brightness-0 lg:h-9 lg:w-9"
+              aria-hidden="true"
+            />
+            <span className="text-[14px] font-semibold leading-none tracking-[0.7px] md:text-base lg:text-[21px]">
+              ONLINE STORE
+            </span>
+          </Link>
+          <Link
+            href="https://www.owndays.com"
+            className={`${FOOTER_GROUP_CTA_CLASS} items-center gap-1.5 py-10 text-[11px] font-semibold leading-[20px] tracking-[0.7px] md:py-0 md:text-[14px] lg:mx-auto`}
+          >
+            <span>OWNDAYS.COM</span>
+            <Image
+              src="/svg/copy_icon.svg"
+              alt=""
+              width={14}
+              height={12}
+              className="transition group-hover:brightness-0 lg:h-[15px] lg:w-[17px]"
+              aria-hidden="true"
+            />
+          </Link>
+        </div>
+
+        <div className="border-t-2 border-primary md:col-span-2 md:[grid-area:4/1/5/2]">
+          <ul className="px-[30px] py-[30px] md:grid md:grid-cols-[auto_auto_auto_1fr] md:gap-[10px] lg:gap-5 lg:pl-[70px]">
+            {FOOTER_LEGAL_LINKS.map((item) => (
+              <li key={item.label}>
+                <Link
+                  href={item.href}
+                  className={`${FOOTER_INLINE_CTA_CLASS} text-[11px] leading-none tracking-[0.7px] lg:text-[13px] ${
+                    item.emphasis
+                      ? "font-semibold"
+                      : "font-medium lg:font-semibold xl:font-semibold"
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="md:col-span-2 md:border-r-2 md:border-primary md:[grid-area:3/1/4/2]">
+          <ul className="flex gap-[18px] px-[30px] pb-[30px] lg:pl-[70px] lg:pb-[69px]">
+            <li>
               <a
                 href={INSTAGRAM_HREF}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"
-                className={`${INSTAGRAM_LINK_CLASS} mt-16 px-1`}
+                className={`${INSTAGRAM_LINK_CLASS} px-1`}
               >
                 <Image
                   src="/svg/instagram_icon.svg"
                   alt=""
-                  width={24}
-                  height={24}
-                  className={INSTAGRAM_ICON_CLASS}
+                  width={20}
+                  height={20}
+                  className={`${INSTAGRAM_ICON_CLASS} lg:h-6 lg:w-6`}
                   aria-hidden="true"
                 />
               </a>
-            </div>
-
-            <div className="flex flex-col items-center justify-center px-12 py-14">
-              <Link href={ONLINE_STORE_HREF} className={ONLINE_STORE_CTA_CLASS}>
-                <Image
-                  src="/svg/cart_icon.svg"
-                  alt=""
-                  width={37}
-                  height={37}
-                  className="transition group-hover:brightness-0"
-                  aria-hidden="true"
-                />
-                <span>ONLINE STORE</span>
-              </Link>
-              <Link
-                href="https://www.owndays.com"
-                className={OWNDAYS_LINK_CTA_CLASS}
-              >
-                <span className="text-[14px]">OWNDAYS.COM</span>
-                <Image
-                  src="/svg/copy_icon.svg"
-                  alt=""
-                  width={17}
-                  height={15}
-                  className="transition group-hover:brightness-0"
-                  aria-hidden="true"
-                />
-              </Link>
-            </div>
-          </div>
+            </li>
+          </ul>
         </div>
 
-        <div className="border-b-2 border-primary">
-          <div className="mx-auto flex max-w-[1440px] items-center justify-between px-12 py-6 text-sm font-semibold tracking-wide">
-            <div className="flex items-center gap-8">
-              {FOOTER_LEGAL_LINKS.map((item) => (
-                <Link
-                  key={item.label}
-                  href={item.href}
-                  className={FOOTER_INLINE_CTA_CLASS}
-                >
-                  {item.label}
-                </Link>
-              ))}
-            </div>
-            <p>COPYRIGHT (C) OWNDAYS CO., LTD. ALL RIGHTS RESERVED.</p>
-          </div>
-        </div>
-      </div>
-
-      <div className="mx-auto max-w-[720px] pb-8 lg:hidden">
-        <div>
-          <nav className="border-b-2 border-t-4 border-primary">
-            {NAV_ITEMS.map((item) => (
-              <Link
-                key={item.label}
-                href={item.href}
-                className={FOOTER_MOBILE_NAV_CLASS}
-              >
-                <span>{item.label}</span>
-                <span className="leading-none">
-                  <Image
-                    src="/svg/right_icon.svg"
-                    alt=""
-                    width={28}
-                    height={28}
-                    aria-hidden="true"
-                  />
-                </span>
-              </Link>
-            ))}
-          </nav>
-
-          <div className="flex items-center justify-between border-b-2 border-primary px-[30px] py-9 text-primary">
-            <Link href={ONLINE_STORE_HREF} className={FOOTER_GROUP_CTA_CLASS}>
-              <Image
-                src="/svg/cart_icon.svg"
-                alt=""
-                width={32}
-                height={32}
-                className="transition group-hover:brightness-0"
-                aria-hidden="true"
-              />
-              <span className="font-semibold tracking-wide">ONLINE STORE</span>
-            </Link>
-            <Link
-              href="https://www.owndays.com"
-              className={`${FOOTER_GROUP_CTA_CLASS} text-xs font-semibold tracking-wide`}
-            >
-              <span>OWNDAYS.COM</span>
-              <Image
-                src="/svg/copy_icon.svg"
-                alt=""
-                width={17}
-                height={15}
-                className="transition group-hover:brightness-0"
-                aria-hidden="true"
-              />
-            </Link>
-          </div>
-
-          <div className="border-b-2 border-primary px-[30px] py-8">
-            <div className="flex flex-col gap-3 font-semibold tracking-wide">
-              {FOOTER_LEGAL_LINKS.map((item) => (
-                <Link
-                  key={item.label}
-                  href={item.href}
-                  className={FOOTER_INLINE_CTA_CLASS}
-                >
-                  {item.label}
-                </Link>
-              ))}
-            </div>
-            <a
-              href={INSTAGRAM_HREF}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Instagram"
-              className={`${INSTAGRAM_LINK_CLASS} mt-10`}
-            >
-              <Image
-                src="/svg/instagram_icon.svg"
-                alt=""
-                width={34}
-                height={34}
-                className={INSTAGRAM_ICON_CLASS}
-                aria-hidden="true"
-              />
-            </a>
-          </div>
-
-          <div className="px-[30px] flex justify-center pt-8 font-semibold tracking-wide text-[10px]">
+        <div className="border-t-2 border-primary md:col-span-2 md:[grid-area:4/2/5/3]">
+          <p className="px-8 py-[30px] text-center text-[10px] font-semibold leading-normal tracking-[0.7px] md:pt-[34px] md:pb-[26px] md:text-left lg:whitespace-nowrap lg:pl-[61px] lg:text-xs">
             COPYRIGHT (C) OWNDAYS CO., LTD. ALL RIGHTS RESERVED.
-          </div>
+          </p>
         </div>
       </div>
     </footer>
