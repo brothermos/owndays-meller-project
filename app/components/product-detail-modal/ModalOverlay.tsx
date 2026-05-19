@@ -10,7 +10,7 @@ export function ModalOverlay(props: ModalOverlayProps) {
     <div
       onClick={onClose}
       aria-hidden="true"
-      className={`fixed inset-0 z-110 bg-black/40 ${
+      className={`fixed inset-0 z-110 bg-black/40 motion-reduce:animate-none ${
         isOpen ? "animate-overlay-in" : "pointer-events-none animate-overlay-out"
       }`}
     />

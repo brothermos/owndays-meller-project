@@ -47,9 +47,10 @@ export function ProductDetailModalContent(props: ProductDetailModalContentProps)
         aria-modal="true"
         aria-hidden={!isOpen}
         aria-labelledby="product-detail-title"
-        className={`fixed z-120 flex flex-col overflow-hidden bg-black shadow-2xl
+        className={`fixed z-120 flex transform-gpu flex-col overflow-hidden bg-black shadow-2xl will-change-transform
           inset-y-[2.5%] left-1/2 h-[95%] w-[90%] rounded-[10px]
           sm:inset-y-0 sm:right-0 sm:left-auto sm:h-full sm:w-[616px] sm:rounded-l-[20px] sm:rounded-r-none
+          motion-reduce:animate-none motion-reduce:will-change-auto
           ${
             isOpen
               ? "animate-modal-in sm:animate-drawer-in"
