@@ -1,7 +1,6 @@
 import useEmblaCarousel from "embla-carousel-react";
 import { useEffect, useMemo, useRef, useState } from "react";
 
-import { useFocusTrap } from "@/app/hooks/useFocusTrap";
 import { getProductImageUrl, getSkuColorLabel, sortSkus } from "@/app/lib/product";
 import type { ProductItem } from "@/app/types/product.type";
 import { formatModalPrice } from "@/app/utils/format";
@@ -10,11 +9,10 @@ import { ONLINE_STORE_BASE } from "../config/env";
 type UseProductDetailModalOptions = {
   selectedProduct: ProductItem;
   initialSkuIndex: number;
-  isOpen: boolean;
 };
 
 export function useProductDetailModal(props: UseProductDetailModalOptions) {
-  const { selectedProduct, initialSkuIndex, isOpen } = props;
+  const { selectedProduct, initialSkuIndex } = props;
 
   const [selectedSkuIndex, setSelectedSkuIndex] = useState(initialSkuIndex);
   const [emblaRef, emblaApi] = useEmblaCarousel({
@@ -23,12 +21,9 @@ export function useProductDetailModal(props: UseProductDetailModalOptions) {
     containScroll: "trimSnaps",
   });
   const isFirstEmblaSync = useRef(true);
-  const dialogRef = useRef<HTMLElement>(null);
 
   const buildOnlineStoreUrl = (productCode: string, skuId: number) =>
     `${ONLINE_STORE_BASE}/${productCode}?sku=${skuId}`;
-
-  useFocusTrap(dialogRef, isOpen);
 
   useEffect(() => {
     if (!emblaApi) return;
@@ -69,7 +64,6 @@ export function useProductDetailModal(props: UseProductDetailModalOptions) {
   const description = selectedProduct.localization.description;
 
   return {
-    dialogRef,
     emblaRef,
     skuImageUrls,
     colorChips,

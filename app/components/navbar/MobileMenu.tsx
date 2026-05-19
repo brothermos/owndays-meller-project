@@ -1,10 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { useRef } from "react";
 
 import { MOBILE_MENU_LEGAL_LINKS, NAV_ITEMS } from "@/app/constants/navigation";
-import { useFocusTrap } from "@/app/hooks/useFocusTrap";
 
 type MobileMenuProps = {
   isOpen: boolean;
@@ -14,9 +12,6 @@ type MobileMenuProps = {
 
 const MobileMenu = (props: MobileMenuProps) => {
   const { isOpen, isMounted, onClose } = props;
-
-  const panelRef = useRef<HTMLDivElement>(null);
-  useFocusTrap(panelRef, isOpen);
 
   if (!isMounted) {
     return null;
@@ -34,7 +29,6 @@ const MobileMenu = (props: MobileMenuProps) => {
       onClick={onClose}
     >
       <div
-        ref={panelRef}
         className={`flex h-full w-full flex-col rounded-[10px] bg-black motion-reduce:animate-none ${
           isOpen ? "animate-mobile-menu-panel-in" : "pointer-events-none animate-mobile-menu-panel-out"
         }`}
@@ -42,7 +36,7 @@ const MobileMenu = (props: MobileMenuProps) => {
       >
         <button
           type="button"
-          className="ml-auto flex cursor-pointer pt-[15px] pr-[15px]"
+          className="ml-auto flex cursor-pointer pt-[15px] pr-[15px] [-webkit-tap-highlight-color:transparent]"
           aria-label="Close menu"
           onClick={onClose}
         >

@@ -20,7 +20,6 @@ export function ProductDetailModalContent(props: ProductDetailModalContentProps)
   const { selectedProduct, initialSkuIndex, isOpen, closeModal } = props;
 
   const {
-    dialogRef,
     emblaRef,
     skuImageUrls,
     colorChips,
@@ -33,7 +32,7 @@ export function ProductDetailModalContent(props: ProductDetailModalContentProps)
     description,
     selectedSku,
     setSelectedSkuIndex,
-  } = useProductDetailModal({ selectedProduct, initialSkuIndex, isOpen });
+  } = useProductDetailModal({ selectedProduct, initialSkuIndex });
 
   if (!selectedSku) {
     return null;
@@ -44,7 +43,6 @@ export function ProductDetailModalContent(props: ProductDetailModalContentProps)
       <ModalOverlay isOpen={isOpen} onClose={closeModal} />
 
       <aside
-        ref={dialogRef}
         role="dialog"
         aria-modal="true"
         aria-hidden={!isOpen}
