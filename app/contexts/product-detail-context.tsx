@@ -9,6 +9,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
+import { useBodyScrollLock } from "@/app/hooks/useBodyScrollLock";
 import type { ProductItem } from "@/app/types/product.type";
 
 type OpenModal = (product: ProductItem, initialSkuIndex?: number) => void;
@@ -42,14 +43,7 @@ export function ProductDetailProvider({ children }: { children: ReactNode }) {
     setIsOpen(false);
   }, []);
 
-  useEffect(() => {
-    if (!isOpen) return;
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.body.style.overflow = previousOverflow;
-    };
-  }, [isOpen]);
+  useBodyScrollLock(isOpen);
 
   useEffect(() => {
     if (!isOpen) return;

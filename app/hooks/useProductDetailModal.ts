@@ -4,7 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { getProductImageUrl, getSkuColorLabel, sortSkus } from "@/app/lib/product";
 import type { ProductItem } from "@/app/types/product.type";
 import { formatModalPrice } from "@/app/utils/format";
-import { ONLINE_STORE_BASE } from "../config/env";
+import { ONLINE_STORE_BASE } from "@/app/config/env";
 
 type UseProductDetailModalOptions = {
   selectedProduct: ProductItem;

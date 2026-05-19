@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
-import { MOBILE_MENU_EXIT_MS } from "../constants/mobile-menu";
+import { MOBILE_MENU_EXIT_MS } from "@/app/constants/mobile-menu";
+import { useBodyScrollLock } from "@/app/hooks/useBodyScrollLock";
 
 export function useMobileMenu() {
   const [isOpen, setIsOpenState] = useState<boolean>(false);
@@ -46,12 +47,7 @@ export function useMobileMenu() {
     return () => window.removeEventListener("keydown", onEsc);
   }, [isMounted, setIsOpen]);
 
-  useEffect(() => {
-    document.body.style.overflow = isMounted ? "hidden" : "";
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [isMounted]);
+  useBodyScrollLock(isMounted);
 
   useEffect(() => clearExitTimer, [clearExitTimer]);
 
