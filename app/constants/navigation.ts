@@ -29,6 +29,14 @@ export const FOOTER_LEGAL_LINKS = [
 
 export const MOBILE_MENU_LEGAL_LINKS = [
   ...FOOTER_LEGAL_LINKS.slice(0, 2),
-  { label: "TERMS OF SERVICE", href: FOOTER_LEGAL_LINKS[2].href, emphasis: false },
+  {
+    label: "TERMS OF SERVICE",
+    href: FOOTER_LEGAL_LINKS[2].href,
+    emphasis: false,
+  },
   FOOTER_LEGAL_LINKS[3],
 ] as const;
+
+export const ONLINE_STORE_HREF = "https://www.owndays.com/jp/ja";
+export const OWNDAYS_HOME_HREF = "https://www.owndays.com";
+export const INSTAGRAM_HREF = "https://www.instagram.com/meller";

@@ -1,33 +1,25 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
-import { FOOTER_LEGAL_LINKS, NAV_ITEMS } from "@/app/constants/navbar";
 
-const FOOTER_INLINE_CTA_CLASS =
-  "w-fit border-2 border-transparent px-1 py-0.5 text-primary transition-colors hover:border-black hover:bg-white hover:text-black!";
+import {
+  FOOTER_INLINE_CTA_CLASS,
+  FOOTER_GROUP_CTA_CLASS,
+  FOOTER_MOBILE_NAV_CLASS,
+  INSTAGRAM_ICON_CLASS,
+  INSTAGRAM_LINK_CLASS,
+} from "@/app/constants/cta-classes";
 
-const FOOTER_GROUP_CTA_CLASS =
-  "group flex max-w-fit items-center border-2 border-transparent px-2 py-1 text-primary transition-colors hover:border-black hover:bg-white hover:text-black!";
+import {
+  FOOTER_LEGAL_LINKS,
+  INSTAGRAM_HREF,
+  NAV_ITEMS,
+  ONLINE_STORE_HREF,
+  OWNDAYS_HOME_HREF,
+} from "@/app/constants/navigation";
 
-const FOOTER_MOBILE_NAV_CLASS =
-  "flex h-full w-full items-center justify-between text-primary transition-colors hover:border-black hover:bg-white hover:text-black!";
-
-const INSTAGRAM_LINK_CLASS = "group inline-flex cursor-pointer";
-
-const INSTAGRAM_ICON_CLASS =
-  "transition-transform duration-300 ease-out motion-safe:group-hover:scale-110 motion-safe:group-active:scale-95";
-
-const ONLINE_STORE_HREF = "https://www.owndays.com/jp/ja";
-
-const INSTAGRAM_HREF = "https://www.instagram.com/meller";
-
-const FooterSection = () => {
+const Footer = () => {
   return (
-    <footer
-      id="stores"
-      className="scroll-mt-20 overflow-hidden bg-black text-primary md:scroll-mt-24"
-    >
+    <footer id="stores" className="scroll-mt-20 overflow-hidden bg-black text-primary md:scroll-mt-24">
       <div className="md:border-t-2 md:border-primary md:grid md:grid-cols-[auto_318px] lg:grid-cols-[1fr_445px] xl:grid-cols-[1fr_508px]">
         <div className="md:col-span-2 md:border-r-2 md:border-primary md:p-[30px] md:[grid-area:1/1/3/2] lg:pt-[69px] lg:pl-[70px] lg:pb-[55px]">
           <ul className="border-t-4 border-primary md:border-t-0 md:grid md:gap-[11px] lg:gap-5">
@@ -77,7 +69,7 @@ const FooterSection = () => {
             </span>
           </Link>
           <Link
-            href="https://www.owndays.com"
+            href={OWNDAYS_HOME_HREF}
             className={`${FOOTER_GROUP_CTA_CLASS} items-center gap-1.5 py-10 text-[11px] font-semibold leading-[20px] tracking-[0.7px] md:py-0 md:text-[14px] lg:mx-auto`}
           >
             <span>OWNDAYS.COM</span>
@@ -99,9 +91,7 @@ const FooterSection = () => {
                 <Link
                   href={item.href}
                   className={`${FOOTER_INLINE_CTA_CLASS} text-[11px] leading-none tracking-[0.7px] lg:text-[13px] ${
-                    item.emphasis
-                      ? "font-semibold"
-                      : "font-medium lg:font-semibold xl:font-semibold"
+                    item.emphasis ? "font-semibold" : "font-medium lg:font-semibold xl:font-semibold"
                   }`}
                 >
                   {item.label}
@@ -144,4 +134,4 @@ const FooterSection = () => {
   );
 };
 
-export default FooterSection;
+export default Footer;

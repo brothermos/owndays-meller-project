@@ -1,22 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import useEmblaCarousel from "embla-carousel-react";
-import { useEffect, useMemo, useRef, useState } from "react";
 
 import { useProductDetail } from "@/app/contexts/product-detail-context";
-import {
-  getProductImageUrl,
-  getSkuColorLabel,
-  sortSkus,
-} from "@/app/lib/product";
+import { useProductDetailModal } from "@/app/hooks/useProductDetailModal";
 import type { ProductItem } from "@/app/types/product.type";
-import { formatModalPrice } from "@/app/utils/format";
-
-const ONLINE_STORE_BASE = "https://www.owndays.com/jp/ja/products";
-
-const buildOnlineStoreUrl = (productCode: string, skuId: number) =>
-  `${ONLINE_STORE_BASE}/${productCode}?sku=${skuId}`;
 
 type ProductDetailModalContentProps = {
   selectedProduct: ProductItem;
@@ -25,55 +13,28 @@ type ProductDetailModalContentProps = {
   closeModal: () => void;
 };
 
-const ProductDetailModalContent = ({
-  selectedProduct,
-  initialSkuIndex,
-  isOpen,
-  closeModal,
-}: ProductDetailModalContentProps) => {
-  const [selectedSkuIndex, setSelectedSkuIndex] = useState(initialSkuIndex);
-  const [emblaRef, emblaApi] = useEmblaCarousel({
-    align: "center",
-    loop: true,
-    containScroll: "trimSnaps",
-  });
-  const isFirstEmblaSync = useRef(true);
+const ProductDetailModalContent = (props: ProductDetailModalContentProps) => {
+  const { selectedProduct, initialSkuIndex, isOpen, closeModal } = props;
 
-  useEffect(() => {
-    if (!emblaApi) return;
-    if (isFirstEmblaSync.current) {
-      isFirstEmblaSync.current = false;
-      return;
-    }
-    emblaApi.reInit();
-    emblaApi.scrollTo(0);
-  }, [emblaApi, selectedSkuIndex, selectedProduct]);
-
-  const sortedSkus = useMemo(
-    () => (selectedProduct ? sortSkus(selectedProduct.skus) : []),
-    [selectedProduct],
-  );
-
-  const selectedSku = sortedSkus[selectedSkuIndex] ?? sortedSkus[0];
-
-  const skuImageUrls = useMemo(() => {
-    if (!selectedSku) return [];
-    return [...selectedSku.images]
-      .sort((a, b) => a.order - b.order)
-      .map((img) => getProductImageUrl(img.path));
-  }, [selectedSku]);
+  const {
+    dialogRef,
+    emblaRef,
+    skuImageUrls,
+    colorChips,
+    frameType,
+    skuLabel,
+    isOutOfStock,
+    formattedPrice,
+    onlineStoreHref,
+    modelName,
+    description,
+    selectedSku,
+    selectSku,
+  } = useProductDetailModal({ selectedProduct, initialSkuIndex, isOpen });
 
   if (!selectedSku) {
     return null;
   }
-
-  const frameType = selectedProduct.frame_types[0]?.code?.toUpperCase() ?? "—";
-  const skuLabel = `${selectedProduct.product.code} ${selectedSku.code}`;
-  const isOutOfStock = selectedProduct.selling_setting.in_stock === 0;
-  const onlineStoreHref = buildOnlineStoreUrl(
-    selectedProduct.product.code,
-    selectedSku.id,
-  );
 
   return (
     <>
@@ -81,13 +42,12 @@ const ProductDetailModalContent = ({
         onClick={closeModal}
         aria-hidden="true"
         className={`fixed inset-0 z-110 bg-black/40 ${
-          isOpen
-            ? "animate-overlay-in"
-            : "pointer-events-none animate-overlay-out"
+          isOpen ? "animate-overlay-in" : "pointer-events-none animate-overlay-out"
         }`}
       />
 
       <aside
+        ref={dialogRef}
         role="dialog"
         aria-modal="true"
         aria-hidden={!isOpen}
@@ -106,7 +66,7 @@ const ProductDetailModalContent = ({
           id="product-detail-title"
           className="font-display absolute top-4 left-6 z-30 text-3xl font-bold uppercase tracking-tight text-primary sm:left-8 sm:text-[35px]"
         >
-          {selectedProduct.product.model_name}
+          {modelName}
         </h2>
 
         <button
@@ -115,26 +75,17 @@ const ProductDetailModalContent = ({
           aria-label="Close product detail"
           className="absolute top-4 right-4 z-30 rounded-full p-2 text-primary"
         >
-          <Image
-            src="/svg/close_icon.svg"
-            alt=""
-            width={28}
-            height={28}
-            aria-hidden="true"
-          />
+          <Image src="/svg/close_icon.svg" alt="" width={28} height={28} aria-hidden="true" />
         </button>
 
         <div className="relative h-[335px] w-full shrink-0 overflow-hidden bg-white sm:h-[499px]">
           <div className="h-full" ref={emblaRef}>
             <ul className="flex h-full items-center">
               {skuImageUrls.map((url, idx) => (
-                <li
-                  key={`${url}-${idx}`}
-                  className="relative cursor-pointer h-[298px] shrink-0 grow-0 basis-[70%]"
-                >
+                <li key={`${url}-${idx}`} className="relative h-[298px] shrink-0 grow-0 basis-[70%] cursor-pointer">
                   <Image
                     src={url}
-                    alt={`${selectedProduct.product.model_name} — image ${idx + 1}`}
+                    alt={`${modelName} — image ${idx + 1}`}
                     fill
                     sizes="(max-width: 640px) 78vw, 444px"
                     className="object-contain px-3 mix-blend-multiply sm:px-10"
@@ -151,28 +102,22 @@ const ProductDetailModalContent = ({
               role="group"
               aria-label="Select color variant"
             >
-              {sortedSkus.map((sku, idx) => {
-                const colorLabel = getSkuColorLabel(sku.colors);
-                const isActive = idx === selectedSkuIndex;
-                return (
-                  <div
-                    key={sku.id}
-                    onClick={() => setSelectedSkuIndex(idx)}
-                    className={`shrink-0 cursor-pointer rounded-full border border-black px-2 py-0.5 text-[10px] leading-tight font-medium uppercase tracking-wide transition-colors sm:px-3 sm:py-1 sm:text-sm sm:tracking-[0.5px] ${
-                      isActive
-                        ? "bg-black text-white"
-                        : "bg-transparent text-black hover:bg-black hover:text-white"
-                    }`}
-                  >
-                    {colorLabel}
-                  </div>
-                );
-              })}
+              {colorChips.map((chip) => (
+                <div
+                  key={chip.skuId}
+                  onClick={() => selectSku(chip.index)}
+                  className={`shrink-0 cursor-pointer rounded-full border border-black px-2 py-0.5 text-[10px] leading-tight font-medium uppercase tracking-wide transition-colors sm:px-3 sm:py-1 sm:text-sm sm:tracking-[0.5px] ${
+                    chip.isActive ? "bg-black text-white" : "bg-transparent text-black hover:bg-black hover:text-white"
+                  }`}
+                >
+                  {chip.label}
+                </div>
+              ))}
             </div>
           </div>
         </div>
 
-        <div className="flex flex-1 flex-col gap-5 overflow-y-auto bg-black px-6 py-8 text-white sm:px-15 sm:py-10 scrollbar-none [&::-webkit-scrollbar]:hidden">
+        <div className="flex flex-1 flex-col gap-5 overflow-y-auto bg-black px-6 py-8 text-white scrollbar-none sm:px-15 sm:py-10 [&::-webkit-scrollbar]:hidden">
           <div className="space-y-2 text-sm font-medium">
             <div className="flex">
               <p className="w-[100px]">P/No.</p>
@@ -184,13 +129,11 @@ const ProductDetailModalContent = ({
             </div>
             <div className="flex">
               <p className="w-[100px]">PRICE</p>
-              <p>{formatModalPrice(selectedProduct.selling_setting.price)}</p>
+              <p>{formattedPrice}</p>
             </div>
           </div>
 
-          <p className="text-sm leading-loose">
-            {selectedProduct.localization.description}
-          </p>
+          <p className="text-sm leading-loose">{description}</p>
 
           <div className="flex flex-col items-center pt-2">
             {isOutOfStock ? (
@@ -212,9 +155,7 @@ const ProductDetailModalContent = ({
                 ONLINE STORE
               </a>
             )}
-            <span className="mt-3 text-xs">
-              OWNDAYSオンラインストアに移動します
-            </span>
+            <span className="mt-3 text-xs">OWNDAYSオンラインストアに移動します</span>
           </div>
         </div>
       </aside>
@@ -223,8 +164,7 @@ const ProductDetailModalContent = ({
 };
 
 const ProductDetailModal = () => {
-  const { selectedProduct, initialSkuIndex, isOpen, closeModal } =
-    useProductDetail();
+  const { selectedProduct, initialSkuIndex, isOpen, closeModal } = useProductDetail();
 
   if (!selectedProduct) {
     return null;

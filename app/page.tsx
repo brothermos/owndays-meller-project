@@ -1,13 +1,12 @@
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 
-import HeroSection from "@/app/containers/HeroSection";
-import ProductSection from "@/app/containers/ProductSection";
-import StyleCarouselSection from "@/app/containers/StyleCarouselSection";
-import FooterSection from "@/app/containers/FooterSection";
-import NavbarSection from "@/app/containers/NavbarSection";
 import ProductDetailModal from "@/app/components/ProductDetailModal";
-import { ProductDetailProvider } from "@/app/contexts/product-detail-context";
+import Footer from "@/app/components/footer/Footer";
+import Navbar from "@/app/components/navbar/Navbar";
 import { getQueryClient } from "@/app/lib/get-query-client";
+import HeroSection from "@/app/sections/HeroSection";
+import ProductSection from "@/app/sections/ProductSection";
+import StyleCarouselSection from "@/app/sections/StyleCarouselSection";
 import { productsQueryOptions } from "@/app/services/product.service";
 
 export default async function HomePage() {
@@ -16,16 +15,14 @@ export default async function HomePage() {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <ProductDetailProvider>
-        <main className="min-h-screen w-full">
-          <NavbarSection />
-          <HeroSection />
-          <ProductSection />
-          <StyleCarouselSection />
-          <FooterSection />
-        </main>
-        <ProductDetailModal />
-      </ProductDetailProvider>
+      <main className="min-h-screen w-full">
+        <Navbar />
+        <HeroSection />
+        <ProductSection />
+        <StyleCarouselSection />
+        <Footer />
+      </main>
+      <ProductDetailModal />
     </HydrationBoundary>
   );
 }

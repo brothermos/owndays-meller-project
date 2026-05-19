@@ -1,5 +1,5 @@
 import ProductCard from "@/app/components/ProductCard";
-import useInView from "@/app/hooks/useInView";
+import { useInView } from "@/app/hooks/useInView";
 import { ProductItem } from "@/app/types/product.type";
 
 type AnimatedProductItemProps = {

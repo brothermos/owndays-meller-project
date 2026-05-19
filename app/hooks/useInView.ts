@@ -6,7 +6,7 @@ type UseInViewOptions = {
   once?: boolean;
 };
 
-const useInView = <T extends Element>(options: UseInViewOptions = {}) => {
+export function useInView<T extends Element>(options: UseInViewOptions = {}) {
   const {
     threshold = 0.15,
     rootMargin = "0px 0px -10% 0px",
@@ -14,7 +14,7 @@ const useInView = <T extends Element>(options: UseInViewOptions = {}) => {
   } = options;
 
   const ref = useRef<T | null>(null);
-  const [isInView, setIsInView] = useState<boolean>(false);
+  const [isInView, setIsInView] = useState(false);
 
   useEffect(() => {
     const node = ref.current;
@@ -44,6 +44,4 @@ const useInView = <T extends Element>(options: UseInViewOptions = {}) => {
   }, [threshold, rootMargin, once]);
 
   return { ref, isInView };
-};
-
-export default useInView;
+}

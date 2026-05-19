@@ -1,15 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import {
-  getSkuColorLabel,
-  getSkuLabel,
-  getSkuSwatchStyle,
-} from "@/app/lib/product";
+
 import type { ProductItem } from "@/app/types/product.type";
-import { formatGridPrice } from "../utils/format";
-import useProductCard from "@/app/hooks/useProductCard";
-import { useProductDetail } from "@/app/contexts/product-detail-context";
+import { useProductCard } from "@/app/hooks/useProductCard";
 
 type ProductCardProps = {
   product: ProductItem;
@@ -20,42 +14,29 @@ const ProductCard = (props: ProductCardProps) => {
   const { product, eagerImage = false } = props;
 
   const {
-    sortedSkus,
     skuImageUrls,
+    swatches,
     hasAnyImage,
     selectedSkuIndex,
-    setSelectedSkuIndex,
-    selectedSku,
+    isOutOfStock,
+    skuLabel,
+    formattedPrice,
+    modelName,
+    handleCardClick,
+    handleCardKeyDown,
+    handleSwatchClick,
   } = useProductCard(product);
-
-  const isOutOfStock = product.selling_setting.in_stock === 0;
-  const { openModal } = useProductDetail();
-
-  const handleCardClick = () => {
-    if (isOutOfStock) return;
-    openModal(product, selectedSkuIndex);
-  };
-
-  const handleCardKeyDown = (event: React.KeyboardEvent<HTMLElement>) => {
-    if (isOutOfStock) return;
-    if (event.key === "Enter" || event.key === " ") {
-      event.preventDefault();
-      openModal(product, selectedSkuIndex);
-    }
-  };
 
   return (
     <article
       role={isOutOfStock ? undefined : "button"}
       tabIndex={isOutOfStock ? undefined : 0}
       aria-disabled={isOutOfStock || undefined}
-      aria-label={`View ${product.product.model_name} details`}
+      aria-label={`View ${modelName} details`}
       onClick={handleCardClick}
       onKeyDown={handleCardKeyDown}
       className={`group flex flex-col bg-white text-black outline-2 outline-black transition-transform duration-300 ease-out lg:outline-transparent ${
-        isOutOfStock
-          ? "cursor-default"
-          : "cursor-pointer motion-safe:hover:scale-[1.03] lg:hover:outline-black"
+        isOutOfStock ? "cursor-default" : "cursor-pointer motion-safe:hover:scale-[1.03] lg:hover:outline-black"
       }`}
     >
       <div className="aspect-4/3 w-full bg-white p-4">
@@ -68,7 +49,7 @@ const ProductCard = (props: ProductCardProps) => {
                 <Image
                   key={url}
                   src={url}
-                  alt={product.product.model_name}
+                  alt={modelName}
                   fill
                   sizes="(max-width: 1024px) 100vw, 33vw"
                   quality={60}
@@ -98,52 +79,32 @@ const ProductCard = (props: ProductCardProps) => {
       <div className="flex flex-1 flex-col px-4 pb-8">
         <div className="flex items-start justify-between gap-3">
           <div className="min-w-0">
-            <div className="font-display text-5xl font-bold uppercase leading-tight tracking-tight">
-              {product.product.model_name}
-            </div>
+            <div className="font-display text-5xl font-bold uppercase leading-tight tracking-tight">{modelName}</div>
           </div>
 
           <div className="flex max-w-[161px] shrink-0 flex-wrap justify-end gap-[3px]">
-            {sortedSkus.slice(0, 4).map((sku, index) => {
-              const firstColor = sku.colors[0];
-              if (!firstColor) return null;
-
-              const isSelected = index === selectedSkuIndex;
-              const swatchStyle = getSkuSwatchStyle(sku.colors);
-              const colorLabel = getSkuColorLabel(sku.colors);
-
-              return (
-                <button
-                  key={sku.id}
-                  type="button"
-                  aria-label={`Select ${colorLabel}`}
-                  onClick={(event) => {
-                    event.stopPropagation();
-                    setSelectedSkuIndex(index);
-                  }}
-                  className="flex size-[38px] shrink-0 items-center justify-center focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-                >
-                  <span
-                    className={`size-[28px] shrink-0 rounded-full border border-black/10 ${
-                      isSelected
-                        ? "ring-2 ring-primary ring-offset-4 ring-offset-white"
-                        : ""
-                    }`}
-                    style={swatchStyle}
-                  />
-                </button>
-              );
-            })}
+            {swatches.map((swatch) => (
+              <button
+                key={swatch.skuId}
+                type="button"
+                aria-label={`Select ${swatch.colorLabel}`}
+                onClick={(event) => handleSwatchClick(event, swatch.index)}
+                className="flex size-[38px] shrink-0 items-center justify-center focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+              >
+                <span
+                  className={`size-[28px] shrink-0 rounded-full border border-black/10 ${
+                    swatch.isSelected ? "ring-2 ring-primary ring-offset-4 ring-offset-white" : ""
+                  }`}
+                  style={swatch.swatchStyle}
+                />
+              </button>
+            ))}
           </div>
         </div>
 
         <div className="flex items-end justify-between gap-3">
-          <p className="text-base text-black/80">
-            {getSkuLabel(product.product.code, selectedSku)}
-          </p>
-          <p className="text-right text-xl font-bold">
-            {formatGridPrice(product.selling_setting.price)}
-          </p>
+          <p className="text-base text-black/80">{skuLabel}</p>
+          <p className="text-right text-xl font-bold">{formattedPrice}</p>
         </div>
       </div>
     </article>

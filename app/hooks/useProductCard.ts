@@ -1,18 +1,24 @@
+import { useCallback, useMemo, useState, type KeyboardEvent } from "react";
+
+import { useProductDetail } from "@/app/contexts/product-detail-context";
 import {
   getDefaultSkuIndex,
   getProductImageUrl,
+  getSkuColorLabel,
+  getSkuLabel,
   getSkuPrimaryImage,
+  getSkuSwatchStyle,
   sortSkus,
 } from "@/app/lib/product";
-import { ProductItem } from "@/app/types/product.type";
-import { useMemo, useState } from "react";
+import type { ProductItem } from "@/app/types/product.type";
+import { formatGridPrice } from "@/app/utils/format";
 
-const useProductCard = (product: ProductItem) => {
+export function useProductCard(product: ProductItem) {
+  const { openModal } = useProductDetail();
+
   const sortedSkus = useMemo(() => sortSkus(product.skus), [product.skus]);
 
-  const [selectedSkuIndex, setSelectedSkuIndex] = useState<number>(() =>
-    getDefaultSkuIndex(sortedSkus),
-  );
+  const [selectedSkuIndex, setSelectedSkuIndex] = useState(() => getDefaultSkuIndex(sortedSkus));
 
   const selectedSku = sortedSkus[selectedSkuIndex] ?? sortedSkus[0];
 
@@ -25,16 +31,69 @@ const useProductCard = (product: ProductItem) => {
     [sortedSkus],
   );
 
+  const swatches = useMemo(
+    () =>
+      sortedSkus.slice(0, 4).flatMap((sku, index) => {
+        if (!sku.colors[0]) return [];
+
+        return [
+          {
+            skuId: sku.id,
+            index,
+            isSelected: index === selectedSkuIndex,
+            swatchStyle: getSkuSwatchStyle(sku.colors),
+            colorLabel: getSkuColorLabel(sku.colors),
+          },
+        ];
+      }),
+    [sortedSkus, selectedSkuIndex],
+  );
+
   const hasAnyImage = skuImageUrls.some(Boolean);
+  const isOutOfStock = product.selling_setting.in_stock === 0;
+  const skuLabel = getSkuLabel(product.product.code, selectedSku);
+  const formattedPrice = formatGridPrice(product.selling_setting.price);
+  const modelName = product.product.model_name;
+
+  const openProductDetail = useCallback(() => {
+    if (isOutOfStock) return;
+    openModal(product, selectedSkuIndex);
+  }, [isOutOfStock, openModal, product, selectedSkuIndex]);
+
+  const handleCardKeyDown = useCallback(
+    (event: KeyboardEvent<HTMLElement>) => {
+      if (isOutOfStock) return;
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        openProductDetail();
+      }
+    },
+    [isOutOfStock, openProductDetail],
+  );
+
+  const selectSku = useCallback((index: number) => {
+    setSelectedSkuIndex(index);
+  }, []);
+
+  const handleSwatchClick = useCallback(
+    (event: React.MouseEvent<HTMLButtonElement>, index: number) => {
+      event.stopPropagation();
+      selectSku(index);
+    },
+    [selectSku],
+  );
 
   return {
-    sortedSkus,
     skuImageUrls,
+    swatches,
     hasAnyImage,
     selectedSkuIndex,
-    setSelectedSkuIndex,
-    selectedSku,
+    isOutOfStock,
+    skuLabel,
+    formattedPrice,
+    modelName,
+    handleCardClick: openProductDetail,
+    handleCardKeyDown,
+    handleSwatchClick,
   };
-};
-
-export default useProductCard;
+}
