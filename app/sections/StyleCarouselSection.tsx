@@ -40,7 +40,7 @@ const StyleCarouselSection = () => {
                 onPointerDown={onSlidePointerDown}
                 onClick={(event) => onSlideClick(event, index)}
                 onKeyDown={(event) => onSlideKeyDown(event, index)}
-                className="group relative h-[492px] w-[326px] shrink-0 cursor-pointer overflow-hidden outline-2 outline-black transition-[transform,outline-color] duration-500 ease-in-out active:cursor-grabbing motion-safe:hover:scale-[1.03] lg:h-[611px] lg:w-[405px] lg:outline-transparent lg:hover:z-10 lg:hover:outline-black"
+                className="group relative h-[492px] w-[326px] shrink-0 cursor-pointer overflow-hidden outline-2 outline-black transition-all duration-500 ease-in-out active:cursor-grabbing motion-safe:hover:scale-[1.03] lg:h-[611px] lg:w-[405px] lg:outline-transparent lg:hover:z-10 lg:hover:outline-black"
               >
                 <Image
                   src={slide.image}
