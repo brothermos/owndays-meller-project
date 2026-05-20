@@ -28,8 +28,8 @@ const ProductDetailContext = createContext<ProductDetailContextValue | null>(nul
 
 export function ProductDetailProvider({ children }: { children: ReactNode }) {
   const [selectedProduct, setSelectedProduct] = useState<ProductItem | null>(null);
-  const [initialSkuIndex, setInitialSkuIndex] = useState(0);
-  const [isOpen, setIsOpen] = useState(false);
+  const [initialSkuIndex, setInitialSkuIndex] = useState<number>(0);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const openModal = useCallback<OpenModal>((product, skuIndex = 0) => {
     setSelectedProduct(product);
