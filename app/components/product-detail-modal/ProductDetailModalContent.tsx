@@ -1,9 +1,11 @@
 "use client";
 
 import Image from "next/image";
+import { useRef } from "react";
 
 import type { ProductItem } from "@/app/types/product.type";
 
+import { useModalFocusTrap } from "@/app/hooks/useModalFocusTrap";
 import { useProductDetailModal } from "@/app/hooks/useProductDetailModal";
 
 import { ModalCta } from "@/app/components/product-detail-modal/ModalCta";
@@ -20,6 +22,10 @@ type ProductDetailModalContentProps = {
 
 export function ProductDetailModalContent(props: ProductDetailModalContentProps) {
   const { selectedProduct, initialSkuIndex, isOpen, closeModal } = props;
+
+  const dialogRef = useRef<HTMLElement>(null);
+
+  const { trapViewport } = useModalFocusTrap(dialogRef, isOpen);
 
   const {
     emblaRef,
@@ -45,10 +51,12 @@ export function ProductDetailModalContent(props: ProductDetailModalContentProps)
       <ModalOverlay isOpen={isOpen} onClose={closeModal} />
 
       <aside
+        ref={dialogRef}
         role="dialog"
         aria-modal="true"
         aria-hidden={!isOpen}
         aria-labelledby="product-detail-title"
+        inert={!isOpen && trapViewport}
         className={`fixed inset-y-[2.5%] left-1/2 z-120 flex h-[95%] w-[90%] transform-gpu flex-col overflow-hidden rounded-[10px] bg-black shadow-2xl will-change-transform motion-reduce:animate-none motion-reduce:will-change-auto sm:inset-y-0 sm:right-0 sm:left-auto sm:h-full sm:w-[616px] sm:rounded-l-[20px] sm:rounded-r-none ${
           isOpen
             ? "animate-modal-in sm:animate-drawer-in"

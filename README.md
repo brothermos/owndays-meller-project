@@ -77,7 +77,7 @@ Optional items from the same spec; status in this repo:
 | ---- | ------ |
 | Smooth open/close animation for modal | Implemented (drawer / overlay motion + exit duration) |
 | Image lazy loading | Implemented (`loading="lazy"` on non-critical images; first carousel slide + first grid image eager where needed) |
-| Keyboard accessibility (Esc, tab navigation) | Partial: **Esc** closes menu and modal; product cards and style slides are activatable with **Enter** / **Space**; swatches use `focus-visible` styles; no dedicated focus trap inside the modal |
+| Keyboard accessibility (Esc, tab navigation) | **Desktop (`sm+`):** focus trap in product modal + `inert` on closed dialog during exit animation. **Mobile:** no trap / no `inert` (touch-first; **Esc** still closes). **Everywhere:** **Enter** / **Space** on cards and style slides; `focus-visible` on swatches |
 | SEO meta tags + OGP (1200×630) | Implemented in `app/layout.tsx` metadata + `/images/meta_ogp.jpg` |
 
 ## Data Source
