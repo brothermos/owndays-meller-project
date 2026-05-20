@@ -49,19 +49,26 @@ export function ModalImageCarousel(props: ModalImageCarouselProps) {
           aria-label="Select color variant"
         >
           {colorChips.map((chip) => (
-            <button
+            <div
               key={chip.skuId}
-              type="button"
+              role="button"
+              tabIndex={0}
               aria-pressed={chip.isActive}
               onClick={() => setSelectedSkuIndex(chip.index)}
-              className={`shrink-0 cursor-pointer rounded-full border border-black px-2 py-0.5 text-[10px] leading-tight font-medium tracking-wide uppercase transition-colors sm:px-3 sm:py-1 sm:text-sm sm:tracking-[0.5px] ${
+              onKeyDown={(event) => {
+                if (event.key === "Enter" || event.key === " ") {
+                  event.preventDefault();
+                  setSelectedSkuIndex(chip.index);
+                }
+              }}
+              className={`shrink-0 cursor-pointer rounded-full border border-black px-2 py-0.5 text-[12px] leading-tight font-medium tracking-wide uppercase transition-colors sm:px-3 sm:py-1 sm:text-sm sm:tracking-[0.5px] ${
                 chip.isActive
                   ? "bg-black text-white"
                   : "bg-transparent text-black hover:bg-black hover:text-white"
               }`}
             >
               {chip.label}
-            </button>
+            </div>
           ))}
         </div>
       </div>
