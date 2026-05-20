@@ -4,7 +4,7 @@ import { productsQueryOptions } from "@/app/services/product.service";
 
 import { getQueryClient } from "@/app/lib/get-query-client";
 
-import ProductDetailModal from "@/app/components/ProductDetailModal";
+import { ProductDetailModalLazy } from "@/app/components/ProductDetailModalLazy";
 import Footer from "@/app/components/footer/Footer";
 import Navbar from "@/app/components/navbar/Navbar";
 
@@ -25,7 +25,7 @@ export default async function HomePage() {
         <StyleCarouselSection />
         <Footer />
       </main>
-      <ProductDetailModal />
+      <ProductDetailModalLazy />
     </HydrationBoundary>
   );
 }

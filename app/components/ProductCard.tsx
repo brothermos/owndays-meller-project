@@ -19,7 +19,6 @@ const ProductCard = (props: ProductCardProps) => {
   const {
     skuImageUrls,
     displaySkus,
-    hasAnyImage,
     selectedSkuIndex,
     isOutOfStock,
     skuLabel,
@@ -29,6 +28,8 @@ const ProductCard = (props: ProductCardProps) => {
     handleCardKeyDown,
     selectSku,
   } = useProductCard(product);
+
+  const activeImageUrl = skuImageUrls[selectedSkuIndex] ?? skuImageUrls.find((url) => Boolean(url));
 
   return (
     <article
@@ -46,25 +47,17 @@ const ProductCard = (props: ProductCardProps) => {
     >
       <div className="aspect-4/3 w-full bg-white p-4">
         <div className="relative isolate size-full overflow-hidden bg-[#F7F7F7]">
-          {hasAnyImage ? (
-            skuImageUrls.map((url, index) => {
-              if (!url) return null;
-              const isActive = index === selectedSkuIndex;
-              return (
-                <Image
-                  key={url}
-                  src={url}
-                  alt={modelName}
-                  fill
-                  sizes="(max-width: 1024px) 100vw, 33vw"
-                  quality={60}
-                  loading={index === 0 && eagerImage ? "eager" : "lazy"}
-                  className={`object-contain p-6 mix-blend-multiply transition-opacity duration-150 ${
-                    isActive ? "opacity-100" : "opacity-0"
-                  } ${isOutOfStock ? "grayscale" : ""}`}
-                />
-              );
-            })
+          {activeImageUrl ? (
+            <Image
+              key={activeImageUrl}
+              src={activeImageUrl}
+              alt={modelName}
+              fill
+              sizes="(max-width: 1024px) 100vw, 33vw"
+              quality={60}
+              loading={eagerImage ? "eager" : "lazy"}
+              className={`object-contain p-6 mix-blend-multiply ${isOutOfStock ? "grayscale" : ""}`}
+            />
           ) : (
             <div className="flex size-full items-center justify-center p-6 text-sm font-medium text-black/50">
               Image unavailable
