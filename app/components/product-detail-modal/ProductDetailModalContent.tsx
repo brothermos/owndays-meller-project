@@ -1,7 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import { useRef } from "react";
+
+import Image from "next/image";
 
 import type { ProductItem } from "@/app/types/product.type";
 
@@ -74,9 +75,16 @@ export function ProductDetailModalContent(props: ProductDetailModalContentProps)
           type="button"
           onClick={closeModal}
           aria-label="Close product detail"
-          className="absolute top-4 right-4 z-30 rounded-full p-2 text-primary"
+          className="group absolute top-4 right-4 z-30 flex size-11 items-center justify-center rounded-full text-primary transition-transform duration-200 ease-out will-change-transform hover:scale-105 hover:drop-shadow-[0_2px_10px_rgba(0,0,0,0.18)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary active:scale-95 motion-reduce:transition-none motion-reduce:hover:scale-100 motion-reduce:hover:drop-shadow-none motion-reduce:active:scale-100"
         >
-          <Image src="/svg/close_icon.svg" alt="" width={28} height={28} aria-hidden="true" />
+          <Image
+            src="/svg/close_icon.svg"
+            alt=""
+            width={28}
+            height={28}
+            aria-hidden="true"
+            className="pointer-events-none transition-transform duration-200 ease-out group-hover:rotate-90 motion-reduce:transition-none motion-reduce:group-hover:rotate-0"
+          />
         </button>
 
         <ModalImageCarousel
