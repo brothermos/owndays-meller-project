@@ -17,7 +17,7 @@ const Navbar = () => {
   return (
     <>
       <header
-        className={`fixed top-0 right-0 left-0 z-100 py-5 transition-all duration-300 lg:py-3 ${
+        className={`fixed top-0 right-0 left-0 z-100 py-7 transition-all duration-300 lg:py-3 ${
           isScrolled ? "bg-black/20 backdrop-blur-sm" : "bg-transparent"
         }`}
       >
