@@ -31,7 +31,7 @@ Frontend implementation for the **OWNDAYS x MELLER** sunglasses collaboration la
 - Per card: model name, SKU label, price (`¥7,800+tax`), color swatches (max 4)
 - Swatches support solid `hex_code`, dual-tone gradient, and pattern images via `path`
 - Selecting a swatch updates the card image to that SKU’s primary image
-- **Sold out** overlay when `selling_setting.in_stock === 0` (card not clickable)
+- Out-of-stock products remain clickable; modal shows **OUT OF STOCK** on the ONLINE STORE CTA when `selling_setting.in_stock === 0`
 
 ### Product detail modal
 

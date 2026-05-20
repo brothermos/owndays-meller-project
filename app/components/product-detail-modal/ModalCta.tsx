@@ -13,7 +13,7 @@ export function ModalCta(props: ModalCtaProps) {
           type="button"
           disabled
           aria-disabled="true"
-          className="flex h-12 w-full max-w-[373px] cursor-not-allowed items-center justify-center rounded-full bg-[#d9d9d9] text-base font-semibold tracking-wide text-[#7a7a7a] sm:h-[54px]"
+          className="flex h-12 w-full max-w-[373px] cursor-not-allowed items-center justify-center rounded-full bg-[#d9d9d9] text-base font-semibold tracking-wide text-white sm:h-[54px]"
         >
           OUT OF STOCK
         </button>

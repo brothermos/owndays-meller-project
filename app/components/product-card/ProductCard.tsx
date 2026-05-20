@@ -20,7 +20,6 @@ const ProductCard = (props: ProductCardProps) => {
     skuImageUrls,
     displaySkus,
     selectedSkuIndex,
-    isOutOfStock,
     skuLabel,
     formattedPrice,
     modelName,
@@ -33,17 +32,12 @@ const ProductCard = (props: ProductCardProps) => {
 
   return (
     <article
-      role={isOutOfStock ? undefined : "button"}
-      tabIndex={isOutOfStock ? undefined : 0}
-      aria-disabled={isOutOfStock || undefined}
+      role="button"
+      tabIndex={0}
       aria-label={`View ${modelName} details`}
       onClick={handleCardClick}
       onKeyDown={handleCardKeyDown}
-      className={`group flex flex-col bg-white text-black outline-2 outline-black transition-transform duration-300 ease-out lg:outline-transparent ${
-        isOutOfStock
-          ? "cursor-default"
-          : "cursor-pointer motion-safe:hover:scale-[1.03] lg:hover:outline-black"
-      }`}
+      className="group flex cursor-pointer flex-col bg-white text-black outline-2 outline-black transition-transform duration-300 ease-out motion-safe:hover:scale-[1.03] lg:outline-transparent lg:hover:outline-black"
     >
       <div className="aspect-4/3 w-full bg-white p-4">
         <div className="relative isolate size-full overflow-hidden bg-[#F7F7F7]">
@@ -56,19 +50,11 @@ const ProductCard = (props: ProductCardProps) => {
               sizes="(max-width: 1024px) 100vw, 33vw"
               quality={60}
               loading={eagerImage ? "eager" : "lazy"}
-              className={`object-contain p-6 mix-blend-multiply ${isOutOfStock ? "grayscale" : ""}`}
+              className="object-contain p-6 mix-blend-multiply"
             />
           ) : (
             <div className="flex size-full items-center justify-center p-6 text-sm font-medium text-black/50">
               Image unavailable
-            </div>
-          )}
-
-          {isOutOfStock && (
-            <div className="absolute inset-0 z-10 flex items-center justify-center bg-black/40">
-              <span className="bg-black px-4 py-2 font-display text-2xl font-bold tracking-wider text-white uppercase">
-                Sold Out
-              </span>
             </div>
           )}
         </div>

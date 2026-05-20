@@ -48,25 +48,22 @@ export function useProductCard(product: ProductItem) {
   );
 
   const hasAnyImage = skuImageUrls.some(Boolean);
-  const isOutOfStock = product.selling_setting.in_stock === 0;
   const skuLabel = getSkuLabel(product.product.code, selectedSku);
   const formattedPrice = formatGridPrice(product.selling_setting.price);
   const modelName = product.product.model_name;
 
   const openProductDetail = useCallback(() => {
-    if (isOutOfStock) return;
     openModal(product, selectedSkuIndex);
-  }, [isOutOfStock, openModal, product, selectedSkuIndex]);
+  }, [openModal, product, selectedSkuIndex]);
 
   const handleCardKeyDown = useCallback(
     (event: KeyboardEvent<HTMLElement>) => {
-      if (isOutOfStock) return;
       if (event.key === "Enter" || event.key === " ") {
         event.preventDefault();
         openProductDetail();
       }
     },
-    [isOutOfStock, openProductDetail],
+    [openProductDetail],
   );
 
   const selectSku = useCallback((index: number) => {
@@ -78,7 +75,6 @@ export function useProductCard(product: ProductItem) {
     displaySkus,
     hasAnyImage,
     selectedSkuIndex,
-    isOutOfStock,
     skuLabel,
     formattedPrice,
     modelName,
