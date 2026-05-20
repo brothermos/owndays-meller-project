@@ -1,7 +1,7 @@
 import { useCallback, useRef } from "react";
 
 import { STYLE_CAROUSEL_SLIDES } from "@/app/constants/style-carousel";
-import { DRAG_THRESHOLD_PX } from "@/app/constants/style-carousel-section";
+import { DRAG_THRESHOLD_PX } from "@/app/constants/style-carousel";
 
 import { useProductDetail } from "@/app/contexts/product-detail-context";
 

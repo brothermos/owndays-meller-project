@@ -60,3 +60,5 @@ export const STYLE_CAROUSEL_SLIDES = [
     colorLabel: "brown demi",
   },
 ] as const;
+
+export const DRAG_THRESHOLD_PX = 8;

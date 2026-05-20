@@ -6,7 +6,7 @@ import { COLUMNS_LG, STAGGER_STEP_MS } from "@/app/constants/animated-product-it
 
 import { useInView } from "@/app/hooks/useInView";
 
-import ProductCard from "@/app/components/ProductCard";
+import ProductCard from "@/app/components/product-card/ProductCard";
 
 type AnimatedProductItemProps = {
   product: ProductItem;

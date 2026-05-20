@@ -6,7 +6,7 @@ import type { ProductItem } from "@/app/types/product.type";
 
 import { useProductCard } from "@/app/hooks/useProductCard";
 
-import ColorSwatchButton from "@/app/components/ColorSwatchButton";
+import ColorSwatchButton from "@/app/components/product-card/ColorSwatchButton";
 
 type ProductCardProps = {
   product: ProductItem;

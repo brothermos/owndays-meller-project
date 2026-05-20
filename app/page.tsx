@@ -4,9 +4,9 @@ import { productsQueryOptions } from "@/app/services/product.service";
 
 import { getQueryClient } from "@/app/lib/get-query-client";
 
-import { ProductDetailModalLazy } from "@/app/components/ProductDetailModalLazy";
 import Footer from "@/app/components/footer/Footer";
 import Navbar from "@/app/components/navbar/Navbar";
+import { ProductDetailModalLazy } from "@/app/components/product-detail-modal/ProductDetailModalLazy";
 
 import HeroSection from "@/app/sections/HeroSection";
 import { HomeBelowFoldSections } from "@/app/sections/HomeBelowFoldSections";

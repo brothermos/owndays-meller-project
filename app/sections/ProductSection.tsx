@@ -2,8 +2,8 @@
 
 import { useProductsQuery } from "@/app/services/product.service";
 
-import AnimatedProductItem from "@/app/components/AnimatedProductItem";
-import ProductCardSkeleton from "@/app/components/ProductCardSkeleton";
+import AnimatedProductItem from "@/app/components/product-card/AnimatedProductItem";
+import ProductCardSkeleton from "@/app/components/product-card/ProductCardSkeleton";
 
 const PRODUCT_SKELETON_COUNT = 8;
 
