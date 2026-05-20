@@ -21,7 +21,7 @@ export function ModalImageCarousel(props: ModalImageCarouselProps) {
   const { emblaRef, skuImageUrls, modelName, colorChips, setSelectedSkuIndex } = props;
 
   return (
-    <div className="relative h-[335px] w-full shrink-0 overflow-hidden bg-white sm:h-[499px]">
+    <div className="relative h-[380px] w-full shrink-0 overflow-hidden bg-white sm:h-[499px]">
       <div className="h-full" ref={emblaRef}>
         <ul className="flex h-full items-center">
           {skuImageUrls.map((url, idx) => (
