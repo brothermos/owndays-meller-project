@@ -7,11 +7,7 @@ type UseInViewOptions = {
 };
 
 export function useInView<T extends Element>(options: UseInViewOptions = {}) {
-  const {
-    threshold = 0.15,
-    rootMargin = "0px 0px -10% 0px",
-    once = true,
-  } = options;
+  const { threshold = 0.15, rootMargin = "0px 0px -10% 0px", once = true } = options;
 
   const ref = useRef<T | null>(null);
   const [isInView, setIsInView] = useState(false);

@@ -18,4 +18,6 @@ export const PRODUCT_IMAGE_BASE_URL = normalizeBaseUrl(
 
 export const PRODUCTS_API_PATH = "/meller/products.json";
 
-export const ONLINE_STORE_BASE = normalizeBaseUrl(getEnv("NEXT_PUBLIC_ONLINE_STORE_BASE", DEFAULT_ONLINE_STORE_BASE));
+export const ONLINE_STORE_BASE = normalizeBaseUrl(
+  getEnv("NEXT_PUBLIC_ONLINE_STORE_BASE", DEFAULT_ONLINE_STORE_BASE),
+);

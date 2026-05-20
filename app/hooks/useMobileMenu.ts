@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 
 import { MOBILE_MENU_EXIT_MS } from "@/app/constants/mobile-menu";
+
 import { useAnimatedPresence } from "@/app/hooks/useAnimatedPresence";
 import { useBodyScrollLock } from "@/app/hooks/useBodyScrollLock";
 

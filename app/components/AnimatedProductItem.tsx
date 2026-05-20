@@ -1,9 +1,12 @@
 "use client";
 
-import ProductCard from "@/app/components/ProductCard";
-import { COLUMNS_LG, STAGGER_STEP_MS } from "@/app/constants/animated-product-item";
-import { useInView } from "@/app/hooks/useInView";
 import type { ProductItem } from "@/app/types/product.type";
+
+import { COLUMNS_LG, STAGGER_STEP_MS } from "@/app/constants/animated-product-item";
+
+import { useInView } from "@/app/hooks/useInView";
+
+import ProductCard from "@/app/components/ProductCard";
 
 type AnimatedProductItemProps = {
   product: ProductItem;

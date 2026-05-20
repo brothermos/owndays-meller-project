@@ -1,8 +1,9 @@
 "use client";
 
+import { useProductsQuery } from "@/app/services/product.service";
+
 import AnimatedProductItem from "@/app/components/AnimatedProductItem";
 import ProductCardSkeleton from "@/app/components/ProductCardSkeleton";
-import { useProductsQuery } from "@/app/services/product.service";
 
 const PRODUCT_SKELETON_COUNT = 8;
 
@@ -12,10 +13,7 @@ const ProductSection = () => {
   const isEmpty = !isLoading && !isError && products?.length === 0;
 
   return (
-    <section
-      id="products"
-      className="bg-primary pb-[121px] pt-[80px] lg:pb-[177px] lg:pt-[110px]"
-    >
+    <section id="products" className="bg-primary pt-[80px] pb-[121px] lg:pt-[110px] lg:pb-[177px]">
       <div className="mx-auto w-full max-w-[1440px]">
         <div className="w-full px-5 sm:px-[50px] md:px-[70px]">
           {isLoading && (
@@ -34,7 +32,9 @@ const ProductSection = () => {
 
           {isError && (
             <div className="flex flex-col items-center gap-4 text-center">
-              <p className="text-lg font-semibold text-white">Unable to load products. Please try again.</p>
+              <p className="text-lg font-semibold text-white">
+                Unable to load products. Please try again.
+              </p>
               <button
                 type="button"
                 onClick={() => refetch()}
@@ -47,7 +47,9 @@ const ProductSection = () => {
           )}
 
           {isEmpty && (
-            <p className="text-center text-lg font-semibold text-white">No products available at the moment.</p>
+            <p className="text-center text-lg font-semibold text-white">
+              No products available at the moment.
+            </p>
           )}
 
           {products && products.length > 0 && (

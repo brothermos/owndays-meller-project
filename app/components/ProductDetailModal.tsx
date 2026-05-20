@@ -1,9 +1,12 @@
 "use client";
 
-import { ProductDetailModalContent } from "@/app/components/product-detail-modal/ProductDetailModalContent";
 import { PRODUCT_MODAL_EXIT_MS } from "@/app/constants/product-detail-modal";
-import { useAnimatedPresence } from "@/app/hooks/useAnimatedPresence";
+
 import { useProductDetail } from "@/app/contexts/product-detail-context";
+
+import { useAnimatedPresence } from "@/app/hooks/useAnimatedPresence";
+
+import { ProductDetailModalContent } from "@/app/components/product-detail-modal/ProductDetailModalContent";
 
 const ProductDetailModal = () => {
   const { selectedProduct, initialSkuIndex, isOpen, closeModal } = useProductDetail();

@@ -2,13 +2,12 @@ import Image from "next/image";
 import Link from "next/link";
 
 import {
-  FOOTER_INLINE_CTA_CLASS,
   FOOTER_GROUP_CTA_CLASS,
+  FOOTER_INLINE_CTA_CLASS,
   FOOTER_MOBILE_NAV_CLASS,
   INSTAGRAM_ICON_CLASS,
   INSTAGRAM_LINK_CLASS,
 } from "@/app/constants/cta-classes";
-
 import {
   FOOTER_LEGAL_LINKS,
   INSTAGRAM_HREF,
@@ -19,20 +18,23 @@ import {
 
 const Footer = () => {
   return (
-    <footer id="stores" className="scroll-mt-20 overflow-hidden bg-black text-primary md:scroll-mt-24">
-      <div className="md:border-t-2 md:border-primary md:grid md:grid-cols-[auto_318px] lg:grid-cols-[1fr_445px] xl:grid-cols-[1fr_508px]">
-        <div className="md:col-span-2 md:border-r-2 md:border-primary md:p-[30px] md:[grid-area:1/1/3/2] lg:pt-[69px] lg:pl-[70px] lg:pb-[55px]">
-          <ul className="border-t-4 border-primary md:border-t-0 md:grid md:gap-[11px] lg:gap-5">
+    <footer
+      id="stores"
+      className="scroll-mt-20 overflow-hidden bg-black text-primary md:scroll-mt-24"
+    >
+      <div className="md:grid md:grid-cols-[auto_318px] md:border-t-2 md:border-primary lg:grid-cols-[1fr_445px] xl:grid-cols-[1fr_508px]">
+        <div className="md:col-span-2 md:border-r-2 md:border-primary md:p-[30px] md:[grid-area:1/1/3/2] lg:pt-[69px] lg:pb-[55px] lg:pl-[70px]">
+          <ul className="border-t-4 border-primary md:grid md:gap-[11px] md:border-t-0 lg:gap-5">
             {NAV_ITEMS.map((item) => (
               <li
                 key={item.label}
-                className="flex h-[60px] w-full items-center border-b-2 border-primary pl-[30px] pr-[19px] md:h-auto md:border-none md:px-0"
+                className="flex h-[60px] w-full items-center border-b-2 border-primary pr-[19px] pl-[30px] md:h-auto md:border-none md:px-0"
               >
                 <a
                   href={item.href}
                   className={`${FOOTER_MOBILE_NAV_CLASS} border-2 border-transparent md:max-w-fit md:pt-[5px] md:pb-[2px] lg:pt-0 ${FOOTER_INLINE_CTA_CLASS}`}
                 >
-                  <span className="text-[14px] font-semibold leading-none tracking-[0.7px] lg:text-[18px]">
+                  <span className="text-[14px] leading-none font-semibold tracking-[0.7px] lg:text-[18px]">
                     {item.label}
                   </span>
                   <span className="shrink-0 md:hidden">
@@ -64,13 +66,13 @@ const Footer = () => {
               className="transition group-hover:brightness-0 lg:h-9 lg:w-9"
               aria-hidden="true"
             />
-            <span className="text-[14px] font-semibold leading-none tracking-[0.7px] md:text-base lg:text-[21px]">
+            <span className="text-[14px] leading-none font-semibold tracking-[0.7px] md:text-base lg:text-[21px]">
               ONLINE STORE
             </span>
           </Link>
           <Link
             href={OWNDAYS_HOME_HREF}
-            className={`${FOOTER_GROUP_CTA_CLASS} items-center gap-1.5 py-10 text-[11px] font-semibold leading-[20px] tracking-[0.7px] md:py-0 md:text-[14px] lg:mx-auto`}
+            className={`${FOOTER_GROUP_CTA_CLASS} items-center gap-1.5 py-10 text-[11px] leading-[20px] font-semibold tracking-[0.7px] md:py-0 md:text-[14px] lg:mx-auto`}
           >
             <span>OWNDAYS.COM</span>
             <Image
@@ -91,7 +93,9 @@ const Footer = () => {
                 <Link
                   href={item.href}
                   className={`${FOOTER_INLINE_CTA_CLASS} text-[11px] leading-none tracking-[0.7px] lg:text-[13px] ${
-                    item.emphasis ? "font-semibold" : "font-medium lg:font-semibold xl:font-semibold"
+                    item.emphasis
+                      ? "font-semibold"
+                      : "font-medium lg:font-semibold xl:font-semibold"
                   }`}
                 >
                   {item.label}
@@ -102,7 +106,7 @@ const Footer = () => {
         </div>
 
         <div className="md:col-span-2 md:border-r-2 md:border-primary md:[grid-area:3/1/4/2]">
-          <ul className="flex gap-[18px] px-[30px] pb-[30px] lg:pl-[70px] lg:pb-[69px]">
+          <ul className="flex gap-[18px] px-[30px] pb-[30px] lg:pb-[69px] lg:pl-[70px]">
             <li>
               <a
                 href={INSTAGRAM_HREF}
@@ -125,7 +129,7 @@ const Footer = () => {
         </div>
 
         <div className="border-t-2 border-primary md:col-span-2 md:[grid-area:4/2/5/3]">
-          <p className="px-8 py-[30px] text-center text-[10px] font-semibold leading-normal tracking-[0.7px] md:pt-[34px] md:pb-[26px] md:text-left lg:whitespace-nowrap lg:pl-[61px] lg:text-xs">
+          <p className="px-8 py-[30px] text-center text-[10px] leading-normal font-semibold tracking-[0.7px] md:pt-[34px] md:pb-[26px] md:text-left lg:pl-[61px] lg:text-xs lg:whitespace-nowrap">
             COPYRIGHT (C) OWNDAYS CO., LTD. ALL RIGHTS RESERVED.
           </p>
         </div>

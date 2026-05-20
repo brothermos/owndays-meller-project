@@ -1,9 +1,17 @@
-import { useCallback, useMemo, useState, type KeyboardEvent } from "react";
+import { type KeyboardEvent, useCallback, useMemo, useState } from "react";
+
+import type { ProductItem } from "@/app/types/product.type";
 
 import { useProductDetail } from "@/app/contexts/product-detail-context";
-import type { ProductItem } from "@/app/types/product.type";
+
 import { formatGridPrice } from "@/app/utils/format";
-import { getDefaultSkuIndex, getProductImageUrl, getSkuLabel, getSkuPrimaryImage, sortSkus } from "@/app/utils/product";
+import {
+  getDefaultSkuIndex,
+  getProductImageUrl,
+  getSkuLabel,
+  getSkuPrimaryImage,
+  sortSkus,
+} from "@/app/utils/product";
 
 export function useProductCard(product: ProductItem) {
   const { openModal } = useProductDetail();

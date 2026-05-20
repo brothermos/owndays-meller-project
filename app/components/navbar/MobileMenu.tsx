@@ -30,7 +30,9 @@ const MobileMenu = (props: MobileMenuProps) => {
     >
       <div
         className={`flex h-full w-full flex-col rounded-[10px] bg-black motion-reduce:animate-none ${
-          isOpen ? "animate-mobile-menu-panel-in" : "pointer-events-none animate-mobile-menu-panel-out"
+          isOpen
+            ? "animate-mobile-menu-panel-in"
+            : "pointer-events-none animate-mobile-menu-panel-out"
         }`}
         onClick={(event) => event.stopPropagation()}
       >
@@ -50,7 +52,7 @@ const MobileMenu = (props: MobileMenuProps) => {
                 <li key={item.label} className="mb-[25px]">
                   <a
                     href={item.href}
-                    className="text-[18px] font-semibold leading-[20.09px] tracking-[0.7px]"
+                    className="text-[18px] leading-[20.09px] font-semibold tracking-[0.7px]"
                     onClick={onClose}
                   >
                     {item.label}

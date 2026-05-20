@@ -1,16 +1,18 @@
 "use client";
 
 import {
+  type ReactNode,
   createContext,
   useCallback,
   useContext,
   useEffect,
   useMemo,
   useState,
-  type ReactNode,
 } from "react";
-import { useBodyScrollLock } from "@/app/hooks/useBodyScrollLock";
+
 import type { ProductItem } from "@/app/types/product.type";
+
+import { useBodyScrollLock } from "@/app/hooks/useBodyScrollLock";
 
 type OpenModal = (product: ProductItem, initialSkuIndex?: number) => void;
 
@@ -22,14 +24,10 @@ type ProductDetailContextValue = {
   closeModal: () => void;
 };
 
-const ProductDetailContext = createContext<ProductDetailContextValue | null>(
-  null,
-);
+const ProductDetailContext = createContext<ProductDetailContextValue | null>(null);
 
 export function ProductDetailProvider({ children }: { children: ReactNode }) {
-  const [selectedProduct, setSelectedProduct] = useState<ProductItem | null>(
-    null,
-  );
+  const [selectedProduct, setSelectedProduct] = useState<ProductItem | null>(null);
   const [initialSkuIndex, setInitialSkuIndex] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -65,19 +63,13 @@ export function ProductDetailProvider({ children }: { children: ReactNode }) {
     [selectedProduct, initialSkuIndex, isOpen, openModal, closeModal],
   );
 
-  return (
-    <ProductDetailContext.Provider value={value}>
-      {children}
-    </ProductDetailContext.Provider>
-  );
+  return <ProductDetailContext.Provider value={value}>{children}</ProductDetailContext.Provider>;
 }
 
 export function useProductDetail() {
   const ctx = useContext(ProductDetailContext);
   if (!ctx) {
-    throw new Error(
-      "useProductDetail must be used within ProductDetailProvider",
-    );
+    throw new Error("useProductDetail must be used within ProductDetailProvider");
   }
   return ctx;
 }

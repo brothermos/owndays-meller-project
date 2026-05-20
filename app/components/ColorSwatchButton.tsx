@@ -3,6 +3,7 @@
 import type { ProductSku } from "@/app/types/product.type";
 
 import { SWATCH_BASE_CLASS } from "@/app/constants/color-swatch-button";
+
 import { useColorSwatchButton } from "@/app/hooks/useColorSwatchButton";
 
 type ColorSwatchButtonProps = {

@@ -4,6 +4,7 @@ import Image from "next/image";
 
 import { NAVBAR_CTA_CLASS } from "@/app/constants/cta-classes";
 import { NAV_ITEMS } from "@/app/constants/navigation";
+
 import { useMobileMenu } from "@/app/hooks/useMobileMenu";
 import { useNavbarScroll } from "@/app/hooks/useNavbarScroll";
 
@@ -16,7 +17,7 @@ const Navbar = () => {
   return (
     <>
       <header
-        className={`fixed left-0 right-0 top-0 z-100 py-5 transition-all duration-300 lg:py-3 ${
+        className={`fixed top-0 right-0 left-0 z-100 py-5 transition-all duration-300 lg:py-3 ${
           isScrolled ? "bg-black/20 backdrop-blur-sm" : "bg-transparent"
         }`}
       >
@@ -43,7 +44,7 @@ const Navbar = () => {
             </div>
           </div>
 
-          <nav className="hidden items-center gap-[50px] text-[15px] font-bold uppercase tracking-[0.7px] lg:flex">
+          <nav className="hidden items-center gap-[50px] text-[15px] font-bold tracking-[0.7px] uppercase lg:flex">
             {NAV_ITEMS.map((item) => (
               <a key={item.label} href={item.href} className={NAVBAR_CTA_CLASS}>
                 {item.label}
@@ -58,22 +59,12 @@ const Navbar = () => {
             aria-expanded={isOpen}
             onClick={() => setIsOpen(true)}
           >
-            <Image
-              src="/svg/hamburger_icon.svg"
-              alt=""
-              width={20}
-              height={15}
-              aria-hidden="true"
-            />
+            <Image src="/svg/hamburger_icon.svg" alt="" width={20} height={15} aria-hidden="true" />
           </button>
         </div>
       </header>
 
-      <MobileMenu
-        isOpen={isOpen}
-        isMounted={isMounted}
-        onClose={() => setIsOpen(false)}
-      />
+      <MobileMenu isOpen={isOpen} isMounted={isMounted} onClose={() => setIsOpen(false)} />
     </>
   );
 };

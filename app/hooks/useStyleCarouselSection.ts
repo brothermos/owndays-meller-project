@@ -2,8 +2,11 @@ import { useCallback, useRef } from "react";
 
 import { STYLE_CAROUSEL_SLIDES } from "@/app/constants/style-carousel";
 import { DRAG_THRESHOLD_PX } from "@/app/constants/style-carousel-section";
+
 import { useProductDetail } from "@/app/contexts/product-detail-context";
+
 import { useProductsQuery } from "@/app/services/product.service";
+
 import { findProductSkuByColor } from "@/app/utils/product";
 
 export function useStyleCarouselSection() {

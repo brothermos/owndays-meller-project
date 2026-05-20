@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
 import { Barlow_Condensed, Geist } from "next/font/google";
-import "./globals.css";
-import { Providers } from "@/app/providers";
+
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+
+import { Providers } from "@/app/providers";
+
+import "./globals.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -18,9 +21,7 @@ const barlowCondensed = Barlow_Condensed({
 
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL ??
-  (process.env.VERCEL_URL
-    ? `https://${process.env.VERCEL_URL}`
-    : "http://localhost:3000");
+  (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000");
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -52,7 +53,7 @@ export default function RootLayout({
       lang="ja"
       className={`${geistSans.variable} ${barlowCondensed.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
+      <body className="flex min-h-full flex-col">
         <Providers>{children}</Providers>
         <Analytics />
         <SpeedInsights />

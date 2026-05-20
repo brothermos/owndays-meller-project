@@ -8,16 +8,18 @@ type UseAnimatedPresenceProps = {
 export function useAnimatedPresence(props: UseAnimatedPresenceProps) {
   const { isVisible, exitDurationMs } = props;
 
-  const [isMounted, setIsMounted] = useState<boolean>(false);
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
     if (isVisible) {
-      setIsMounted(true);
-    }
-  }, [isVisible]);
+      const frame = requestAnimationFrame(() => {
+        setIsMounted(true);
+      });
 
-  useEffect(() => {
-    if (isVisible || !isMounted) return;
+      return () => cancelAnimationFrame(frame);
+    }
+
+    if (!isMounted) return;
 
     const exitTimer = window.setTimeout(() => {
       setIsMounted(false);

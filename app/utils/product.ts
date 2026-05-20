@@ -1,24 +1,17 @@
-import { ONLINE_STORE_BASE, PRODUCT_IMAGE_BASE_URL } from "@/app/config/env";
-import type {
-  ProductColor,
-  ProductItem,
-  ProductSku,
-} from "@/app/types/product.type";
 import type { CSSProperties } from "react";
+
+import type { ProductColor, ProductItem, ProductSku } from "@/app/types/product.type";
+
+import { ONLINE_STORE_BASE, PRODUCT_IMAGE_BASE_URL } from "@/app/config/env";
 
 export const SWATCH_FALLBACK_STYLE: CSSProperties = { backgroundColor: "#d9d9d9" };
 
 export function getColorEnglishName(color: ProductColor): string {
-  const enName = color.localizations?.find(
-    (loc) => loc.language_code === "en",
-  )?.name;
+  const enName = color.localizations?.find((loc) => loc.language_code === "en")?.name;
   return (enName ?? color.name).toUpperCase();
 }
 
-export function getSkuColorLabel(
-  colors: ProductColor[],
-  separator = " / ",
-): string {
+export function getSkuColorLabel(colors: ProductColor[], separator = " / "): string {
   return colors.map(getColorEnglishName).join(separator);
 }
 
@@ -70,8 +63,7 @@ export function findProductSkuByColor(
   colorLabel: string,
 ): { product: ProductItem; skuIndex: number } | null {
   const product = products.find(
-    (item) =>
-      item.product.model_name.toUpperCase() === modelName.toUpperCase(),
+    (item) => item.product.model_name.toUpperCase() === modelName.toUpperCase(),
   );
   if (!product) return null;
 

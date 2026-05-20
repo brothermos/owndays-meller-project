@@ -1,13 +1,16 @@
-import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
+import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
+
+import { productsQueryOptions } from "@/app/services/product.service";
+
+import { getQueryClient } from "@/app/lib/get-query-client";
 
 import ProductDetailModal from "@/app/components/ProductDetailModal";
 import Footer from "@/app/components/footer/Footer";
 import Navbar from "@/app/components/navbar/Navbar";
-import { getQueryClient } from "@/app/lib/get-query-client";
+
 import HeroSection from "@/app/sections/HeroSection";
 import ProductSection from "@/app/sections/ProductSection";
 import StyleCarouselSection from "@/app/sections/StyleCarouselSection";
-import { productsQueryOptions } from "@/app/services/product.service";
 
 export default async function HomePage() {
   const queryClient = getQueryClient();

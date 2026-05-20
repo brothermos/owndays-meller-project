@@ -1,7 +1,10 @@
 import { queryOptions, useQuery } from "@tanstack/react-query";
-import { PRODUCTS_API_PATH } from "@/app/config/env";
-import { apiClient } from "@/app/lib/api-client";
+
 import { ProductItem, ProductResponse } from "@/app/types/product.type";
+
+import { PRODUCTS_API_PATH } from "@/app/config/env";
+
+import { apiClient } from "@/app/lib/api-client";
 
 export const productQueryKey = ["products", "meller"] as const;
 

@@ -8,14 +8,14 @@ Frontend implementation for the **OWNDAYS x MELLER** sunglasses collaboration la
 
 ## Tech Stack
 
-| Layer | Choice |
-|-------|--------|
-| Framework | [Next.js 16](https://nextjs.org/) (App Router) |
-| UI | React 19 + TypeScript |
-| Styling | Tailwind CSS v4 |
-| Data fetching | [TanStack React Query](https://tanstack.com/query) (SSR prefetch + client hydration) |
-| HTTP client | Axios |
-| Image carousel (modal) | [Embla Carousel](https://www.embla-carousel.com/) |
+| Layer                  | Choice                                                                               |
+| ---------------------- | ------------------------------------------------------------------------------------ |
+| Framework              | [Next.js 16](https://nextjs.org/) (App Router)                                       |
+| UI                     | React 19 + TypeScript                                                                |
+| Styling                | Tailwind CSS v4                                                                      |
+| Data fetching          | [TanStack React Query](https://tanstack.com/query) (SSR prefetch + client hydration) |
+| HTTP client            | Axios                                                                                |
+| Image carousel (modal) | [Embla Carousel](https://www.embla-carousel.com/)                                    |
 
 ## Features
 
@@ -54,11 +54,11 @@ Frontend implementation for the **OWNDAYS x MELLER** sunglasses collaboration la
 
 ## Data Source
 
-| Resource | URL |
-|----------|-----|
-| Products API | `GET https://api-one-alpha-60.vercel.app/meller/products.json` |
-| API schema docs | [PRODUCTS_README.md](https://github.com/frontend-otm/api/blob/main/meller/PRODUCTS_README.md) |
-| Image base URL (default) | `https://storage.owndays.com/storage/` |
+| Resource                 | URL                                                                                           |
+| ------------------------ | --------------------------------------------------------------------------------------------- |
+| Products API             | `GET https://api-one-alpha-60.vercel.app/meller/products.json`                                |
+| API schema docs          | [PRODUCTS_README.md](https://github.com/frontend-otm/api/blob/main/meller/PRODUCTS_README.md) |
+| Image base URL (default) | `https://storage.owndays.com/storage/`                                                        |
 
 Image paths from the API are appended to the image base URL, e.g.:
 
@@ -71,12 +71,12 @@ products/36ebdac7-….webp
 
 All variables are optional; defaults match `app/config/env.ts`.
 
-| Variable | Description | Default |
-|----------|-------------|---------|
-| `NEXT_PUBLIC_API_BASE_URL` | API host | `https://api-one-alpha-60.vercel.app` |
-| `NEXT_PUBLIC_IMAGE_BASE_URL` | Prefix for product/swatch images | `https://storage.owndays.com/storage/` |
-| `NEXT_PUBLIC_ONLINE_STORE_BASE` | OWNDAYS product store base | `https://www.owndays.com/jp/ja/products` |
-| `NEXT_PUBLIC_SITE_URL` | Canonical site URL for Open Graph | `http://localhost:3000` (or Vercel URL on deploy) |
+| Variable                        | Description                       | Default                                           |
+| ------------------------------- | --------------------------------- | ------------------------------------------------- |
+| `NEXT_PUBLIC_API_BASE_URL`      | API host                          | `https://api-one-alpha-60.vercel.app`             |
+| `NEXT_PUBLIC_IMAGE_BASE_URL`    | Prefix for product/swatch images  | `https://storage.owndays.com/storage/`            |
+| `NEXT_PUBLIC_ONLINE_STORE_BASE` | OWNDAYS product store base        | `https://www.owndays.com/jp/ja/products`          |
+| `NEXT_PUBLIC_SITE_URL`          | Canonical site URL for Open Graph | `http://localhost:3000` (or Vercel URL on deploy) |
 
 Create `.env.local` to override:
 

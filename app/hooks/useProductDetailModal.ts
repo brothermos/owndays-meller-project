@@ -1,9 +1,16 @@
-import useEmblaCarousel from "embla-carousel-react";
 import { useEffect, useMemo, useRef, useState } from "react";
 
+import useEmblaCarousel from "embla-carousel-react";
+
 import type { ProductItem } from "@/app/types/product.type";
+
 import { formatModalPrice } from "@/app/utils/format";
-import { buildOnlineStoreUrl, getProductImageUrl, getSkuColorLabel, sortSkus } from "@/app/utils/product";
+import {
+  buildOnlineStoreUrl,
+  getProductImageUrl,
+  getSkuColorLabel,
+  sortSkus,
+} from "@/app/utils/product";
 
 type UseProductDetailModalOptions = {
   selectedProduct: ProductItem;
@@ -37,7 +44,9 @@ export function useProductDetailModal(props: UseProductDetailModalOptions) {
 
   const skuImageUrls = useMemo(() => {
     if (!selectedSku) return [];
-    return [...selectedSku.images].sort((a, b) => a.order - b.order).map((img) => getProductImageUrl(img.path));
+    return [...selectedSku.images]
+      .sort((a, b) => a.order - b.order)
+      .map((img) => getProductImageUrl(img.path));
   }, [selectedSku]);
 
   const colorChips = useMemo(
@@ -55,7 +64,9 @@ export function useProductDetailModal(props: UseProductDetailModalOptions) {
   const skuLabel = selectedSku ? `${selectedProduct.product.code} ${selectedSku.code}` : "";
   const isOutOfStock = selectedProduct.selling_setting.in_stock === 0;
   const formattedPrice = formatModalPrice(selectedProduct.selling_setting.price);
-  const onlineStoreHref = selectedSku ? buildOnlineStoreUrl(selectedProduct.product.code, selectedSku.id) : "#";
+  const onlineStoreHref = selectedSku
+    ? buildOnlineStoreUrl(selectedProduct.product.code, selectedSku.id)
+    : "#";
   const modelName = selectedProduct.product.model_name;
   const description = selectedProduct.localization.description;
 

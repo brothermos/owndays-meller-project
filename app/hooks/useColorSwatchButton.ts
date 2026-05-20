@@ -1,8 +1,10 @@
-import { useCallback, useMemo, type MouseEvent } from "react";
+import { type MouseEvent, useCallback, useMemo } from "react";
 
-import { SWATCH_RING_CLASS, type ColorSwatchVariant } from "@/app/constants/color-swatch-button";
 import type { ProductSku } from "@/app/types/product.type";
-import { getProductImageUrl, getSwatchStyle, SWATCH_FALLBACK_STYLE } from "@/app/utils/product";
+
+import { type ColorSwatchVariant, SWATCH_RING_CLASS } from "@/app/constants/color-swatch-button";
+
+import { SWATCH_FALLBACK_STYLE, getProductImageUrl, getSwatchStyle } from "@/app/utils/product";
 
 export function useColorSwatchButton(sku: ProductSku, isSelected: boolean, onSelect: () => void) {
   const ringClass = isSelected ? SWATCH_RING_CLASS.selected : SWATCH_RING_CLASS.default;
@@ -27,10 +29,12 @@ export function useColorSwatchButton(sku: ProductSku, isSelected: boolean, onSel
 
   const patternStyle = useMemo(
     () => ({
-      backgroundImage: patternColor?.path ? `url(${getProductImageUrl(patternColor.path)})` : undefined,
+      backgroundImage: patternColor?.path
+        ? `url(${getProductImageUrl(patternColor.path)})`
+        : undefined,
       backgroundColor: hexColors[0] ?? undefined,
     }),
-    [patternColor?.path, hexColors],
+    [patternColor, hexColors],
   );
 
   const handleClick = useCallback(
