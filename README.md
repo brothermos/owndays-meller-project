@@ -52,6 +52,34 @@ Frontend implementation for the **OWNDAYS x MELLER** sunglasses collaboration la
 - SEO metadata + Open Graph image (`/images/meta_ogp.jpg`)
 - Keyboard: **Esc** closes mobile menu and product modal
 
+## Specification coverage (Must have)
+
+Checklist aligned with [FRONTEND_TEST.md — Must have](https://github.com/frontend-otm/api/blob/main/meller/FRONTEND_TEST.md#must-have).
+
+- [x] Responsive layout (desktop 3-column grid + mobile single column)
+- [x] Navigation bar (desktop text links + mobile hamburger)
+- [x] Mobile menu overlay with ABOUT, PRODUCTS, STORES
+- [x] Product cards for all **8** products from JSON
+- [x] Color swatches (solid `hex_code`, dual-tone, pattern `path`), max 4
+- [x] Product detail modal with full product information
+- [x] SKU / color switching (updates images + product code / labels)
+- [x] Horizontal image carousel inside modal (Embla)
+- [x] “HOW TO STYLE THEM” horizontal scroll section
+- [x] ONLINE STORE CTA (hover + disabled when out of stock)
+- [x] Price formatting (`¥7,800+tax` grid / `¥7,800 税込` modal)
+- [x] Modal dismiss (close control + overlay; **Esc** documented above)
+
+## Nice to have (from test brief)
+
+Optional items from the same spec; status in this repo:
+
+| Item | Status |
+| ---- | ------ |
+| Smooth open/close animation for modal | Implemented (drawer / overlay motion + exit duration) |
+| Image lazy loading | Implemented (`loading="lazy"` on non-critical images; first carousel slide + first grid image eager where needed) |
+| Keyboard accessibility (Esc, tab navigation) | Partial: **Esc** closes menu and modal; product cards and style slides are activatable with **Enter** / **Space**; swatches use `focus-visible` styles; no dedicated focus trap inside the modal |
+| SEO meta tags + OGP (1200×630) | Implemented in `app/layout.tsx` metadata + `/images/meta_ogp.jpg` |
+
 ## Data Source
 
 | Resource                 | URL                                                                                           |
@@ -127,7 +155,7 @@ app/
 ├── hooks/               # Component logic (menu, modal, carousel, product card)
 ├── contexts/            # Product detail modal state
 ├── services/            # API + React Query options
-├── lib/                 # Product helpers, API client, style-carousel utils
+├── lib/                 # API client, React Query client + provider
 ├── constants/           # Navigation, carousel slides, CTA classes
 ├── types/               # TypeScript types for API models
 ├── config/              # Environment-backed URLs
