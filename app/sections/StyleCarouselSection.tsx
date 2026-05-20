@@ -10,7 +10,7 @@ const StyleCarouselSection = () => {
   const { slides, onSlidePointerDown, onSlideClick, onSlideKeyDown } = useStyleCarouselSection();
 
   return (
-    <section className="bg-primary">
+    <section id="style" className="bg-primary">
       <div className="px-4 sm:px-8 lg:px-[70px]">
         <div className="relative z-10 mb-[-28px] inline-flex flex-col items-start lg:mb-[-46px]">
           <span className="inline-block bg-black font-display text-[72px] leading-none font-bold tracking-tight text-primary [text-box-edge:cap_alphabetic] [text-box-trim:trim-both] lg:text-[120px]">
@@ -40,7 +40,7 @@ const StyleCarouselSection = () => {
                 onPointerDown={onSlidePointerDown}
                 onClick={(event) => onSlideClick(event, index)}
                 onKeyDown={(event) => onSlideKeyDown(event, index)}
-                className="group relative h-[492px] w-[326px] shrink-0 cursor-pointer overflow-hidden outline-2 outline-black transition-all duration-500 ease-in-out active:cursor-grabbing motion-safe:hover:scale-[1.03] lg:h-[611px] lg:w-[405px] lg:outline-transparent lg:hover:z-10 lg:hover:outline-black"
+                className="group relative h-[492px] w-[326px] shrink-0 cursor-pointer overflow-hidden outline-2 outline-black transition-[transform,outline-color] duration-500 ease-in-out active:cursor-grabbing motion-safe:hover:scale-[1.03] lg:h-[611px] lg:w-[405px] lg:outline-transparent lg:hover:z-10 lg:hover:outline-black"
               >
                 <Image
                   src={slide.image}

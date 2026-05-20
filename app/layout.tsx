@@ -1,22 +1,21 @@
 import type { Metadata } from "next";
 import { Barlow_Condensed, Geist } from "next/font/google";
 
-import { Analytics } from "@vercel/analytics/next";
-import { SpeedInsights } from "@vercel/speed-insights/next";
-
-import { Providers } from "@/app/providers";
+import { DeferredVercelInsights } from "@/app/components/DeferredVercelInsights";
 
 import "./globals.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+  display: "swap",
 });
 
 const barlowCondensed = Barlow_Condensed({
   subsets: ["latin"],
   weight: ["700"],
   variable: "--font-barlow-condensed",
+  display: "swap",
 });
 
 const siteUrl =
@@ -53,10 +52,25 @@ export default function RootLayout({
       lang="ja"
       className={`${geistSans.variable} ${barlowCondensed.variable} h-full antialiased`}
     >
+      <head>
+        <link
+          rel="preload"
+          as="image"
+          href="/images/hero_banner_mobile.avif"
+          media="(max-width: 640px)"
+          type="image/avif"
+        />
+        <link
+          rel="preload"
+          as="image"
+          href="/images/hero_banner_desktop.avif"
+          media="(min-width: 641px)"
+          type="image/avif"
+        />
+      </head>
       <body className="flex min-h-full flex-col">
-        <Providers>{children}</Providers>
-        <Analytics />
-        <SpeedInsights />
+        {children}
+        <DeferredVercelInsights />
       </body>
     </html>
   );

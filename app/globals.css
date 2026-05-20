@@ -119,6 +119,22 @@
   box-sizing: border-box;
 }
 
+@media (max-width: 640px) {
+  #products,
+  #style {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 900px;
+  }
+
+  body,
+  a,
+  button,
+  [role="button"],
+  .cursor-pointer {
+    cursor: auto;
+  }
+}
+
 body {
   background: var(--background);
   color: var(--background);

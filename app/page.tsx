@@ -9,23 +9,25 @@ import Footer from "@/app/components/footer/Footer";
 import Navbar from "@/app/components/navbar/Navbar";
 
 import HeroSection from "@/app/sections/HeroSection";
-import ProductSection from "@/app/sections/ProductSection";
-import StyleCarouselSection from "@/app/sections/StyleCarouselSection";
+import { HomeBelowFoldSections } from "@/app/sections/HomeBelowFoldSections";
+
+import { Providers } from "@/app/providers";
 
 export default async function HomePage() {
   const queryClient = getQueryClient();
   await queryClient.prefetchQuery(productsQueryOptions);
 
   return (
-    <HydrationBoundary state={dehydrate(queryClient)}>
-      <main className="min-h-screen w-full">
-        <Navbar />
-        <HeroSection />
-        <ProductSection />
-        <StyleCarouselSection />
-        <Footer />
-      </main>
-      <ProductDetailModalLazy />
-    </HydrationBoundary>
+    <main className="min-h-screen w-full">
+      <Navbar />
+      <HeroSection />
+      <Providers>
+        <HydrationBoundary state={dehydrate(queryClient)}>
+          <HomeBelowFoldSections />
+          <ProductDetailModalLazy />
+        </HydrationBoundary>
+      </Providers>
+      <Footer />
+    </main>
   );
 }

@@ -27,7 +27,7 @@ const AnimatedProductItem = (props: AnimatedProductItemProps) => {
         isInView ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
       }`}
     >
-      <ProductCard product={product} eagerImage={index < 3} />
+      <ProductCard product={product} eagerImage={index === 0} />
     </li>
   );
 };
