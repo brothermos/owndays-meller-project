@@ -59,6 +59,7 @@ export default function RootLayout({
           href="/images/hero_banner_mobile.avif"
           media="(max-width: 640px)"
           type="image/avif"
+          fetchPriority="high"
         />
         <link
           rel="preload"
@@ -66,6 +67,7 @@ export default function RootLayout({
           href="/images/hero_banner_desktop.avif"
           media="(min-width: 641px)"
           type="image/avif"
+          fetchPriority="high"
         />
       </head>
       <body className="flex min-h-full flex-col">
