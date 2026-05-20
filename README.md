@@ -147,19 +147,28 @@ npm run build
 
 ```text
 app/
-├── components/          # UI components (cards, modal, navbar, swatches)
+├── layout.tsx           # Root layout, metadata, fonts, head preloads
+├── page.tsx             # Home route (server): prefetch + composition
+├── providers.tsx        # React Query + product modal context
+├── globals.css
+├── loading.tsx
+├── error.tsx
+├── icon.jpg
+├── components/          # UI (by feature area)
 │   ├── navbar/
 │   ├── footer/
-│   └── product-detail-modal/
-├── sections/            # Page sections (hero, products, style carousel)
-├── hooks/               # Component logic (menu, modal, carousel, product card)
+│   ├── product-card/    # Grid card, skeleton, swatches, animated item
+│   ├── product-detail-modal/
+│   └── DeferredVercelInsights.tsx
+├── sections/            # Page sections (hero, products, style carousel, below-fold wrapper)
+├── hooks/               # UI logic (menu, scroll, modal, carousel, product card, …)
 ├── contexts/            # Product detail modal state
-├── services/            # API + React Query options
+├── services/            # API + React Query query options
 ├── lib/                 # API client, React Query client + provider
-├── constants/           # Navigation, carousel slides, CTA classes
-├── types/               # TypeScript types for API models
-├── config/              # Environment-backed URLs
-└── utils/               # Formatting helpers (price)
+├── constants/           # Nav, CTA classes, carousel mapping, modal timings, …
+├── types/               # TypeScript types for API / domain models
+├── config/              # Environment-backed URLs (defaults + overrides)
+└── utils/               # Pure helpers: price format, product/sku rules, carousel labels
 ```
 
 ## Design Reference
